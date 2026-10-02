@@ -374,6 +374,37 @@ main{
 
 .detail-body p{line-height:1.6}
 
+.content-block{
+  white-space:pre-line;
+  line-height:1.6;
+}
+
+.world-image{
+  width:100%;
+  max-width:720px;
+  display:block;
+  margin:0 0 22px;
+  border:2px solid var(--ink);
+}
+
+.resource-link{
+  display:inline-block;
+  border:1.5px solid var(--ink);
+  background:var(--accent);
+  color:var(--ink);
+  padding:11px 14px;
+  margin:15px 0;
+  font-family:'DM Mono',monospace;
+  font-size:11px;
+  text-transform:uppercase;
+  text-decoration:none;
+  font-weight:500;
+}
+
+.resource-link:hover{
+  background:var(--ink);
+  color:var(--accent);
+}
 
 /* CHARACTER PROFILE */
 
@@ -453,9 +484,6 @@ main{
   text-transform:uppercase;
 }
 
-
-/* DETAILS */
-
 .connections{
   display:flex;
   flex-wrap:wrap;
@@ -474,7 +502,6 @@ main{
 .connections button:hover{
   background:var(--accent);
 }
-
 
 /* WORLD SUMMARY */
 
@@ -537,9 +564,6 @@ footer{
   text-transform:uppercase;
 }
 
-
-/* PRINT */
-
 @media print{
   body{background:white}
 
@@ -569,9 +593,6 @@ footer{
     background:white;
   }
 }
-
-
-/* RESPONSIVE */
 
 @media(max-width:850px){
 
@@ -631,10 +652,7 @@ footer{
 
 @media(max-width:550px){
 
-  .builder-grid{
-    grid-template-columns:1fr;
-  }
-
+  .builder-grid,
   .cards{
     grid-template-columns:1fr;
   }
@@ -653,7 +671,6 @@ footer{
 }
 </style>
 </head>
-
 
 <body>
 
@@ -674,11 +691,7 @@ footer{
 
 </header>
 
-
 <main>
-
-
-<!-- HOME -->
 
 <section id="home" class="page active">
 
@@ -704,7 +717,6 @@ sports, and stories are created.
 
 </div>
 
-
 <div class="hero-aside">
 
 <span class="mono">FIELD NOTE / 001</span>
@@ -724,7 +736,6 @@ Explore the world ↗
 
 </div>
 
-
 <div class="section-head" id="archiveHead">
 
 <h2>THE ARCHIVE</h2>
@@ -732,7 +743,6 @@ Explore the world ↗
 <span id="count"></span>
 
 </div>
-
 
 <div class="filters" id="filters">
 
@@ -751,14 +761,9 @@ placeholder="Search the archive...">
 
 </div>
 
-
 <div id="cards" class="cards"></div>
 
 </section>
-
-
-
-<!-- WORLD SUMMARY -->
 
 <section id="summary" class="page">
 
@@ -786,10 +791,6 @@ Print / Save PDF
 <div id="summaryContent"></div>
 
 </section>
-
-
-
-<!-- BUILDERS -->
 
 <section id="builders" class="page">
 
@@ -927,10 +928,6 @@ changing or incorporating someone else’s creation.
 
 </section>
 
-
-
-<!-- PROJECT -->
-
 <section id="guide" class="page">
 
 <div class="section-head">
@@ -949,67 +946,44 @@ explain, research, or combine approaches.
 <div class="guide-grid">
 
 <div class="guide-box">
-
 <span class="mono">01 / ORIGINAL</span>
-
 <h3>ADD SOMETHING</h3>
-
 <p>
 Add something the story and class have not already fully explained.
 Your contribution should make the world larger.
 </p>
-
 </div>
 
-
 <div class="guide-box">
-
 <span class="mono">02 / CONNECTED</span>
-
 <h3>MAKE IT BELONG</h3>
-
 <p>
 Connect your contribution to the original story or something else
 that already exists in our shared world.
 </p>
-
 </div>
 
-
 <div class="guide-box">
-
 <span class="mono">03 / DEVELOPED</span>
-
 <h3>PUSH IT FURTHER</h3>
-
 <p>
 Include enough details that someone else can understand how your idea
 works, why it exists, and why it matters.
 </p>
-
 </div>
 
-
 <div class="guide-box">
-
 <span class="mono">04 / PURPOSEFUL</span>
-
 <h3>MAKE CHOICES</h3>
-
 <p>
 Use your chosen format intentionally. Be able to explain why you made
 important choices and what they add to the world.
 </p>
-
 </div>
 
 </div>
 
 </section>
-
-
-
-<!-- DETAIL -->
 
 <section id="detail" class="page">
 
@@ -1049,7 +1023,6 @@ style="margin-top:15px">
 
 </section>
 
-
 <footer>
 
 <span>JAX'S WORLD / CLASS ARCHIVE</span>
@@ -1059,8 +1032,6 @@ style="margin-top:15px">
 </footer>
 
 </main>
-
-
 
 <script>
 
@@ -1073,8 +1044,6 @@ category:'people',
 type:'Character',
 description:'A 15-year-old football player at the centre of our world.',
 workingOn:'Hannah / Alexandra / Josie',
-
-content:'',
 
 profile:{
 
@@ -1132,7 +1101,7 @@ items:[
 title:'KNOWN HISTORY',
 wide:true,
 items:[
-['Football','Jax started playing football when he was 9 years old.'],
+['Football','Jax started playing football when he was 12 years old.'],
 ['Football Camp','He missed football camp because he had appendicitis.'],
 ['Job',"He works at Luingunii’s Pizzeria around the bend."],
 ['Daily Routine','Jax goes to Vala Cafe every day.'],
@@ -1157,27 +1126,30 @@ connections:[
 'vala',
 'pizzeria',
 'lightning',
-'milsamolex'
+'milsamolex',
+'laws'
 ]
 
 },
-
 
 {
 id:'ashlee',
 title:'Ashlee Eirvalon',
 category:'people',
 type:'Character',
-description:'Jax’s girlfriend. She is extroverted, calm, and adventurous.',
+description:'Jax’s girlfriend. Extroverted, calm, adventurous, and very protective.',
 content:
 `ESTABLISHED:
 
 Ashlee Eirvalon is Jax’s girlfriend.
 
-She is extroverted, calm, and adventurous.`,
+She is extroverted, calm, adventurous, and very protective.
+
+She has dark brown hair.
+
+She loves cargo pants.`,
 connections:['jax']
 },
-
 
 {
 id:'mia',
@@ -1196,7 +1168,6 @@ Jax has described her as annoying.`,
 connections:['jax','lauren','paul']
 },
 
-
 {
 id:'lauren',
 title:'Lauren',
@@ -1208,10 +1179,11 @@ content:
 
 Lauren is Jax and Mia’s mom.
 
-She has curly blonde hair.`,
+She has curly blonde hair.
+
+She wears glasses.`,
 connections:['jax','mia','paul']
 },
-
 
 {
 id:'paul',
@@ -1230,7 +1202,6 @@ He has balding black hair and brown eyes.`,
 connections:['jax','lauren','mia','lightning']
 },
 
-
 {
 id:'noodles',
 title:'Noodles',
@@ -1245,9 +1216,8 @@ Noodles is a female Siamese cat.
 She is calm.
 
 She belongs to Jax.`,
-connections:['jax']
+connections:['jax','animals']
 },
-
 
 {
 id:'nazareth',
@@ -1255,18 +1225,61 @@ workingOn:'Norah / Jordyn',
 title:'Nazareth',
 category:'places',
 type:'Planet',
-description:'The planet where Jax’s World takes place.',
+description:'A yellow planet with shifting gravity, temporary volcanic regions, and a moon named Harry.',
 content:
 `ESTABLISHED:
 
-The planet is called Nazareth.
+Nazareth is the planet where Jax’s World takes place.
 
-IN DEVELOPMENT:
+GRAVITY
 
-Its geography, environments, history, physics, countries, and natural systems are still being developed.`,
-connections:['soultara','animals','map']
+Gravity normally acts like gravity on Earth.
+
+Occasionally, the planet causes people and loose objects to hover or float.
+
+Eventually gravity returns to normal.
+
+VOLCANIC AREAS
+
+Volcanic and obsidian areas can randomly appear on the planet for a while.
+
+Eventually these areas return to normal.
+
+ATMOSPHERE
+
+Nazareth has normal Earth-like air and oxygen.
+
+SPACE
+
+Lava rocks float in space, mostly around Nazareth.
+
+MOON
+
+Nazareth’s moon is named Harry.
+
+Harry is based on Jordyn’s eraser. Ask Jordyn or Norah for details about what Harry looks like.
+
+COLOURS
+
+The planet’s main colour is yellow.
+
+Some areas occasionally become dark brown, black, and orange because of the temporary volcanic areas.
+
+Water is a normal blue colour.
+
+WATER
+
+The water all connects to the middle of the planet.
+
+SEASONS
+
+Nazareth has the same normal seasons as Earth.
+
+VISUAL DESIGN
+
+Ask Norah for information about what the planet looks like.`,
+connections:['soultara','animals','map','worldrules']
 },
-
 
 {
 id:'soultara',
@@ -1285,12 +1298,9 @@ Milsamolex is a city in Soultara.
 
 The class has created an official flag for Soultara.
 
-IN DEVELOPMENT:
-
-The country’s history, laws, culture, government, geography, and fantasy-world rules are still being developed.`,
-connections:['nazareth','milsamolex','laws','worldrules']
+Soultara has laws governing football, jobs, dragons, magic, the Tenebrae Forest, and raising the dead.`,
+connections:['nazareth','milsamolex','laws','worldrules','tenebrae']
 },
-
 
 {
 id:'milsamolex',
@@ -1324,14 +1334,17 @@ connections:[
 ]
 },
 
-
 {
 id:'lightning',
 workingOn:'Marrex / Max',
 title:'Milsamolex Lightning',
 category:'sports',
 type:'Football Team',
-description:'The known football team of Milsamolex.',
+description:'The football team of Milsamolex.',
+resource:{
+label:'View the Lightning jerseys ↗',
+url:'https://docs.google.com/presentation/d/1_IGfyOYMfDl_nt0EMo23VrayaEP3EZswhlJY62FrtRU/edit?usp=sharing'
+},
 content:
 `ESTABLISHED:
 
@@ -1339,12 +1352,15 @@ The football team is called the Milsamolex Lightning.
 
 Paul is a football coach.
 
+In Soultara, people can only start playing football at age 12.
+
+Jax started playing football at age 12.
+
 IN DEVELOPMENT:
 
 The team, players, league, uniforms, rivals, records, and history are being developed.`,
-connections:['jax','paul','milsamolex']
+connections:['jax','paul','milsamolex','laws']
 },
-
 
 {
 id:'flames',
@@ -1364,7 +1380,6 @@ Players, branding, league information, history, rivals, and the team’s relatio
 connections:['milsamolex']
 },
 
-
 {
 id:'pizzeria',
 workingOn:'Aneleigh / Josie',
@@ -1379,12 +1394,9 @@ Jax works at Luingunii’s Pizzeria.
 
 It is described as being "around the bend."
 
-IN DEVELOPMENT:
-
-Its menu, location, staff, appearance, history, and role in Milsamolex are still open.`,
-connections:['jax','milsamolex']
+Soultara has a law saying people must have the same job as their parents.`,
+connections:['jax','milsamolex','laws']
 },
-
 
 {
 id:'vala',
@@ -1408,6 +1420,48 @@ The cafe itself—its design, menu, employees, customers, history, and role in M
 connections:['jax','milsamolex']
 },
 
+{
+id:'laws',
+workingOn:'Ethne',
+title:'Laws & Rules',
+category:'society',
+type:'Law',
+description:'Rules governing everyday life, football, magic, dragons, jobs, and forbidden places.',
+content:
+`ESTABLISHED LAWS:
+
+• You can only start football at age 12.
+
+• You must have the same job as your parents.
+
+• Everyone gets a pet dragon on their 20th birthday.
+
+• You cannot go into the Tenebrae Forest.
+
+• You can only use magic if you have a permit.
+
+• If you use magic without a permit, the punishment depends on how much magic was used. A small amount of magic receives a smaller punishment; a large amount receives a larger punishment.
+
+• You cannot raise the dead.`,
+connections:['soultara','worldrules','tenebrae','lightning','jax']
+},
+
+{
+id:'tenebrae',
+title:'Tenebrae Forest',
+category:'places',
+type:'Forbidden Place',
+description:'A forest that people are legally forbidden from entering.',
+content:
+`ESTABLISHED:
+
+The Tenebrae Forest exists in Jax’s World.
+
+It is illegal to enter the forest.
+
+Everything else about the forest is currently unknown.`,
+connections:['soultara','laws']
+},
 
 {
 id:'villains',
@@ -1426,9 +1480,8 @@ What do they want?
 Why are they in conflict with Jax or this world?
 
 What happened before we met them?`,
-connections:['jax']
+connections:['jax','worldrules']
 },
-
 
 {
 id:'characters',
@@ -1441,9 +1494,8 @@ content:
 `IN DEVELOPMENT:
 
 Character drawings and profiles will be added here as they become part of the shared world.`,
-connections:['jax','ashlee','mia']
+connections:['jax','ashlee','mia','lauren','paul']
 },
-
 
 {
 id:'map',
@@ -1458,9 +1510,8 @@ content:
 Arianna is mapping the world.
 
 The map can eventually connect countries, cities, landmarks, habitats, roads, and natural areas.`,
-connections:['nazareth','soultara','milsamolex']
+connections:['nazareth','soultara','milsamolex','tenebrae']
 },
-
 
 {
 id:'transport',
@@ -1478,24 +1529,6 @@ Transportation may shape how cities work, how far people travel, and what techno
 connections:['milsamolex','soultara']
 },
 
-
-{
-id:'laws',
-workingOn:'Ethne',
-title:'Laws',
-category:'society',
-type:'Law / In Development',
-description:'The rules people in this world are expected to live by.',
-content:
-`IN DEVELOPMENT:
-
-Ethne is developing laws and rules for the world.
-
-These may reveal what the society values, fears, protects, or controls.`,
-connections:['soultara','worldrules']
-},
-
-
 {
 id:'fashion',
 workingOn:'Bella',
@@ -1504,14 +1537,17 @@ category:'society',
 type:'Design / In Development',
 description:'What people wear and what clothing reveals about life on Nazareth.',
 content:
-`IN DEVELOPMENT:
+`ESTABLISHED:
+
+Ashlee Eirvalon loves cargo pants.
+
+IN DEVELOPMENT:
 
 Bella is developing fashion for the world.
 
 Clothing can connect to climate, culture, jobs, sports, status, technology, or everyday life.`,
-connections:['milsamolex','soultara']
+connections:['milsamolex','soultara','ashlee']
 },
-
 
 {
 id:'worldrules',
@@ -1519,20 +1555,29 @@ workingOn:'Bristol',
 title:'World Rules',
 category:'society',
 type:'Worldbuilding / In Development',
-description:'The larger rules and logic that shape life in this fantasy world.',
+description:'Magic, planetary behaviour, and the larger rules that shape life in this world.',
 content:
-`IN DEVELOPMENT:
+`ESTABLISHED:
 
-Bristol is developing the country and fantasy-world rules.
+Magic exists.
 
-What is possible here?
+Using magic requires a permit.
 
-What is normal?
+Using magic without a permit results in punishment based on the amount of magic used.
 
-What makes this world different from ours?`,
-connections:['nazareth','soultara','laws']
+Raising the dead is forbidden.
+
+Nazareth occasionally experiences periods when people and loose objects float.
+
+Volcanic and obsidian regions can temporarily appear and later return to normal.
+
+Everyone receives a pet dragon on their 20th birthday.
+
+IN DEVELOPMENT:
+
+Other rules and fantasy-world systems are still being developed.`,
+connections:['nazareth','soultara','laws','tenebrae']
 },
-
 
 {
 id:'animals',
@@ -1542,14 +1587,21 @@ category:'nature',
 type:'Wildlife / In Development',
 description:'The creatures and animal life of Nazareth are being invented.',
 content:
-`IN DEVELOPMENT:
+`ESTABLISHED:
+
+Dragons exist.
+
+Everyone receives a pet dragon on their 20th birthday.
+
+Noodles is a Siamese cat, showing that familiar Earth animals also exist.
+
+IN DEVELOPMENT:
 
 Crosby and Brent are exploring the animal kingdom.
 
 Their creatures can eventually connect to habitats, food webs, cities, culture, and the map.`,
-connections:['nazareth','map']
+connections:['nazareth','map','noodles','laws']
 },
-
 
 {
 id:'newscast',
@@ -1564,9 +1616,8 @@ content:
 Hannah and Ivy are creating newscasts from within the world.
 
 Reports may connect to characters, sports, major events, laws, or other class creations.`,
-connections:['milsamolex','jax']
+connections:['milsamolex','jax','laws']
 },
-
 
 {
 id:'graphicnovel',
@@ -1582,7 +1633,6 @@ Ivy is developing a graphic novel set in Jax’s World.`,
 connections:['jax']
 },
 
-
 {
 id:'newspaper',
 workingOn:'Berkeley / Harper',
@@ -1596,9 +1646,8 @@ content:
 Newspaper-style contributions are underway.
 
 This space can collect headlines, articles, images, interviews, and reports about events elsewhere in the archive.`,
-connections:['milsamolex','lightning','flames']
+connections:['milsamolex','lightning','flames','laws']
 },
-
 
 {
 id:'backstories',
@@ -1615,7 +1664,6 @@ connections:['jax','villains']
 }
 
 ];
-
 
 
 /* NAVIGATION */
@@ -1643,7 +1691,6 @@ document.querySelectorAll('[data-page]').forEach(b =>
 );
 
 
-
 /* WORLD SUMMARY */
 
 function renderSummary(){
@@ -1653,34 +1700,54 @@ const established = {
 'PEOPLE':[
 "Jax King is 15 years old.",
 "Jax has blond hair with a blue streak.",
-"He started playing football at age 9.",
+"Jax started playing football at age 12.",
 "He missed football camp because he had appendicitis.",
 "Jax is not popular because he is an introvert.",
-"Ashlee Eirvalon is Jax’s girlfriend; she is extroverted, calm, and adventurous.",
-"Mia is Jax’s 6-year-old little sister; she has curly blonde hair and blue eyes.",
-"Lauren is Jax’s mom and has curly blonde hair.",
-"Paul is Jax’s dad and the football coach; he has balding black hair and brown eyes.",
+"Ashlee Eirvalon is Jax’s girlfriend. She is extroverted, calm, adventurous, and very protective.",
+"Ashlee has dark brown hair and loves cargo pants.",
+"Mia is Jax’s 6-year-old little sister. She has curly blonde hair and blue eyes.",
+"Lauren is Jax’s mom. She has curly blonde hair and wears glasses.",
+"Paul is Jax’s dad and the football coach. He has balding black hair and brown eyes.",
 "Noodles is Jax’s calm female Siamese cat."
 ],
 
-'WORLD & PLACES':[
-"Planet: Nazareth",
-"Country: Soultara",
-"City: Milsamolex",
-"Luingunii’s Pizzeria exists in or around Milsamolex.",
-"Jax goes to Vala Cafe every day."
+'NAZARETH':[
+"Nazareth is the planet.",
+"Gravity normally works like Earth’s gravity.",
+"Occasionally people and loose objects hover or float before gravity returns to normal.",
+"Volcanic and obsidian areas can randomly appear for a while and later return to normal.",
+"The atmosphere contains normal Earth-like air and oxygen.",
+"Nazareth’s main colour is yellow.",
+"Temporary volcanic areas can appear dark brown, black, and orange.",
+"Water is normal blue.",
+"Water all connects to the middle of the planet.",
+"Nazareth has Earth-like seasons.",
+"The moon is named Harry.",
+"Lava rocks float in space, mostly around Nazareth."
 ],
 
-'SPORTS':[
+'PLACES & SPORTS':[
+"Country: Soultara",
+"City: Milsamolex",
+"Forbidden place: Tenebrae Forest",
 "Football team: Milsamolex Lightning",
 "Basketball team: Milsamolex Flames",
-"Jax started playing football at age 9.",
-"Paul is the football coach."
+"Jax works at Luingunii’s Pizzeria.",
+"Jax visits Vala Cafe every day."
+],
+
+'LAWS & WORLD RULES':[
+"You can only start football at age 12.",
+"You must have the same job as your parents.",
+"Everyone gets a pet dragon on their 20th birthday.",
+"You cannot go into the Tenebrae Forest.",
+"You can only use magic if you have a permit.",
+"Using magic without a permit results in punishment based on how much magic was used.",
+"You cannot raise the dead."
 ],
 
 'EVERYDAY LIFE':[
-"Jax works at Luingunii’s Pizzeria around the bend.",
-"At Vala Cafe, Jax gets a rainbow lemonade with blueberry, raspberry, and pineapple.",
+"Jax’s Vala Cafe order is a rainbow lemonade with blueberry, raspberry, and pineapple.",
 "He also gets a birthday-cake-flavoured volleyball cakepop.",
 "Jax’s favourite food is a cakepop.",
 "His favourite drink is rainbow lemonade.",
@@ -1688,7 +1755,6 @@ const established = {
 ]
 
 };
-
 
 const boxes = Object.entries(established)
 .map(([title,items]) =>
@@ -1709,7 +1775,6 @@ ${items.map(x=>`<li>${x}</li>`).join('')}
 
 ).join('');
 
-
 document.getElementById('summaryContent').innerHTML =
 
 `<div class="summary-grid">
@@ -1723,13 +1788,12 @@ ${boxes}
 <h3>Not decided yet</h3>
 
 <p>
-Most of Jax’s World is still unwritten.
-Geography, history, culture, technology, wildlife,
-villains, league details, laws, transportation,
-fashion, and many character details are being developed now.
+Jax’s World is still being built. Many details about its history,
+geography, society, characters, wildlife, sports, magic, cities,
+technology, and conflicts are still open.
 </p>
 
-<p class="summary-note">
+<p>
 If something is not listed as established here,
 do not assume it is canon yet.
 </p>
@@ -1741,7 +1805,6 @@ do not assume it is canon yet.
 }
 
 
-
 /* ARCHIVE CARDS */
 
 function render(){
@@ -1751,7 +1814,6 @@ document.getElementById('search')
 .value
 .trim()
 .toLowerCase();
-
 
 const found = entries.filter(e =>
 
@@ -1772,10 +1834,8 @@ e.workingOn || ''
 
 );
 
-
 document.getElementById('count').textContent =
 entries.length + ' entries / expanding';
-
 
 document.getElementById('cards').innerHTML =
 
@@ -1812,7 +1872,6 @@ ${e.workingOn
 
 '<p class="empty">No entries match your search. Try another term.</p>';
 
-
 document.querySelectorAll('.entry').forEach(b =>
 b.addEventListener('click',()=>openEntry(b.dataset.id))
 );
@@ -1820,13 +1879,11 @@ b.addEventListener('click',()=>openEntry(b.dataset.id))
 }
 
 
-
 /* CHARACTER PROFILE */
 
 function characterProfileHTML(e){
 
 if(!e.profile) return '';
-
 
 const photo = e.profile.photo
 
@@ -1843,7 +1900,6 @@ const photo = e.profile.photo
 <strong>NOT YET ADDED</strong>
 
 </div>`;
-
 
 const sections = e.profile.sections.map(sec =>
 
@@ -1868,7 +1924,6 @@ ${sec.items.map(([k,v]) =>
 
 ).join('');
 
-
 return `
 
 <div class="character-profile">
@@ -1888,7 +1943,6 @@ ${sections}
 }
 
 
-
 /* OPEN ARCHIVE ENTRY */
 
 function openEntry(id){
@@ -1897,18 +1951,14 @@ const e = entries.find(x=>x.id===id);
 
 if(!e) return;
 
-
 document.getElementById('detailMeta').textContent =
 e.category + ' / ' + e.type;
-
 
 document.getElementById('detailTitle').textContent =
 e.title;
 
-
 document.getElementById('detailLead').textContent =
 e.description;
-
 
 document.getElementById('detailInfo').innerHTML =
 
@@ -1919,11 +1969,7 @@ document.getElementById('detailInfo').innerHTML =
 
 +
 
-`This entry is a flexible container.
-It can hold writing, images, maps, videos,
-links, statistics, or any other meaningful contribution.`;
-
-
+`This entry is part of the shared Jax’s World archive.`;
 
 if(e.profile){
 
@@ -1934,39 +1980,45 @@ characterProfileHTML(e);
 
 else{
 
-document.getElementById('detailContent').innerHTML =
+let media = '';
 
-(e.image
+if(e.image){
 
-? `<img
+media +=
+`<img
 src="${e.image}"
 alt="${e.title} image"
-style="
-width:100%;
-max-width:720px;
-display:block;
-margin:0 0 22px;
-border:2px solid #111;
-">`
-
-: ''
-
-)
-
-+
-
-`<div style="white-space:pre-line">
-${e.content}
-</div>`;
+class="world-image">`;
 
 }
 
+if(e.resource){
+
+media +=
+`<a
+class="resource-link"
+href="${e.resource.url}"
+target="_blank"
+rel="noopener">
+${e.resource.label}
+</a>`;
+
+}
+
+document.getElementById('detailContent').innerHTML =
+
+media
+
++
+
+`<div class="content-block">${e.content}</div>`;
+
+}
 
 const related =
 e.connections
 .map(id=>entries.find(x=>x.id===id))
 .filter(Boolean);
-
 
 document.getElementById('connections').innerHTML =
 
@@ -1986,24 +2038,20 @@ ${x.title} ↗
 
 '<p>No connections yet. What might connect here?</p>';
 
-
 document.querySelectorAll('#connections button')
 .forEach(b =>
 b.addEventListener('click',()=>openEntry(b.dataset.id))
 );
-
 
 show('detail');
 
 }
 
 
-
 /* EVENTS */
 
 document.getElementById('back')
 .addEventListener('click',()=>show('home'));
-
 
 document.querySelectorAll('#filters button')
 .forEach(b =>
@@ -2022,7 +2070,6 @@ render();
 })
 
 );
-
 
 document.getElementById('search')
 .addEventListener('input',render);
