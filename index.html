@@ -1,3 +1,382 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>JAX'S WORLD / An Open Archive</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+:root{
+  --ink:#141414;
+  --paper:#f0eee7;
+  --accent:#d7f344;
+  --line:#bbb9af;
+  --muted:#65655d;
+}
+
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  background:var(--paper);
+  color:var(--ink);
+  font-family:'Space Grotesk',Arial,sans-serif;
+}
+
+button,input{font:inherit}
+button{cursor:pointer}
+
+.top{
+  position:sticky;
+  top:0;
+  z-index:10;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  background:var(--ink);
+  color:var(--paper);
+  padding:15px 3vw;
+  gap:15px;
+}
+
+.brand{
+  font-weight:700;
+  letter-spacing:-.07em;
+  font-size:clamp(22px,3vw,34px);
+}
+
+.brand span{color:var(--accent)}
+
+.top small,
+.mono,
+.eyebrow,
+.tag,
+.nav button,
+.meta{
+  font-family:'DM Mono',monospace;
+  font-size:11px;
+  letter-spacing:.05em;
+  text-transform:uppercase;
+}
+
+.top small{color:#c9c9c0}
+
+.nav{
+  display:flex;
+  gap:5px;
+  flex-wrap:wrap;
+}
+
+.nav button{
+  border:1px solid #777;
+  background:transparent;
+  color:white;
+  padding:10px 13px;
+}
+
+.nav button.active,
+.nav button:hover{
+  background:var(--accent);
+  color:var(--ink);
+  border-color:var(--accent);
+}
+
+main{
+  max-width:1500px;
+  margin:auto;
+  padding:0 3vw 65px;
+}
+
+.hero{
+  padding:75px 0 45px;
+  border-bottom:2px solid var(--ink);
+  display:grid;
+  grid-template-columns:1.5fr 1fr;
+  gap:30px;
+}
+
+.eyebrow{
+  display:inline-flex;
+  gap:12px;
+  align-items:center;
+}
+
+.dot{
+  height:8px;
+  width:8px;
+  background:#ee633d;
+  border-radius:50%;
+  display:inline-block;
+}
+
+.hero h1{
+  font-size:clamp(42px,5.5vw,76px);
+  line-height:.88;
+  letter-spacing:-.085em;
+  margin:24px 0;
+}
+
+.hero h1 em{
+  font-style:normal;
+  color:#8e9580;
+}
+
+.hero p{
+  font-size:clamp(18px,2vw,26px);
+  max-width:680px;
+  line-height:1.25;
+}
+
+.hero-aside{
+  align-self:end;
+  border-top:2px solid;
+  padding-top:18px;
+}
+
+.hero-aside strong{
+  font-size:clamp(24px,3vw,42px);
+  line-height:1.03;
+  letter-spacing:-.06em;
+  display:block;
+  margin:12px 0 25px;
+}
+
+.button{
+  border:2px solid var(--ink);
+  padding:13px 18px;
+  background:var(--accent);
+  font-weight:700;
+  text-transform:uppercase;
+  font-size:12px;
+  letter-spacing:.03em;
+}
+
+.button:hover{
+  background:var(--ink);
+  color:var(--accent);
+}
+
+.section-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:end;
+  border-bottom:2px solid;
+  margin:45px 0 18px;
+  padding-bottom:12px;
+  gap:15px;
+}
+
+.section-head h2{
+  font-size:clamp(28px,4vw,52px);
+  letter-spacing:-.07em;
+  margin:0;
+}
+
+.section-head span{
+  font-family:'DM Mono',monospace;
+  font-size:11px;
+  text-transform:uppercase;
+}
+
+.filters{
+  display:flex;
+  gap:7px;
+  flex-wrap:wrap;
+  margin:20px 0;
+}
+
+.filters button{
+  border:1px solid var(--ink);
+  background:transparent;
+  padding:10px 12px;
+  font-family:'DM Mono',monospace;
+  font-size:11px;
+  text-transform:uppercase;
+}
+
+.filters button.active{
+  background:var(--ink);
+  color:var(--paper);
+}
+
+.search{
+  margin-left:auto;
+  min-width:180px;
+  padding:10px;
+  border:1px solid var(--ink);
+  background:transparent;
+}
+
+.cards{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:12px;
+}
+
+.entry{
+  min-height:260px;
+  border:1.5px solid var(--ink);
+  padding:18px;
+  display:flex;
+  flex-direction:column;
+  background:#e6e4da;
+  transition:transform .15s,background .15s;
+  text-align:left;
+}
+
+.entry:hover{
+  transform:translateY(-4px);
+  background:var(--accent);
+}
+
+.entry:nth-child(4n+2){background:#dedfd3}
+.entry:nth-child(4n+3){background:#e8e3dc}
+
+.entry .num{
+  font-family:'DM Mono',monospace;
+  font-size:11px;
+}
+
+.entry h3{
+  font-size:clamp(28px,3vw,43px);
+  letter-spacing:-.075em;
+  line-height:1;
+  margin:35px 0 12px;
+}
+
+.entry p{
+  line-height:1.35;
+  font-size:14px;
+  max-width:350px;
+}
+
+.entry .creator{
+  font-family:'DM Mono',monospace;
+  font-size:10px;
+  text-transform:uppercase;
+  margin-top:auto;
+  padding-top:14px;
+  color:var(--muted);
+}
+
+.entry .bottom{
+  display:flex;
+  justify-content:space-between;
+  align-items:end;
+  margin-top:auto;
+  border-top:1px solid;
+  padding-top:12px;
+  gap:8px;
+}
+
+.tag{
+  border:1px solid;
+  padding:5px;
+}
+
+.arrow{font-size:26px}
+
+.empty{
+  padding:30px;
+  border:1px dashed var(--line);
+}
+
+.page{display:none}
+.page.active{display:block}
+
+.guide-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:12px;
+  margin-top:24px;
+}
+
+.guide-box{
+  border:1.5px solid;
+  padding:25px;
+  min-height:180px;
+}
+
+.guide-box h3{
+  font-size:30px;
+  letter-spacing:-.06em;
+  margin:8px 0;
+}
+
+.guide-box p{line-height:1.5}
+
+.builder-grid{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:10px;
+  margin-top:22px;
+}
+
+.builder-card{
+  border:1.5px solid var(--ink);
+  padding:18px;
+  min-height:145px;
+  background:#e6e4da;
+}
+
+.builder-card h3{
+  font-size:24px;
+  letter-spacing:-.05em;
+  margin:7px 0 12px;
+}
+
+.builder-card p{
+  font-size:14px;
+  line-height:1.4;
+  margin:0;
+}
+
+.builder-card .mono{color:var(--muted)}
+
+.detail{
+  max-width:1100px;
+  padding:50px 0;
+}
+
+.back{
+  background:none;
+  border:0;
+  border-bottom:1px solid;
+  padding:0 0 5px;
+  font-family:'DM Mono',monospace;
+  text-transform:uppercase;
+  font-size:12px;
+}
+
+.detail h1{
+  font-size:clamp(50px,8vw,110px);
+  letter-spacing:-.09em;
+  line-height:.95;
+  margin:25px 0;
+}
+
+.detail .lead{
+  font-size:clamp(20px,3vw,31px);
+  line-height:1.3;
+  max-width:750px;
+}
+
+.detail-body{
+  border-top:2px solid;
+  margin-top:35px;
+  padding-top:25px;
+  display:grid;
+  grid-template-columns:minmax(180px,.7fr) minmax(0,2.3fr);
+  gap:30px;
+}
+
+.detail-body p{line-height:1.6}
+
+
+/* CHARACTER PROFILE */
+
 .character-profile{
   display:grid;
   grid-template-columns:minmax(220px,280px) minmax(0,1fr);
@@ -74,7 +453,128 @@
   text-transform:uppercase;
 }
 
+
+/* DETAILS */
+
+.connections{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+}
+
+.connections button{
+  border:1px solid;
+  background:transparent;
+  padding:10px;
+  font-family:'DM Mono',monospace;
+  font-size:11px;
+  text-transform:uppercase;
+}
+
+.connections button:hover{
+  background:var(--accent);
+}
+
+
+/* WORLD SUMMARY */
+
+.summary-actions{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:15px;
+  margin:22px 0;
+}
+
+.summary-intro{
+  font-size:clamp(18px,2vw,25px);
+  line-height:1.35;
+  max-width:850px;
+}
+
+.summary-grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:12px;
+  margin-top:20px;
+}
+
+.summary-box{
+  border:1.5px solid var(--ink);
+  padding:22px;
+  background:#e6e4da;
+}
+
+.summary-box.wide{grid-column:1/-1}
+
+.summary-box h3{
+  font-size:28px;
+  letter-spacing:-.055em;
+  margin:5px 0 14px;
+}
+
+.summary-box ul{
+  margin:0;
+  padding-left:20px;
+}
+
+.summary-box li{
+  margin:7px 0;
+  line-height:1.35;
+}
+
+.summary-box .mono{color:var(--muted)}
+
+footer{
+  border-top:2px solid;
+  margin-top:70px;
+  padding:20px 0;
+  display:flex;
+  justify-content:space-between;
+  gap:20px;
+  font-family:'DM Mono',monospace;
+  font-size:11px;
+  text-transform:uppercase;
+}
+
+
+/* PRINT */
+
+@media print{
+  body{background:white}
+
+  .top,
+  footer,
+  .summary-actions .button{
+    display:none!important;
+  }
+
+  main{
+    max-width:none;
+    padding:0;
+  }
+
+  .page{display:none!important}
+
+  #summary.page{
+    display:block!important;
+  }
+
+  .summary-grid{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .summary-box{
+    break-inside:avoid;
+    background:white;
+  }
+}
+
+
+/* RESPONSIVE */
+
 @media(max-width:850px){
+
   .character-profile{
     grid-template-columns:1fr;
   }
@@ -86,4 +586,1454 @@
   .profile-box.wide{
     grid-column:auto;
   }
+
+  .summary-grid{
+    grid-template-columns:1fr;
+  }
+
+  .summary-box.wide{
+    grid-column:auto;
+  }
+
+  .builder-grid{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .top{
+    position:relative;
+    flex-wrap:wrap;
+  }
+
+  .top small{display:none}
+
+  .nav{width:100%}
+
+  .hero,
+  .detail-body{
+    grid-template-columns:1fr;
+  }
+
+  .hero{padding-top:45px}
+
+  .cards{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .guide-grid{
+    grid-template-columns:1fr;
+  }
+
+  .search{
+    width:100%;
+    margin-left:0;
+  }
 }
+
+@media(max-width:550px){
+
+  .builder-grid{
+    grid-template-columns:1fr;
+  }
+
+  .cards{
+    grid-template-columns:1fr;
+  }
+
+  .entry{
+    min-height:220px;
+  }
+
+  .hero h1{
+    font-size:46px;
+  }
+
+  footer{
+    flex-direction:column;
+  }
+}
+</style>
+</head>
+
+
+<body>
+
+<header class="top">
+
+  <div class="brand">
+    JAX'S WORLD<span>↗</span>
+  </div>
+
+  <small>AN OPEN ARCHIVE / GRADE 8 ELA</small>
+
+  <nav class="nav">
+    <button data-page="home" class="active">Explore</button>
+    <button data-page="summary">World Summary</button>
+    <button data-page="builders">Who’s Building What</button>
+    <button data-page="guide">The Project</button>
+  </nav>
+
+</header>
+
+
+<main>
+
+
+<!-- HOME -->
+
+<section id="home" class="page active">
+
+<div class="hero">
+
+<div>
+
+<div class="eyebrow">
+<span class="dot"></span>
+ARCHIVE STATUS: UNDER CONSTRUCTION
+</div>
+
+<h1>
+JAX'S<br>
+<em>WORLD</em>
+</h1>
+
+<p>
+A shared world built from one starting point and expanded by the class.
+This world will grow as characters, places, history, society, wildlife,
+sports, and stories are created.
+</p>
+
+</div>
+
+
+<div class="hero-aside">
+
+<span class="mono">FIELD NOTE / 001</span>
+
+<strong>
+THIS WORLD IS NOT FINISHED.
+THAT'S THE POINT.
+</strong>
+
+<button
+class="button"
+onclick="document.getElementById('archiveHead').scrollIntoView({behavior:'smooth'})">
+Explore the world ↗
+</button>
+
+</div>
+
+</div>
+
+
+<div class="section-head" id="archiveHead">
+
+<h2>THE ARCHIVE</h2>
+
+<span id="count"></span>
+
+</div>
+
+
+<div class="filters" id="filters">
+
+<button class="active" data-filter="all">All</button>
+<button data-filter="people">People</button>
+<button data-filter="places">Places</button>
+<button data-filter="sports">Sports</button>
+<button data-filter="society">Society</button>
+<button data-filter="nature">Nature</button>
+<button data-filter="stories">Stories & Media</button>
+
+<input
+id="search"
+class="search"
+placeholder="Search the archive...">
+
+</div>
+
+
+<div id="cards" class="cards"></div>
+
+</section>
+
+
+
+<!-- WORLD SUMMARY -->
+
+<section id="summary" class="page">
+
+<div class="section-head">
+
+<h2>WORLD SUMMARY</h2>
+
+<span>QUICK REFERENCE / CURRENT CANON</span>
+
+</div>
+
+<div class="summary-actions">
+
+<p class="summary-intro">
+Everything the class has officially established about Jax’s World in one place.
+If a detail is not here yet, it may still be open for someone to develop.
+</p>
+
+<button class="button" onclick="window.print()">
+Print / Save PDF
+</button>
+
+</div>
+
+<div id="summaryContent"></div>
+
+</section>
+
+
+
+<!-- BUILDERS -->
+
+<section id="builders" class="page">
+
+<div class="section-head">
+
+<h2>WHO’S BUILDING WHAT</h2>
+
+<span>FIND PEOPLE / MAKE CONNECTIONS</span>
+
+</div>
+
+<p class="summary-intro">
+If your idea connects to something another person is developing,
+talk to them. Ask questions, compare ideas, and get permission before
+changing or incorporating someone else’s creation.
+</p>
+
+<div class="builder-grid">
+
+<div class="builder-card">
+<span class="mono">SPORTS</span>
+<h3>Isaiah</h3>
+<p>Basketball</p>
+</div>
+
+<div class="builder-card">
+<span class="mono">PEOPLE / PLACES</span>
+<h3>Aneleigh / Josie</h3>
+<p>Girlfriend, family, friends, coffee shop</p>
+</div>
+
+<div class="builder-card">
+<span class="mono">SPORTS / STORY</span>
+<h3>Zander</h3>
+<p>Basketball team and football team’s ally in the fight</p>
+</div>
+
+<div class="builder-card">
+<span class="mono">PEOPLE</span>
+<h3>Elliot</h3>
+<p>Bad guys backstory</p>
+</div>
+
+<div class="builder-card">
+<span class="mono">PEOPLE / MEDIA</span>
+<h3>Hannah</h3>
+<p>Character profiles, drawings, newscast</p>
+</div>
+
+<div class="builder-card">
+<span class="mono">PLACES</span>
+<h3>Arianna</h3>
+<p>Map</p>
+</div>
+
+<div class="builder-card">
+<span class="mono">SOCIETY</span>
+<h3>Sienna</h3>
+<p>Transportation</p>
+</div>
+
+<div class="builder-card">
+<span class="mono">STORIES / MEDIA</span>
+<h3>Ivy</h3>
+<p>Graphic novel and newscast</p>
+</div>
+
+<div class="builder-card">
+<span class="mono">SOCIETY</span>
+<h3>Ethne</h3>
+<p>Laws and rules</p>
+</div>
+
+<div class="builder-card">
+<span class="mono">SPORTS</span>
+<h3>Marrex / Max</h3>
+<p>Football team and league</p>
+</div>
+
+<div class="builder-card">
+<span class="mono">SOCIETY</span>
+<h3>Bella</h3>
+<p>Fashion design</p>
+</div>
+
+<div class="builder-card">
+<span class="mono">WORLD</span>
+<h3>Norah / Jordyn</h3>
+<p>Plan the planet</p>
+</div>
+
+<div class="builder-card">
+<span class="mono">MEDIA</span>
+<h3>Berkeley</h3>
+<p>Newspaper article</p>
+</div>
+
+<div class="builder-card">
+<span class="mono">PLACES</span>
+<h3>Finley / Cohen</h3>
+<p>Milsamolex city planning</p>
+</div>
+
+<div class="builder-card">
+<span class="mono">PLACES / MEDIA</span>
+<h3>Harper</h3>
+<p>Coffee shop 2 and newspaper</p>
+</div>
+
+<div class="builder-card">
+<span class="mono">NATURE</span>
+<h3>Crosby</h3>
+<p>Animal kingdom</p>
+</div>
+
+<div class="builder-card">
+<span class="mono">NATURE</span>
+<h3>Brent</h3>
+<p>Animal kingdom</p>
+</div>
+
+<div class="builder-card">
+<span class="mono">SOCIETY</span>
+<h3>Bristol</h3>
+<p>Country and fantasy-world rules</p>
+</div>
+
+<div class="builder-card">
+<span class="mono">STORY</span>
+<h3>Alexandra / Josie</h3>
+<p>Backstory</p>
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- PROJECT -->
+
+<section id="guide" class="page">
+
+<div class="section-head">
+
+<h2>THE PROJECT</h2>
+
+<span>WORLD BUILDING / GRADE 8 ELA</span>
+
+</div>
+
+<p class="summary-intro">
+Create something that expands Jax’s World. Write, draw, design,
+explain, research, or combine approaches.
+</p>
+
+<div class="guide-grid">
+
+<div class="guide-box">
+
+<span class="mono">01 / ORIGINAL</span>
+
+<h3>ADD SOMETHING</h3>
+
+<p>
+Add something the story and class have not already fully explained.
+Your contribution should make the world larger.
+</p>
+
+</div>
+
+
+<div class="guide-box">
+
+<span class="mono">02 / CONNECTED</span>
+
+<h3>MAKE IT BELONG</h3>
+
+<p>
+Connect your contribution to the original story or something else
+that already exists in our shared world.
+</p>
+
+</div>
+
+
+<div class="guide-box">
+
+<span class="mono">03 / DEVELOPED</span>
+
+<h3>PUSH IT FURTHER</h3>
+
+<p>
+Include enough details that someone else can understand how your idea
+works, why it exists, and why it matters.
+</p>
+
+</div>
+
+
+<div class="guide-box">
+
+<span class="mono">04 / PURPOSEFUL</span>
+
+<h3>MAKE CHOICES</h3>
+
+<p>
+Use your chosen format intentionally. Be able to explain why you made
+important choices and what they add to the world.
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- DETAIL -->
+
+<section id="detail" class="page">
+
+<div class="detail">
+
+<button class="back" id="back">
+← Back to archive
+</button>
+
+<div class="meta" id="detailMeta"></div>
+
+<h1 id="detailTitle"></h1>
+
+<p class="lead" id="detailLead"></p>
+
+<div id="detailContent"></div>
+
+<div class="detail-body">
+
+<div id="detailInfo"></div>
+
+<div>
+
+<span class="mono">CONNECTED RECORDS</span>
+
+<div
+class="connections"
+id="connections"
+style="margin-top:15px">
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<footer>
+
+<span>JAX'S WORLD / CLASS ARCHIVE</span>
+
+<span>BUILD → CONNECT → EXPAND</span>
+
+</footer>
+
+</main>
+
+
+
+<script>
+
+const entries = [
+
+{
+id:'jax',
+title:'Jax King',
+category:'people',
+type:'Character',
+description:'A 15-year-old football player at the centre of our world.',
+workingOn:'Hannah / Alexandra / Josie',
+
+content:'',
+
+profile:{
+
+photo:'',
+
+sections:[
+
+{
+title:'PROFILE',
+items:[
+['Name','Jax King'],
+['Name Meaning','God is gracious'],
+['Birthday','May 17'],
+['Zodiac','Taurus'],
+['Height',"5’10’’"],
+['Weight','150 lb'],
+['Style',"We don't know yet"],
+['Physical Traits','Blond hair with a blue streak; buff (apparently)']
+]
+},
+
+{
+title:'FAVOURITES',
+items:[
+['Food','Cakepop'],
+['Drink','Rainbow lemonade'],
+['Colour','Blue'],
+['Weather','Sunny'],
+['Item','Signed football']
+]
+},
+
+{
+title:'PERSONALITY',
+items:[
+['Hobbies','Football, baking'],
+['Special Skills','Football'],
+['Pet Peeve','Being late or cancelling last minute'],
+['Bad At','Singing and dancing'],
+['Biggest Fear','FOMO'],
+['Biggest Flaw','Introverted']
+]
+},
+
+{
+title:'MOTIVATION',
+items:[
+['Goal','Become a football player'],
+['Would Die For','Football'],
+['Would Kill For','Football']
+]
+},
+
+{
+title:'KNOWN HISTORY',
+wide:true,
+items:[
+['Football','Jax started playing football when he was 9 years old.'],
+['Football Camp','He missed football camp because he had appendicitis.'],
+['Job',"He works at Luingunii’s Pizzeria around the bend."],
+['Daily Routine','Jax goes to Vala Cafe every day.'],
+['Cafe Order','Rainbow lemonade with blueberry, raspberry, and pineapple, plus a birthday-cake-flavoured volleyball cakepop.'],
+['Family','His parents are Lauren and Paul. His little sister is Mia.'],
+['Relationship','His girlfriend is Ashlee Eirvalon.'],
+['Pet','He has a calm female Siamese cat named Noodles.'],
+['Social Life','Jax is not popular because he is an introvert.']
+]
+}
+
+]
+
+},
+
+connections:[
+'ashlee',
+'mia',
+'lauren',
+'paul',
+'noodles',
+'vala',
+'pizzeria',
+'lightning',
+'milsamolex'
+]
+
+},
+
+
+{
+id:'ashlee',
+title:'Ashlee Eirvalon',
+category:'people',
+type:'Character',
+description:'Jax’s girlfriend. She is extroverted, calm, and adventurous.',
+content:
+`ESTABLISHED:
+
+Ashlee Eirvalon is Jax’s girlfriend.
+
+She is extroverted, calm, and adventurous.`,
+connections:['jax']
+},
+
+
+{
+id:'mia',
+title:'Mia King',
+category:'people',
+type:'Character',
+description:'Jax’s six-year-old little sister.',
+content:
+`ESTABLISHED:
+
+Mia is 6 years old.
+
+She has curly blonde hair and blue eyes.
+
+Jax has described her as annoying.`,
+connections:['jax','lauren','paul']
+},
+
+
+{
+id:'lauren',
+title:'Lauren',
+category:'people',
+type:'Character',
+description:'Jax and Mia’s mom.',
+content:
+`ESTABLISHED:
+
+Lauren is Jax and Mia’s mom.
+
+She has curly blonde hair.`,
+connections:['jax','mia','paul']
+},
+
+
+{
+id:'paul',
+title:'Paul',
+category:'people',
+type:'Character / Coach',
+description:'Jax’s dad and a football coach.',
+content:
+`ESTABLISHED:
+
+Paul is Jax’s dad.
+
+He is the football coach.
+
+He has balding black hair and brown eyes.`,
+connections:['jax','lauren','mia','lightning']
+},
+
+
+{
+id:'noodles',
+title:'Noodles',
+category:'nature',
+type:'Animal / Pet',
+description:'Jax’s calm female Siamese cat.',
+content:
+`ESTABLISHED:
+
+Noodles is a female Siamese cat.
+
+She is calm.
+
+She belongs to Jax.`,
+connections:['jax']
+},
+
+
+{
+id:'nazareth',
+workingOn:'Norah / Jordyn',
+title:'Nazareth',
+category:'places',
+type:'Planet',
+description:'The planet where Jax’s World takes place.',
+content:
+`ESTABLISHED:
+
+The planet is called Nazareth.
+
+IN DEVELOPMENT:
+
+Its geography, environments, history, physics, countries, and natural systems are still being developed.`,
+connections:['soultara','animals','map']
+},
+
+
+{
+id:'soultara',
+workingOn:'Bristol / Norah / Jordyn',
+title:'Soultara',
+category:'places',
+type:'Country',
+description:'The country containing Milsamolex.',
+image:'https://raw.githubusercontent.com/Buhlerbuhler/worldbuilding/refs/heads/main/Soultara-Flag-1.jpg',
+content:
+`ESTABLISHED:
+
+Soultara is a country on the planet Nazareth.
+
+Milsamolex is a city in Soultara.
+
+The class has created an official flag for Soultara.
+
+IN DEVELOPMENT:
+
+The country’s history, laws, culture, government, geography, and fantasy-world rules are still being developed.`,
+connections:['nazareth','milsamolex','laws','worldrules']
+},
+
+
+{
+id:'milsamolex',
+workingOn:'Finley / Cohen',
+title:'Milsamolex',
+category:'places',
+type:'City / City Planning',
+description:'The city where much of Jax’s known life takes place.',
+content:
+`ESTABLISHED:
+
+Milsamolex is a city in Soultara.
+
+The Milsamolex Lightning football team and Milsamolex Flames basketball team are based here.
+
+Jax works at Luingunii’s Pizzeria.
+
+Jax visits Vala Cafe every day.
+
+IN DEVELOPMENT:
+
+Finley and Cohen are developing the city itself: layout, neighbourhoods, important locations, streets, landmarks, and how Milsamolex works.`,
+connections:[
+'soultara',
+'lightning',
+'flames',
+'pizzeria',
+'vala',
+'transport',
+'map'
+]
+},
+
+
+{
+id:'lightning',
+workingOn:'Marrex / Max',
+title:'Milsamolex Lightning',
+category:'sports',
+type:'Football Team',
+description:'The known football team of Milsamolex.',
+content:
+`ESTABLISHED:
+
+The football team is called the Milsamolex Lightning.
+
+Paul is a football coach.
+
+IN DEVELOPMENT:
+
+The team, players, league, uniforms, rivals, records, and history are being developed.`,
+connections:['jax','paul','milsamolex']
+},
+
+
+{
+id:'flames',
+workingOn:'Isaiah / Zander',
+title:'Milsamolex Flames',
+category:'sports',
+type:'Basketball Team',
+description:'The basketball team of Milsamolex.',
+content:
+`ESTABLISHED:
+
+The basketball team is called the Milsamolex Flames.
+
+IN DEVELOPMENT:
+
+Players, branding, league information, history, rivals, and the team’s relationship to the larger story are still being developed.`,
+connections:['milsamolex']
+},
+
+
+{
+id:'pizzeria',
+workingOn:'Aneleigh / Josie',
+title:'Luingunii’s Pizzeria',
+category:'places',
+type:'Business',
+description:'The pizzeria where Jax works.',
+content:
+`ESTABLISHED:
+
+Jax works at Luingunii’s Pizzeria.
+
+It is described as being "around the bend."
+
+IN DEVELOPMENT:
+
+Its menu, location, staff, appearance, history, and role in Milsamolex are still open.`,
+connections:['jax','milsamolex']
+},
+
+
+{
+id:'vala',
+workingOn:'Aneleigh / Josie',
+title:'Vala Cafe',
+category:'places',
+type:'Business / Cafe',
+description:'A cafe Jax visits every day.',
+content:
+`ESTABLISHED:
+
+Jax goes to Vala Cafe every day.
+
+His usual order is a rainbow lemonade made with blueberry, raspberry, and pineapple.
+
+He also gets a volleyball cakepop with birthday-cake flavour.
+
+IN DEVELOPMENT:
+
+The cafe itself—its design, menu, employees, customers, history, and role in Milsamolex—is still being developed.`,
+connections:['jax','milsamolex']
+},
+
+
+{
+id:'villains',
+workingOn:'Elliot',
+title:'The Bad Guys',
+category:'people',
+type:'Backstory / In Development',
+description:'The backstory of the world’s villains is being developed.',
+content:
+`IN DEVELOPMENT:
+
+Who are the bad guys?
+
+What do they want?
+
+Why are they in conflict with Jax or this world?
+
+What happened before we met them?`,
+connections:['jax']
+},
+
+
+{
+id:'characters',
+workingOn:'Hannah',
+title:'Character Profiles',
+category:'people',
+type:'Illustration / In Development',
+description:'Characters are being developed through visual profiles and drawings.',
+content:
+`IN DEVELOPMENT:
+
+Character drawings and profiles will be added here as they become part of the shared world.`,
+connections:['jax','ashlee','mia']
+},
+
+
+{
+id:'map',
+workingOn:'Arianna',
+title:'Map of the World',
+category:'places',
+type:'Map / In Development',
+description:'The geography of Nazareth, Soultara, and Milsamolex is beginning to take shape.',
+content:
+`IN DEVELOPMENT:
+
+Arianna is mapping the world.
+
+The map can eventually connect countries, cities, landmarks, habitats, roads, and natural areas.`,
+connections:['nazareth','soultara','milsamolex']
+},
+
+
+{
+id:'transport',
+workingOn:'Sienna',
+title:'Transportation',
+category:'society',
+type:'World System / In Development',
+description:'How people move through Milsamolex, Soultara, and possibly the planet.',
+content:
+`IN DEVELOPMENT:
+
+Sienna is designing transportation for the world.
+
+Transportation may shape how cities work, how far people travel, and what technology exists.`,
+connections:['milsamolex','soultara']
+},
+
+
+{
+id:'laws',
+workingOn:'Ethne',
+title:'Laws',
+category:'society',
+type:'Law / In Development',
+description:'The rules people in this world are expected to live by.',
+content:
+`IN DEVELOPMENT:
+
+Ethne is developing laws and rules for the world.
+
+These may reveal what the society values, fears, protects, or controls.`,
+connections:['soultara','worldrules']
+},
+
+
+{
+id:'fashion',
+workingOn:'Bella',
+title:'Fashion',
+category:'society',
+type:'Design / In Development',
+description:'What people wear and what clothing reveals about life on Nazareth.',
+content:
+`IN DEVELOPMENT:
+
+Bella is developing fashion for the world.
+
+Clothing can connect to climate, culture, jobs, sports, status, technology, or everyday life.`,
+connections:['milsamolex','soultara']
+},
+
+
+{
+id:'worldrules',
+workingOn:'Bristol',
+title:'World Rules',
+category:'society',
+type:'Worldbuilding / In Development',
+description:'The larger rules and logic that shape life in this fantasy world.',
+content:
+`IN DEVELOPMENT:
+
+Bristol is developing the country and fantasy-world rules.
+
+What is possible here?
+
+What is normal?
+
+What makes this world different from ours?`,
+connections:['nazareth','soultara','laws']
+},
+
+
+{
+id:'animals',
+workingOn:'Crosby / Brent',
+title:'Animal Kingdom',
+category:'nature',
+type:'Wildlife / In Development',
+description:'The creatures and animal life of Nazareth are being invented.',
+content:
+`IN DEVELOPMENT:
+
+Crosby and Brent are exploring the animal kingdom.
+
+Their creatures can eventually connect to habitats, food webs, cities, culture, and the map.`,
+connections:['nazareth','map']
+},
+
+
+{
+id:'newscast',
+workingOn:'Hannah / Ivy',
+title:'Milsamolex Newscast',
+category:'stories',
+type:'Broadcast / In Development',
+description:'News from inside the world, reported as if the events are really happening.',
+content:
+`IN DEVELOPMENT:
+
+Hannah and Ivy are creating newscasts from within the world.
+
+Reports may connect to characters, sports, major events, laws, or other class creations.`,
+connections:['milsamolex','jax']
+},
+
+
+{
+id:'graphicnovel',
+workingOn:'Ivy',
+title:'Graphic Novel',
+category:'stories',
+type:'Visual Story / In Development',
+description:'A part of the world is being told through sequential art.',
+content:
+`IN DEVELOPMENT:
+
+Ivy is developing a graphic novel set in Jax’s World.`,
+connections:['jax']
+},
+
+
+{
+id:'newspaper',
+workingOn:'Berkeley / Harper',
+title:'The Newspaper',
+category:'stories',
+type:'News / In Development',
+description:'Articles and reporting from inside the world.',
+content:
+`IN DEVELOPMENT:
+
+Newspaper-style contributions are underway.
+
+This space can collect headlines, articles, images, interviews, and reports about events elsewhere in the archive.`,
+connections:['milsamolex','lightning','flames']
+},
+
+
+{
+id:'backstories',
+workingOn:'Alexandra / Josie',
+title:'Backstories',
+category:'stories',
+type:'Story / In Development',
+description:'The past is being filled in through characters, events, conflicts, and histories.',
+content:
+`IN DEVELOPMENT:
+
+Alexandra and Josie are building backstories that can deepen characters and explain how parts of this world came to be.`,
+connections:['jax','villains']
+}
+
+];
+
+
+
+/* NAVIGATION */
+
+const pages = [...document.querySelectorAll('.page')];
+const nav = [...document.querySelectorAll('.nav button')];
+
+let filter = 'all';
+
+function show(page){
+
+  pages.forEach(p =>
+    p.classList.toggle('active',p.id===page)
+  );
+
+  nav.forEach(b =>
+    b.classList.toggle('active',b.dataset.page===page)
+  );
+
+  window.scrollTo(0,0);
+}
+
+document.querySelectorAll('[data-page]').forEach(b =>
+  b.addEventListener('click',()=>show(b.dataset.page))
+);
+
+
+
+/* WORLD SUMMARY */
+
+function renderSummary(){
+
+const established = {
+
+'PEOPLE':[
+"Jax King is 15 years old.",
+"Jax has blond hair with a blue streak.",
+"He started playing football at age 9.",
+"He missed football camp because he had appendicitis.",
+"Jax is not popular because he is an introvert.",
+"Ashlee Eirvalon is Jax’s girlfriend; she is extroverted, calm, and adventurous.",
+"Mia is Jax’s 6-year-old little sister; she has curly blonde hair and blue eyes.",
+"Lauren is Jax’s mom and has curly blonde hair.",
+"Paul is Jax’s dad and the football coach; he has balding black hair and brown eyes.",
+"Noodles is Jax’s calm female Siamese cat."
+],
+
+'WORLD & PLACES':[
+"Planet: Nazareth",
+"Country: Soultara",
+"City: Milsamolex",
+"Luingunii’s Pizzeria exists in or around Milsamolex.",
+"Jax goes to Vala Cafe every day."
+],
+
+'SPORTS':[
+"Football team: Milsamolex Lightning",
+"Basketball team: Milsamolex Flames",
+"Jax started playing football at age 9.",
+"Paul is the football coach."
+],
+
+'EVERYDAY LIFE':[
+"Jax works at Luingunii’s Pizzeria around the bend.",
+"At Vala Cafe, Jax gets a rainbow lemonade with blueberry, raspberry, and pineapple.",
+"He also gets a birthday-cake-flavoured volleyball cakepop.",
+"Jax’s favourite food is a cakepop.",
+"His favourite drink is rainbow lemonade.",
+"His hobbies include football and baking."
+]
+
+};
+
+
+const boxes = Object.entries(established)
+.map(([title,items]) =>
+
+`<div class="summary-box">
+
+<span class="mono">ESTABLISHED</span>
+
+<h3>${title}</h3>
+
+<ul>
+
+${items.map(x=>`<li>${x}</li>`).join('')}
+
+</ul>
+
+</div>`
+
+).join('');
+
+
+document.getElementById('summaryContent').innerHTML =
+
+`<div class="summary-grid">
+
+${boxes}
+
+<div class="summary-box">
+
+<span class="mono">STILL OPEN</span>
+
+<h3>Not decided yet</h3>
+
+<p>
+Most of Jax’s World is still unwritten.
+Geography, history, culture, technology, wildlife,
+villains, league details, laws, transportation,
+fashion, and many character details are being developed now.
+</p>
+
+<p class="summary-note">
+If something is not listed as established here,
+do not assume it is canon yet.
+</p>
+
+</div>
+
+</div>`;
+
+}
+
+
+
+/* ARCHIVE CARDS */
+
+function render(){
+
+const q =
+document.getElementById('search')
+.value
+.trim()
+.toLowerCase();
+
+
+const found = entries.filter(e =>
+
+(filter==='all' || e.category===filter)
+
+&&
+
+[
+e.title,
+e.description,
+e.type,
+e.category,
+e.workingOn || ''
+]
+.join(' ')
+.toLowerCase()
+.includes(q)
+
+);
+
+
+document.getElementById('count').textContent =
+entries.length + ' entries / expanding';
+
+
+document.getElementById('cards').innerHTML =
+
+found.map(e =>
+
+`<button class="entry" data-id="${e.id}">
+
+<span class="num">
+RECORD / ${String(entries.indexOf(e)+1).padStart(3,'0')}
+</span>
+
+<h3>${e.title}</h3>
+
+<p>${e.description}</p>
+
+${e.workingOn
+? `<div class="creator">WORKING ON / ${e.workingOn}</div>`
+: ''
+}
+
+<div class="bottom">
+
+<span class="tag">${e.type}</span>
+
+<span class="arrow">↗</span>
+
+</div>
+
+</button>`
+
+).join('')
+
+||
+
+'<p class="empty">No entries match your search. Try another term.</p>';
+
+
+document.querySelectorAll('.entry').forEach(b =>
+b.addEventListener('click',()=>openEntry(b.dataset.id))
+);
+
+}
+
+
+
+/* CHARACTER PROFILE */
+
+function characterProfileHTML(e){
+
+if(!e.profile) return '';
+
+
+const photo = e.profile.photo
+
+? `<img src="${e.profile.photo}" alt="Portrait of ${e.title}">`
+
+:
+
+`<div>
+
+<span class="mono">CHARACTER IMAGE</span>
+
+<br><br>
+
+<strong>NOT YET ADDED</strong>
+
+</div>`;
+
+
+const sections = e.profile.sections.map(sec =>
+
+`<div class="profile-box ${sec.wide?'wide':''}">
+
+<span class="mono">CHARACTER FILE</span>
+
+<h3>${sec.title}</h3>
+
+<div class="profile-list">
+
+${sec.items.map(([k,v]) =>
+
+`<strong>${k}</strong>
+<span>${v}</span>`
+
+).join('')}
+
+</div>
+
+</div>`
+
+).join('');
+
+
+return `
+
+<div class="character-profile">
+
+<div class="character-photo">
+${photo}
+</div>
+
+<div class="profile-sections">
+${sections}
+</div>
+
+</div>
+
+`;
+
+}
+
+
+
+/* OPEN ARCHIVE ENTRY */
+
+function openEntry(id){
+
+const e = entries.find(x=>x.id===id);
+
+if(!e) return;
+
+
+document.getElementById('detailMeta').textContent =
+e.category + ' / ' + e.type;
+
+
+document.getElementById('detailTitle').textContent =
+e.title;
+
+
+document.getElementById('detailLead').textContent =
+e.description;
+
+
+document.getElementById('detailInfo').innerHTML =
+
+(e.workingOn
+? '<strong>WORKING ON / '+e.workingOn+'</strong><br><br>'
+: ''
+)
+
++
+
+`This entry is a flexible container.
+It can hold writing, images, maps, videos,
+links, statistics, or any other meaningful contribution.`;
+
+
+
+if(e.profile){
+
+document.getElementById('detailContent').innerHTML =
+characterProfileHTML(e);
+
+}
+
+else{
+
+document.getElementById('detailContent').innerHTML =
+
+(e.image
+
+? `<img
+src="${e.image}"
+alt="${e.title} image"
+style="
+width:100%;
+max-width:720px;
+display:block;
+margin:0 0 22px;
+border:2px solid #111;
+">`
+
+: ''
+
+)
+
++
+
+`<div style="white-space:pre-line">
+${e.content}
+</div>`;
+
+}
+
+
+const related =
+e.connections
+.map(id=>entries.find(x=>x.id===id))
+.filter(Boolean);
+
+
+document.getElementById('connections').innerHTML =
+
+related.length
+
+?
+
+related.map(x =>
+
+`<button data-id="${x.id}">
+${x.title} ↗
+</button>`
+
+).join('')
+
+:
+
+'<p>No connections yet. What might connect here?</p>';
+
+
+document.querySelectorAll('#connections button')
+.forEach(b =>
+b.addEventListener('click',()=>openEntry(b.dataset.id))
+);
+
+
+show('detail');
+
+}
+
+
+
+/* EVENTS */
+
+document.getElementById('back')
+.addEventListener('click',()=>show('home'));
+
+
+document.querySelectorAll('#filters button')
+.forEach(b =>
+
+b.addEventListener('click',()=>{
+
+filter=b.dataset.filter;
+
+document.querySelectorAll('#filters button')
+.forEach(x =>
+x.classList.toggle('active',x===b)
+);
+
+render();
+
+})
+
+);
+
+
+document.getElementById('search')
+.addEventListener('input',render);
+
+
+/* START */
+
+render();
+renderSummary();
+
+</script>
+
+</body>
+</html>
