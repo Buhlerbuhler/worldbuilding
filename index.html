@@ -473,6 +473,56 @@ main{
   text-transform:uppercase;
 }
 
+/* ANIMAL PHOTOS */
+
+.animal-photo{
+  width:100%;
+  max-width:900px;
+  aspect-ratio:16 / 9;
+  border:1.5px solid var(--ink);
+  background:#dedfd3;
+  margin:22px 0 28px;
+  overflow:hidden;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.animal-photo img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+}
+
+.animal-photo-placeholder{
+  width:100%;
+  height:100%;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding:25px;
+  background:
+    linear-gradient(135deg,transparent 49.7%,#c7c7bc 50%,transparent 50.3%),
+    linear-gradient(45deg,transparent 49.7%,#c7c7bc 50%,transparent 50.3%);
+}
+
+.animal-photo-placeholder strong{
+  display:block;
+  margin-top:8px;
+  font-size:clamp(25px,4vw,44px);
+  letter-spacing:-.06em;
+  background:#dedfd3;
+  padding:5px 12px;
+}
+
+.animal-photo-placeholder .mono{
+  background:#dedfd3;
+  padding:5px 8px;
+}
+
 /* CONNECTIONS */
 
 .connections{
@@ -974,9 +1024,7 @@ explain, research, or combine approaches.
 
 const entries = [
 
-/* =========================================================
-   PEOPLE
-========================================================= */
+/* PEOPLE */
 
 {
 id:'jax',
@@ -1065,20 +1113,10 @@ items:[
 },
 
 connections:[
-'ashlee',
-'leo',
-'mia',
-'lauren',
-'paul',
-'noodles',
-'vala',
-'pizzeria',
-'lightning',
-'milsamolex',
-'laws'
+'ashlee','leo','mia','lauren','paul','noodles',
+'vala','pizzeria','lightning','milsamolex','laws'
 ]
 },
-
 
 {
 id:'ashlee',
@@ -1107,7 +1145,6 @@ Ashlee’s dad is a science teacher.`,
 connections:['jax','fashion']
 },
 
-
 {
 id:'leo',
 title:'Leo Smith',
@@ -1131,7 +1168,6 @@ They do not like being separated.`,
 connections:['jax']
 },
 
-
 {
 id:'mia',
 title:'Mia King',
@@ -1153,7 +1189,6 @@ He also says he doesn't know what is going on in her head.`,
 connections:['jax','lauren','paul']
 },
 
-
 {
 id:'lauren',
 title:'Lauren',
@@ -1172,7 +1207,6 @@ She wears glasses.
 Jax loves his parents but gives them alone time.`,
 connections:['jax','mia','paul']
 },
-
 
 {
 id:'paul',
@@ -1193,13 +1227,13 @@ Jax loves his parents but gives them alone time.`,
 connections:['jax','lauren','mia','lightning']
 },
 
-
 {
 id:'noodles',
 title:'Noodles',
 category:'nature',
 type:'Pet',
 description:'Jax’s calm female Siamese cat.',
+animalPhoto:true,
 content:
 `ESTABLISHED:
 
@@ -1212,9 +1246,7 @@ connections:['jax','animals']
 },
 
 
-/* =========================================================
-   WORLD / PLACES
-========================================================= */
+/* WORLD / PLACES */
 
 {
 id:'nazareth',
@@ -1278,7 +1310,6 @@ Ask Norah for information about what the planet looks like.`,
 connections:['soultara','animals','map','worldrules','harry']
 },
 
-
 {
 id:'harry',
 title:'Harry',
@@ -1295,7 +1326,6 @@ Harry is based on Jordyn's eraser.
 For details about Harry's appearance, ask Jordyn or Norah.`,
 connections:['nazareth']
 },
-
 
 {
 id:'soultara',
@@ -1317,7 +1347,6 @@ The class has created a flag for Soultara.
 Soultara has laws governing football, adulthood, jobs, dragons, magic, the Tenebrae Forest and raising the dead.`,
 connections:['nazareth','milsamolex','laws','worldrules','tenebrae']
 },
-
 
 {
 id:'milsamolex',
@@ -1342,17 +1371,8 @@ Jax visits Vala Cafe every day.
 IN DEVELOPMENT:
 
 Finley and Cohen are developing the city itself, including its layout, neighbourhoods, streets, landmarks and important locations.`,
-connections:[
-'soultara',
-'lightning',
-'flames',
-'pizzeria',
-'vala',
-'transport',
-'map'
-]
+connections:['soultara','lightning','flames','pizzeria','vala','transport','map']
 },
-
 
 {
 id:'tenebrae',
@@ -1373,7 +1393,6 @@ According to the current law, anyone who enters never comes out.`,
 connections:['soultara','laws','worldrules']
 },
 
-
 {
 id:'pizzeria',
 workingOn:'Aneleigh / Josie',
@@ -1391,7 +1410,6 @@ It is described as being "around the bend."
 Soultara law says people must have the same job as their parents by the time they become adults.`,
 connections:['jax','milsamolex','laws']
 },
-
 
 {
 id:'vala',
@@ -1417,7 +1435,6 @@ The cakepop is birthday-cake flavour.`,
 connections:['jax','milsamolex']
 },
 
-
 {
 id:'map',
 workingOn:'Arianna',
@@ -1435,9 +1452,7 @@ connections:['nazareth','soultara','milsamolex','tenebrae']
 },
 
 
-/* =========================================================
-   SPORTS
-========================================================= */
+/* SPORTS */
 
 {
 id:'lightning',
@@ -1465,7 +1480,6 @@ The team has jersey designs linked above.`,
 connections:['jax','paul','milsamolex','laws']
 },
 
-
 {
 id:'flames',
 workingOn:'Isaiah / Zander',
@@ -1485,9 +1499,7 @@ connections:['milsamolex']
 },
 
 
-/* =========================================================
-   SOCIETY
-========================================================= */
+/* SOCIETY */
 
 {
 id:'laws',
@@ -1536,16 +1548,8 @@ A large amount of magic results in a larger punishment.
 You cannot raise the dead.
 
 If you raise the dead, you will die.`,
-connections:[
-'soultara',
-'jax',
-'lightning',
-'tenebrae',
-'dragons',
-'worldrules'
-]
+connections:['soultara','jax','lightning','tenebrae','dragons','worldrules']
 },
-
 
 {
 id:'worldrules',
@@ -1575,7 +1579,6 @@ The Tenebrae Forest causes anyone who enters to become lost and never return.`,
 connections:['nazareth','soultara','laws','tenebrae','dragons']
 },
 
-
 {
 id:'transport',
 workingOn:'Sienna',
@@ -1591,7 +1594,6 @@ Sienna is designing transportation for the world.
 Transportation may affect how cities work, how far people travel and what kinds of technology exist.`,
 connections:['milsamolex','soultara','nazareth']
 },
-
 
 {
 id:'fashion',
@@ -1614,9 +1616,7 @@ connections:['ashlee','milsamolex','soultara']
 },
 
 
-/* =========================================================
-   NATURE
-========================================================= */
+/* NATURE */
 
 {
 id:'animals',
@@ -1637,7 +1637,6 @@ More creatures are being developed.`,
 connections:['nazareth','shiger','pogle','dragons','noodles']
 },
 
-
 {
 id:'shiger',
 workingOn:'Crosby / Brent',
@@ -1645,6 +1644,8 @@ title:'Shiger',
 category:'nature',
 type:'Creature',
 description:'A large creature that can travel underwater and walk on land.',
+animalPhoto:true,
+image:'',
 content:
 `ESTABLISHED:
 
@@ -1670,7 +1671,6 @@ They can weigh between about 1,500 and 2,200 pounds.`,
 connections:['animals','nazareth']
 },
 
-
 {
 id:'pogle',
 workingOn:'Crosby / Brent',
@@ -1678,6 +1678,8 @@ title:'Pogle',
 category:'nature',
 type:'Creature',
 description:'The last surviving species of Pogle.',
+animalPhoto:true,
+image:'',
 content:
 `ESTABLISHED:
 
@@ -1691,13 +1693,14 @@ More information about the Pogle is still being developed.`,
 connections:['animals','nazareth']
 },
 
-
 {
 id:'dragons',
 title:'Pet Dragons',
 category:'nature',
 type:'Creature / Society',
 description:'Every person receives a pet dragon when they turn 20.',
+animalPhoto:true,
+image:'',
 content:
 `ESTABLISHED:
 
@@ -1712,9 +1715,7 @@ connections:['animals','laws','worldrules','nazareth']
 },
 
 
-/* =========================================================
-   STORIES / MEDIA
-========================================================= */
+/* STORIES / MEDIA */
 
 {
 id:'villains',
@@ -1736,7 +1737,6 @@ What happened before we met them?`,
 connections:['jax','worldrules']
 },
 
-
 {
 id:'characters',
 workingOn:'Hannah',
@@ -1750,7 +1750,6 @@ content:
 Character drawings and profiles will be added here as they become part of the shared world.`,
 connections:['jax','ashlee','leo','mia','lauren','paul']
 },
-
 
 {
 id:'newscast',
@@ -1768,7 +1767,6 @@ Reports can connect to characters, sports, laws, major events and other class cr
 connections:['milsamolex','jax','laws']
 },
 
-
 {
 id:'graphicnovel',
 workingOn:'Ivy',
@@ -1782,7 +1780,6 @@ content:
 Ivy is developing a graphic novel set in Jax’s World.`,
 connections:['jax']
 },
-
 
 {
 id:'newspaper',
@@ -1799,7 +1796,6 @@ Newspaper-style contributions are underway.
 This space can collect headlines, articles, images, interviews and reports about events elsewhere in the archive.`,
 connections:['milsamolex','lightning','flames','laws']
 },
-
 
 {
 id:'backstories',
@@ -1818,9 +1814,7 @@ connections:['jax','villains','leo','ashlee']
 ];
 
 
-/* =========================================================
-   NAVIGATION
-========================================================= */
+/* NAVIGATION */
 
 const pages = [...document.querySelectorAll('.page')];
 const nav = [...document.querySelectorAll('.nav button')];
@@ -1845,9 +1839,7 @@ document.querySelectorAll('[data-page]').forEach(b =>
 );
 
 
-/* =========================================================
-   WORLD SUMMARY
-========================================================= */
+/* WORLD SUMMARY */
 
 function renderSummary(){
 
@@ -1961,9 +1953,7 @@ overwriting someone else's work.
 }
 
 
-/* =========================================================
-   ARCHIVE
-========================================================= */
+/* ARCHIVE */
 
 function render(){
 
@@ -2038,9 +2028,7 @@ b.addEventListener('click',()=>openEntry(b.dataset.id))
 }
 
 
-/* =========================================================
-   CHARACTER PROFILE
-========================================================= */
+/* CHARACTER PROFILE */
 
 function characterProfileHTML(e){
 
@@ -2096,9 +2084,7 @@ ${sections}
 }
 
 
-/* =========================================================
-   OPEN ENTRY
-========================================================= */
+/* OPEN ENTRY */
 
 function openEntry(id){
 
@@ -2137,7 +2123,28 @@ else{
 
 let media = '';
 
-if(e.image){
+/* LANDSCAPE ANIMAL PHOTO */
+
+if(e.animalPhoto){
+
+media +=
+`<div class="animal-photo">
+
+${e.image
+? `<img src="${e.image}" alt="${e.title}">`
+: `<div class="animal-photo-placeholder">
+     <span class="mono">CREATURE IMAGE</span>
+     <strong>${e.title}</strong>
+   </div>`
+}
+
+</div>`;
+
+}
+
+/* STANDARD IMAGE */
+
+else if(e.image){
 
 media +=
 `<img
@@ -2146,6 +2153,8 @@ alt="${e.title}"
 class="world-image">`;
 
 }
+
+/* EXTERNAL RESOURCE */
 
 if(e.resource){
 
@@ -2197,9 +2206,7 @@ show('detail');
 }
 
 
-/* =========================================================
-   EVENTS
-========================================================= */
+/* EVENTS */
 
 document.getElementById('back')
 .addEventListener('click',()=>show('home'));
