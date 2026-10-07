@@ -387,13 +387,14 @@ main{
   border:2px solid var(--ink);
 }
 
-.resource-link{
+.resource-link,
+.popup-image-button{
   display:inline-block;
   border:1.5px solid var(--ink);
   background:var(--accent);
   color:var(--ink);
   padding:11px 14px;
-  margin:15px 0 22px;
+  margin:15px 8px 22px 0;
   font-family:'DM Mono',monospace;
   font-size:11px;
   text-transform:uppercase;
@@ -401,7 +402,8 @@ main{
   font-weight:500;
 }
 
-.resource-link:hover{
+.resource-link:hover,
+.popup-image-button:hover{
   background:var(--ink);
   color:var(--accent);
 }
@@ -442,9 +444,7 @@ main{
   overflow:hidden;
 }
 
-.profile-box.wide{
-  grid-column:1/-1;
-}
+.profile-box.wide{grid-column:1/-1}
 
 .profile-box h3{
   font-size:22px;
@@ -463,9 +463,7 @@ main{
 
 .profile-list > *{min-width:0}
 
-.profile-list span{
-  overflow-wrap:anywhere;
-}
+.profile-list span{overflow-wrap:anywhere}
 
 .profile-list strong{
   font-family:'DM Mono',monospace;
@@ -523,6 +521,56 @@ main{
   padding:5px 8px;
 }
 
+/* IMAGE POPUP */
+
+.image-popup{
+  position:fixed;
+  inset:0;
+  z-index:1000;
+  background:rgba(20,20,20,.94);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:clamp(12px,3vw,40px);
+}
+
+.image-popup.open{
+  display:flex;
+}
+
+.image-popup img{
+  display:block;
+  max-width:100%;
+  max-height:calc(100dvh - 40px);
+  width:auto;
+  height:auto;
+  object-fit:contain;
+  box-shadow:0 0 0 1px rgba(255,255,255,.2);
+}
+
+.image-popup-close{
+  position:absolute;
+  top:14px;
+  right:18px;
+  z-index:2;
+  width:44px;
+  height:44px;
+  border:1px solid white;
+  background:var(--ink);
+  color:white;
+  font-size:27px;
+  line-height:1;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.image-popup-close:hover{
+  background:var(--accent);
+  color:var(--ink);
+  border-color:var(--accent);
+}
+
 /* CONNECTIONS */
 
 .connections{
@@ -540,9 +588,7 @@ main{
   text-transform:uppercase;
 }
 
-.connections button:hover{
-  background:var(--accent);
-}
+.connections button:hover{background:var(--accent)}
 
 /* SUMMARY */
 
@@ -619,13 +665,9 @@ footer{
 
   .page{display:none!important}
 
-  #summary.page{
-    display:block!important;
-  }
+  #summary.page{display:block!important}
 
-  .summary-grid{
-    grid-template-columns:1fr 1fr;
-  }
+  .summary-grid{grid-template-columns:1fr 1fr}
 
   .summary-box{
     break-inside:avoid;
@@ -635,9 +677,7 @@ footer{
 
 @media(max-width:850px){
 
-  .character-profile{
-    grid-template-columns:1fr;
-  }
+  .character-profile{grid-template-columns:1fr}
 
   .profile-sections,
   .summary-grid{
@@ -672,9 +712,7 @@ footer{
     grid-template-columns:repeat(2,1fr);
   }
 
-  .guide-grid{
-    grid-template-columns:1fr;
-  }
+  .guide-grid{grid-template-columns:1fr}
 
   .search{
     width:100%;
@@ -694,6 +732,19 @@ footer{
   .hero h1{font-size:46px}
 
   footer{flex-direction:column}
+
+  .image-popup{
+    padding:10px;
+  }
+
+  .image-popup img{
+    max-height:calc(100dvh - 20px);
+  }
+
+  .image-popup-close{
+    top:10px;
+    right:10px;
+  }
 }
 </style>
 </head>
@@ -713,8 +764,6 @@ footer{
 </header>
 
 <main>
-
-<!-- HOME -->
 
 <section id="home" class="page active">
 
@@ -776,8 +825,6 @@ Explore the world ↗
 </section>
 
 
-<!-- SUMMARY -->
-
 <section id="summary" class="page">
 
 <div class="section-head">
@@ -802,8 +849,6 @@ Print / Save PDF
 
 </section>
 
-
-<!-- BUILDERS -->
 
 <section id="builders" class="page">
 
@@ -933,8 +978,6 @@ changing or incorporating someone else’s creation.
 </section>
 
 
-<!-- PROJECT -->
-
 <section id="guide" class="page">
 
 <div class="section-head">
@@ -978,8 +1021,6 @@ explain, research, or combine approaches.
 </section>
 
 
-<!-- DETAIL -->
-
 <section id="detail" class="page">
 
 <div class="detail">
@@ -1018,6 +1059,22 @@ explain, research, or combine approaches.
 </footer>
 
 </main>
+
+
+<!-- IMAGE POPUP -->
+
+<div id="imagePopup" class="image-popup" aria-hidden="true">
+
+<button
+id="imagePopupClose"
+class="image-popup-close"
+aria-label="Close image">
+×
+</button>
+
+<img id="imagePopupImg" src="" alt="">
+
+</div>
 
 
 <script>
@@ -1234,6 +1291,7 @@ category:'nature',
 type:'Pet',
 description:'Jax’s calm female Siamese cat.',
 animalPhoto:true,
+image:'',
 content:
 `ESTABLISHED:
 
@@ -1366,12 +1424,12 @@ The Milsamolex Flames basketball team is based here.
 
 Jax works at Luingunii’s Pizzeria.
 
-Jax visits Vala Cafe every day.
+Jax visits  Cafe every day.
 
 IN DEVELOPMENT:
 
 Finley and Cohen are developing the city itself, including its layout, neighbourhoods, streets, landmarks and important locations.`,
-connections:['soultara','lightning','flames','pizzeria','vala','transport','map']
+connections:['soultara','lightning','flames','pizzeria','','transport','map']
 },
 
 {
@@ -1412,12 +1470,18 @@ connections:['jax','milsamolex','laws']
 },
 
 {
-id:'vala',
+id:'',
 workingOn:'Aneleigh / Josie',
 title:'Vala Cafe',
 category:'places',
 type:'Business / Cafe',
 description:'A cafe Jax visits every day.',
+
+popupImage:{
+  label:'View Vala Cafe Menu ↗',
+  url:'https://raw.githubusercontent.com/Buhlerbuhler/worldbuilding/refs/heads/main/vala-cafe-1.jpg'
+},
+
 content:
 `ESTABLISHED:
 
@@ -1645,7 +1709,7 @@ category:'nature',
 type:'Creature',
 description:'A large creature that can travel underwater and walk on land.',
 animalPhoto:true,
-image:'https://raw.githubusercontent.com/Buhlerbuhler/worldbuilding/refs/heads/main/Shiger.png',
+image:'',
 content:
 `ESTABLISHED:
 
@@ -1679,7 +1743,7 @@ category:'nature',
 type:'Creature',
 description:'The last surviving species of Pogle.',
 animalPhoto:true,
-image:'https://raw.githubusercontent.com/Buhlerbuhler/worldbuilding/refs/heads/main/Pogle.png',
+image:'',
 content:
 `ESTABLISHED:
 
@@ -2169,9 +2233,40 @@ ${e.resource.label}
 
 }
 
+/* POPUP IMAGE */
+
+if(e.popupImage){
+
+media +=
+`<button
+class="popup-image-button"
+data-popup-image="${e.popupImage.url}"
+data-popup-title="${e.title}">
+${e.popupImage.label}
+</button>`;
+
+}
+
 document.getElementById('detailContent').innerHTML =
 media +
 `<div class="content-block">${e.content || ''}</div>`;
+
+
+/* CONNECT POPUP BUTTON */
+
+document.querySelectorAll('[data-popup-image]')
+.forEach(button => {
+
+  button.addEventListener('click', () => {
+
+    openImagePopup(
+      button.dataset.popupImage,
+      button.dataset.popupTitle
+    );
+
+  });
+
+});
 
 }
 
@@ -2204,6 +2299,70 @@ b.addEventListener('click',()=>openEntry(b.dataset.id))
 show('detail');
 
 }
+
+
+/* IMAGE POPUP */
+
+const imagePopup =
+document.getElementById('imagePopup');
+
+const imagePopupImg =
+document.getElementById('imagePopupImg');
+
+const imagePopupClose =
+document.getElementById('imagePopupClose');
+
+
+function openImagePopup(src,title){
+
+  imagePopupImg.src = src;
+  imagePopupImg.alt = title || 'Image';
+
+  imagePopup.classList.add('open');
+  imagePopup.setAttribute('aria-hidden','false');
+
+  document.body.style.overflow = 'hidden';
+
+}
+
+
+function closeImagePopup(){
+
+  imagePopup.classList.remove('open');
+  imagePopup.setAttribute('aria-hidden','true');
+
+  imagePopupImg.src = '';
+
+  document.body.style.overflow = '';
+
+}
+
+
+imagePopupClose.addEventListener(
+  'click',
+  closeImagePopup
+);
+
+
+imagePopup.addEventListener('click', e => {
+
+  if(e.target === imagePopup){
+    closeImagePopup();
+  }
+
+});
+
+
+document.addEventListener('keydown', e => {
+
+  if(
+    e.key === 'Escape' &&
+    imagePopup.classList.contains('open')
+  ){
+    closeImagePopup();
+  }
+
+});
 
 
 /* EVENTS */
