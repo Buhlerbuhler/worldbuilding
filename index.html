@@ -151,7 +151,6 @@ main{
   font-weight:700;
   text-transform:uppercase;
   font-size:12px;
-  letter-spacing:.03em;
 }
 
 .button:hover{
@@ -287,30 +286,59 @@ main{
 .page{display:none}
 .page.active{display:block}
 
-/* PROJECT */
-
-.guide-grid{
+.guide-grid,
+.summary-grid{
   display:grid;
-  grid-template-columns:repeat(2,1fr);
+  grid-template-columns:repeat(2,minmax(0,1fr));
   gap:12px;
-  margin-top:24px;
+  margin-top:20px;
+}
+
+.guide-box,
+.summary-box{
+  border:1.5px solid var(--ink);
+  padding:22px;
+  background:#e6e4da;
 }
 
 .guide-box{
-  border:1.5px solid;
-  padding:25px;
   min-height:180px;
 }
 
-.guide-box h3{
-  font-size:30px;
-  letter-spacing:-.06em;
-  margin:8px 0;
+.guide-box h3,
+.summary-box h3{
+  font-size:28px;
+  letter-spacing:-.055em;
+  margin:8px 0 14px;
 }
 
 .guide-box p{line-height:1.5}
 
-/* BUILDERS */
+.summary-box.wide{grid-column:1/-1}
+
+.summary-box ul{
+  margin:0;
+  padding-left:20px;
+}
+
+.summary-box li{
+  margin:7px 0;
+  line-height:1.35;
+}
+
+.summary-actions{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:15px;
+  margin:22px 0;
+}
+
+.summary-intro{
+  font-size:clamp(18px,2vw,25px);
+  line-height:1.35;
+  max-width:850px;
+}
 
 .builder-grid{
   display:grid;
@@ -339,8 +367,6 @@ main{
 }
 
 .builder-card .mono{color:var(--muted)}
-
-/* DETAIL */
 
 .detail{
   max-width:1100px;
@@ -389,7 +415,7 @@ main{
   width:100%;
   max-width:720px;
   display:block;
-  margin:0 0 22px;
+  margin:22px 0 28px;
   border:2px solid var(--ink);
 }
 
@@ -450,9 +476,7 @@ main{
   overflow:hidden;
 }
 
-.profile-box.wide{
-  grid-column:1/-1;
-}
+.profile-box.wide{grid-column:1/-1}
 
 .profile-box h3{
   font-size:22px;
@@ -481,7 +505,7 @@ main{
   text-transform:uppercase;
 }
 
-/* ANIMAL PHOTO CONTAINERS */
+/* ANIMAL PHOTOS */
 
 .animal-photo{
   width:100%;
@@ -531,7 +555,7 @@ main{
   padding:5px 8px;
 }
 
-/* SCROLLABLE IMAGE POPUP */
+/* SCROLLABLE DOCUMENT POPUP */
 
 .image-popup{
   position:fixed;
@@ -544,9 +568,7 @@ main{
   padding:clamp(12px,3vw,40px);
 }
 
-.image-popup.open{
-  display:flex;
-}
+.image-popup.open{display:flex}
 
 .image-popup-window{
   position:relative;
@@ -595,7 +617,6 @@ main{
 }
 
 .image-popup-close{
-  position:static;
   flex:0 0 auto;
   width:38px;
   height:38px;
@@ -614,9 +635,7 @@ main{
   color:var(--ink);
 }
 
-.image-popup-scroll::-webkit-scrollbar{
-  width:12px;
-}
+.image-popup-scroll::-webkit-scrollbar{width:12px}
 
 .image-popup-scroll::-webkit-scrollbar-track{
   background:#c9c7bd;
@@ -627,8 +646,6 @@ main{
   background:var(--ink);
   border:2px solid #c9c7bd;
 }
-
-/* CONNECTIONS */
 
 .connections{
   display:flex;
@@ -645,56 +662,7 @@ main{
   text-transform:uppercase;
 }
 
-.connections button:hover{
-  background:var(--accent);
-}
-
-/* SUMMARY */
-
-.summary-actions{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:15px;
-  margin:22px 0;
-}
-
-.summary-intro{
-  font-size:clamp(18px,2vw,25px);
-  line-height:1.35;
-  max-width:850px;
-}
-
-.summary-grid{
-  display:grid;
-  grid-template-columns:repeat(2,minmax(0,1fr));
-  gap:12px;
-  margin-top:20px;
-}
-
-.summary-box{
-  border:1.5px solid var(--ink);
-  padding:22px;
-  background:#e6e4da;
-}
-
-.summary-box.wide{grid-column:1/-1}
-
-.summary-box h3{
-  font-size:28px;
-  letter-spacing:-.055em;
-  margin:5px 0 14px;
-}
-
-.summary-box ul{
-  margin:0;
-  padding-left:20px;
-}
-
-.summary-box li{
-  margin:7px 0;
-  line-height:1.35;
-}
+.connections button:hover{background:var(--accent)}
 
 footer{
   border-top:2px solid;
@@ -708,10 +676,7 @@ footer{
   text-transform:uppercase;
 }
 
-/* PRINT */
-
 @media print{
-
   body{background:white}
 
   .top,
@@ -727,14 +692,7 @@ footer{
   }
 
   .page{display:none!important}
-
-  #summary.page{
-    display:block!important;
-  }
-
-  .summary-grid{
-    grid-template-columns:1fr 1fr;
-  }
+  #summary.page{display:block!important}
 
   .summary-box{
     break-inside:avoid;
@@ -742,13 +700,8 @@ footer{
   }
 }
 
-/* TABLET */
-
 @media(max-width:850px){
-
-  .character-profile{
-    grid-template-columns:1fr;
-  }
+  .character-profile{grid-template-columns:1fr}
 
   .profile-sections,
   .summary-grid{
@@ -770,7 +723,6 @@ footer{
   }
 
   .top small{display:none}
-
   .nav{width:100%}
 
   .hero,
@@ -778,17 +730,13 @@ footer{
     grid-template-columns:1fr;
   }
 
-  .hero{
-    padding-top:45px;
-  }
+  .hero{padding-top:45px}
 
   .cards{
     grid-template-columns:repeat(2,1fr);
   }
 
-  .guide-grid{
-    grid-template-columns:1fr;
-  }
+  .guide-grid{grid-template-columns:1fr}
 
   .search{
     width:100%;
@@ -796,30 +744,18 @@ footer{
   }
 }
 
-/* PHONE */
-
 @media(max-width:550px){
-
   .builder-grid,
   .cards{
     grid-template-columns:1fr;
   }
 
-  .entry{
-    min-height:220px;
-  }
+  .entry{min-height:220px}
+  .hero h1{font-size:46px}
 
-  .hero h1{
-    font-size:46px;
-  }
+  footer{flex-direction:column}
 
-  footer{
-    flex-direction:column;
-  }
-
-  .image-popup{
-    padding:8px;
-  }
+  .image-popup{padding:8px}
 
   .image-popup-window{
     width:100%;
@@ -831,213 +767,129 @@ footer{
     padding-left:12px;
   }
 }
-
 </style>
 </head>
 
 <body>
 
 <header class="top">
-
-  <div class="brand">
-    JAX'S WORLD<span>↗</span>
-  </div>
-
-  <small>
-    AN OPEN ARCHIVE / GRADE 8 ELA
-  </small>
+  <div class="brand">JAX'S WORLD<span>↗</span></div>
+  <small>AN OPEN ARCHIVE / GRADE 8 ELA</small>
 
   <nav class="nav">
-
-    <button data-page="home" class="active">
-      Explore
-    </button>
-
-    <button data-page="summary">
-      World Summary
-    </button>
-
-    <button data-page="builders">
-      Who’s Building What
-    </button>
-
-    <button data-page="guide">
-      The Project
-    </button>
-
+    <button data-page="home" class="active">Explore</button>
+    <button data-page="summary">World Summary</button>
+    <button data-page="builders">Who’s Building What</button>
+    <button data-page="guide">The Project</button>
   </nav>
-
 </header>
-
 
 <main>
 
-<!-- ======================================================
-     HOME
-====================================================== -->
+<!-- HOME -->
 
 <section id="home" class="page active">
 
 <div class="hero">
 
 <div>
+  <div class="eyebrow">
+    <span class="dot"></span>
+    ARCHIVE STATUS: UNDER CONSTRUCTION
+  </div>
 
-<div class="eyebrow">
-<span class="dot"></span>
-ARCHIVE STATUS: UNDER CONSTRUCTION
+  <h1>JAX'S<br><em>WORLD</em></h1>
+
+  <p>
+    A shared world built from one starting point and expanded by the class.
+    Characters, places, creatures, laws, sports, history and stories all
+    become part of the same growing world.
+  </p>
 </div>
-
-<h1>
-JAX'S<br>
-<em>WORLD</em>
-</h1>
-
-<p>
-A shared world built from one starting point and expanded by the class.
-Characters, places, creatures, laws, sports, history and stories all
-become part of the same growing world.
-</p>
-
-</div>
-
 
 <div class="hero-aside">
+  <span class="mono">FIELD NOTE / 001</span>
 
-<span class="mono">
-FIELD NOTE / 001
-</span>
+  <strong>
+    THIS WORLD IS NOT FINISHED.
+    THAT'S THE POINT.
+  </strong>
 
-<strong>
-THIS WORLD IS NOT FINISHED.
-THAT'S THE POINT.
-</strong>
-
-<button
-class="button"
-onclick="document.getElementById('archiveHead').scrollIntoView({behavior:'smooth'})">
-Explore the world ↗
-</button>
-
+  <button
+  class="button"
+  onclick="document.getElementById('archiveHead').scrollIntoView({behavior:'smooth'})">
+    Explore the world ↗
+  </button>
 </div>
 
 </div>
-
 
 <div class="section-head" id="archiveHead">
-
-<h2>THE ARCHIVE</h2>
-
-<span id="count"></span>
-
+  <h2>THE ARCHIVE</h2>
+  <span id="count"></span>
 </div>
-
 
 <div class="filters" id="filters">
+  <button class="active" data-filter="all">All</button>
+  <button data-filter="people">People</button>
+  <button data-filter="places">Places</button>
+  <button data-filter="sports">Sports</button>
+  <button data-filter="society">Society</button>
+  <button data-filter="nature">Nature</button>
+  <button data-filter="stories">Stories & Media</button>
 
-<button class="active" data-filter="all">
-All
-</button>
-
-<button data-filter="people">
-People
-</button>
-
-<button data-filter="places">
-Places
-</button>
-
-<button data-filter="sports">
-Sports
-</button>
-
-<button data-filter="society">
-Society
-</button>
-
-<button data-filter="nature">
-Nature
-</button>
-
-<button data-filter="stories">
-Stories & Media
-</button>
-
-<input
-id="search"
-class="search"
-placeholder="Search the archive...">
-
+  <input
+  id="search"
+  class="search"
+  placeholder="Search the archive...">
 </div>
-
 
 <div id="cards" class="cards"></div>
 
 </section>
 
 
-<!-- ======================================================
-     WORLD SUMMARY
-====================================================== -->
+<!-- SUMMARY -->
 
 <section id="summary" class="page">
 
 <div class="section-head">
-
-<h2>WORLD SUMMARY</h2>
-
-<span>
-QUICK REFERENCE / CURRENT CANON
-</span>
-
+  <h2>WORLD SUMMARY</h2>
+  <span>QUICK REFERENCE / CURRENT CANON</span>
 </div>
-
 
 <div class="summary-actions">
 
-<p class="summary-intro">
-Everything currently established about Jax’s World in one place.
-This page will keep changing as the class develops the world.
-</p>
+  <p class="summary-intro">
+    Everything currently established about Jax’s World in one place.
+    This page will keep changing as the class develops the world.
+  </p>
 
-<button
-class="button"
-onclick="window.print()">
-Print / Save PDF
-</button>
+  <button class="button" onclick="window.print()">
+    Print / Save PDF
+  </button>
 
 </div>
-
 
 <div id="summaryContent"></div>
 
 </section>
 
 
-<!-- ======================================================
-     BUILDERS
-====================================================== -->
+<!-- BUILDERS -->
 
 <section id="builders" class="page">
 
 <div class="section-head">
-
-<h2>
-WHO’S BUILDING WHAT
-</h2>
-
-<span>
-FIND PEOPLE / MAKE CONNECTIONS
-</span>
-
+  <h2>WHO’S BUILDING WHAT</h2>
+  <span>FIND PEOPLE / MAKE CONNECTIONS</span>
 </div>
 
-
 <p class="summary-intro">
-If your idea connects to something another person is developing,
-talk to them. Ask questions, compare ideas, and get permission before
-changing or incorporating someone else’s creation.
+  If your idea connects to something another person is developing,
+  talk to them. Ask questions, compare ideas, and get permission before
+  changing or incorporating someone else’s creation.
 </p>
-
 
 <div class="builder-grid">
 
@@ -1128,7 +980,7 @@ changing or incorporating someone else’s creation.
 <div class="builder-card">
 <span class="mono">PLACES / MEDIA</span>
 <h3>Harper</h3>
-<p>Coffee shop and newspaper</p>
+<p>Vala Cafe and newspaper</p>
 </div>
 
 <div class="builder-card">
@@ -1154,88 +1006,44 @@ changing or incorporating someone else’s creation.
 </section>
 
 
-<!-- ======================================================
-     PROJECT
-====================================================== -->
+<!-- PROJECT -->
 
 <section id="guide" class="page">
 
 <div class="section-head">
-
-<h2>THE PROJECT</h2>
-
-<span>
-WORLD BUILDING / GRADE 8 ELA
-</span>
-
+  <h2>THE PROJECT</h2>
+  <span>WORLD BUILDING / GRADE 8 ELA</span>
 </div>
 
-
 <p class="summary-intro">
-Create something that expands Jax’s World. Write, draw, design,
-explain, research, or combine approaches.
+  Create something that expands Jax’s World. Write, draw, design,
+  explain, research, or combine approaches.
 </p>
-
 
 <div class="guide-grid">
 
 <div class="guide-box">
-
-<span class="mono">
-01 / ORIGINAL
-</span>
-
+<span class="mono">01 / ORIGINAL</span>
 <h3>ADD SOMETHING</h3>
-
-<p>
-Add something the world does not already fully explain.
-</p>
-
+<p>Add something the world does not already fully explain.</p>
 </div>
 
-
 <div class="guide-box">
-
-<span class="mono">
-02 / CONNECTED
-</span>
-
+<span class="mono">02 / CONNECTED</span>
 <h3>MAKE IT BELONG</h3>
-
-<p>
-Connect your contribution to the story or another part of the shared world.
-</p>
-
+<p>Connect your contribution to the story or another part of the shared world.</p>
 </div>
 
-
 <div class="guide-box">
-
-<span class="mono">
-03 / DEVELOPED
-</span>
-
+<span class="mono">03 / DEVELOPED</span>
 <h3>PUSH IT FURTHER</h3>
-
-<p>
-Add enough detail that other people can understand how your idea works.
-</p>
-
+<p>Add enough detail that other people can understand how your idea works.</p>
 </div>
 
-
 <div class="guide-box">
-
-<span class="mono">
-04 / PURPOSEFUL
-</span>
-
+<span class="mono">04 / PURPOSEFUL</span>
 <h3>MAKE CHOICES</h3>
-
-<p>
-Use your format intentionally and be able to explain your choices.
-</p>
-
+<p>Use your format intentionally and be able to explain your choices.</p>
 </div>
 
 </div>
@@ -1243,34 +1051,23 @@ Use your format intentionally and be able to explain your choices.
 </section>
 
 
-<!-- ======================================================
-     DETAIL
-====================================================== -->
+<!-- DETAIL -->
 
 <section id="detail" class="page">
 
 <div class="detail">
 
-<button
-class="back"
-id="back">
+<button class="back" id="back">
 ← Back to archive
 </button>
 
-<div
-class="meta"
-id="detailMeta">
-</div>
+<div class="meta" id="detailMeta"></div>
 
 <h1 id="detailTitle"></h1>
 
-<p
-class="lead"
-id="detailLead">
-</p>
+<p class="lead" id="detailLead"></p>
 
 <div id="detailContent"></div>
-
 
 <div class="detail-body">
 
@@ -1278,9 +1075,7 @@ id="detailLead">
 
 <div>
 
-<span class="mono">
-CONNECTED RECORDS
-</span>
+<span class="mono">CONNECTED RECORDS</span>
 
 <div
 class="connections"
@@ -1298,23 +1093,14 @@ style="margin-top:15px">
 
 
 <footer>
-
-<span>
-JAX'S WORLD / CLASS ARCHIVE
-</span>
-
-<span>
-BUILD → CONNECT → EXPAND
-</span>
-
+<span>JAX'S WORLD / CLASS ARCHIVE</span>
+<span>BUILD → CONNECT → EXPAND</span>
 </footer>
 
 </main>
 
 
-<!-- ======================================================
-     SCROLLABLE IMAGE VIEWER
-====================================================== -->
+<!-- SCROLLABLE IMAGE POPUP -->
 
 <div
 id="imagePopup"
@@ -1340,7 +1126,6 @@ aria-label="Close image">
 
 </div>
 
-
 <div
 id="imagePopupScroll"
 class="image-popup-scroll">
@@ -1365,8 +1150,9 @@ alt="">
 
 const entries = [
 
-
-/* PEOPLE */
+/* ======================================================
+   PEOPLE
+====================================================== */
 
 {
 id:'jax',
@@ -1383,7 +1169,6 @@ sections:[
 
 {
 title:'PROFILE',
-
 items:[
 ['Name','Jax King'],
 ['Age','15'],
@@ -1398,7 +1183,6 @@ items:[
 
 {
 title:'FAVOURITES',
-
 items:[
 ['Food','Cakepop'],
 ['Drink','Rainbow lemonade'],
@@ -1410,7 +1194,6 @@ items:[
 
 {
 title:'PERSONALITY',
-
 items:[
 ['Personality','Introverted'],
 ['Hobbies','Football, baking'],
@@ -1423,7 +1206,6 @@ items:[
 
 {
 title:'MOTIVATION',
-
 items:[
 ['Goal','Become a football player'],
 ['Would Die For','Football'],
@@ -1434,7 +1216,6 @@ items:[
 {
 title:'KNOWN HISTORY',
 wide:true,
-
 items:[
 ['Football','Jax started playing football at age 12.'],
 ['Football Camp','He missed football camp because he was sick with appendicitis.'],
@@ -1448,7 +1229,6 @@ items:[
 {
 title:'RELATIONSHIPS',
 wide:true,
-
 items:[
 ['Ashlee','His girlfriend. She plans both of their next day hour for hour.'],
 ['Mia',"His little sister. Jax stays a bit away because she bombards him with hugs and he doesn't know what is going on in her head."],
@@ -1472,10 +1252,10 @@ connections:[
 'pizzeria',
 'lightning',
 'milsamolex',
-'laws'
+'laws',
+'newspaper'
 ]
 },
-
 
 {
 id:'ashlee',
@@ -1505,12 +1285,8 @@ Ashlee’s mom is a nurse.
 
 Ashlee’s dad is a science teacher.`,
 
-connections:[
-'jax',
-'fashion'
-]
+connections:['jax','fashion']
 },
-
 
 {
 id:'leo',
@@ -1539,7 +1315,6 @@ They do not like being separated.`,
 connections:['jax']
 },
 
-
 {
 id:'mia',
 title:'Mia King',
@@ -1556,19 +1331,14 @@ Mia is 6 years old.
 
 She has curly blonde hair and blue eyes.
 
-Jax describes her as annoying.
+She is described as a little crazy.
 
-Jax stays a bit away from Mia because she bombards him with hugs.
+Jax stays a bit away from Mia because otherwise he gets bombarded with hugs.
 
 He also says he doesn't know what is going on in her head.`,
 
-connections:[
-'jax',
-'lauren',
-'paul'
-]
+connections:['jax','lauren','paul']
 },
-
 
 {
 id:'lauren',
@@ -1576,8 +1346,7 @@ title:'Lauren',
 category:'people',
 type:'Character',
 
-description:
-'Jax and Mia’s mom.',
+description:'Jax and Mia’s mom.',
 
 content:
 `ESTABLISHED:
@@ -1590,13 +1359,8 @@ She wears glasses.
 
 Jax loves his parents but gives them alone time.`,
 
-connections:[
-'jax',
-'mia',
-'paul'
-]
+connections:['jax','mia','paul']
 },
-
 
 {
 id:'paul',
@@ -1604,13 +1368,12 @@ title:'Paul',
 category:'people',
 type:'Character / Coach',
 
-description:
-'Jax’s dad and the football coach.',
+description:'Jax’s dad and the football coach.',
 
 content:
 `ESTABLISHED:
 
-Jax's dad is called Paul in the current class notes.
+Jax's dad is supposedly called Paul.
 
 Paul is the football coach.
 
@@ -1618,14 +1381,40 @@ He has balding black hair and brown eyes.
 
 Jax loves his parents but gives them alone time.`,
 
-connections:[
-'jax',
-'lauren',
-'mia',
-'lightning'
-]
+connections:['jax','lauren','mia','lightning']
 },
 
+{
+id:'jeremiah',
+title:'Jeremiah Smith',
+category:'people',
+type:'Character / Athlete',
+
+description:
+'A 6-foot-3, 221-pound athlete with a major five-year contract.',
+
+content:
+`ESTABLISHED:
+
+Jeremiah Smith is 6'3".
+
+He weighs 221 pounds.
+
+He runs a 4.31.
+
+CONTRACT:
+
+• 5 years
+• $18.74 million per year
+• $93.7 million total
+• $50 million guaranteed
+
+IN DEVELOPMENT:
+
+Jeremiah's exact role, team and relationship to the other characters have not yet been established.`,
+
+connections:['lightning']
+},
 
 {
 id:'noodles',
@@ -1637,7 +1426,6 @@ description:
 'Jax’s calm female Siamese cat.',
 
 animalPhoto:true,
-
 image:'',
 
 content:
@@ -1649,14 +1437,13 @@ She is calm.
 
 She belongs to Jax.`,
 
-connections:[
-'jax',
-'animals'
-]
+connections:['jax','animals']
 },
 
 
-/* WORLD / PLACES */
+/* ======================================================
+   WORLD / PLACES
+====================================================== */
 
 {
 id:'nazareth',
@@ -1695,7 +1482,9 @@ MOON:
 
 The moon is named Harry.
 
-Harry is based on Jordyn's eraser. Ask Jordyn or Norah for information about what Harry looks like.
+Harry is based on Jordyn's eraser.
+
+Ask Jordyn or Norah for information about what Harry looks like.
 
 SPACE:
 
@@ -1730,7 +1519,6 @@ connections:[
 ]
 },
 
-
 {
 id:'harry',
 title:'Harry',
@@ -1751,7 +1539,6 @@ For details about Harry's appearance, ask Jordyn or Norah.`,
 
 connections:['nazareth']
 },
-
 
 {
 id:'soultara',
@@ -1775,17 +1562,28 @@ Milsamolex is a city in Soultara.
 
 The class has created a flag for Soultara.
 
-Soultara has laws governing football, adulthood, jobs, dragons, magic, the Tenebrae Forest and raising the dead.`,
+There are no cars in Soultara.
+
+People travel by dragon.
+
+Soultara is ruled by a king and queen.
+
+If someone breaks the rules, the king and queen decide the punishment based on what the person did.
+
+Any of the king and queen's children can become the next king or queen.
+
+The next ruler does not have to be the oldest child.`,
 
 connections:[
 'nazareth',
 'milsamolex',
 'laws',
 'worldrules',
-'tenebrae'
+'tenebrae',
+'transport',
+'dragons'
 ]
 },
-
 
 {
 id:'milsamolex',
@@ -1821,10 +1619,10 @@ connections:[
 'pizzeria',
 'vala',
 'transport',
-'map'
+'map',
+'newspaper'
 ]
 },
-
 
 {
 id:'tenebrae',
@@ -1844,15 +1642,10 @@ People are not allowed to enter it.
 
 Immediately after entering the forest, a person becomes lost.
 
-According to the current law, anyone who enters never comes out.`,
+Anyone who enters never comes out.`,
 
-connections:[
-'soultara',
-'laws',
-'worldrules'
-]
+connections:['soultara','laws','worldrules']
 },
-
 
 {
 id:'pizzeria',
@@ -1873,28 +1666,21 @@ It is described as being "around the bend."
 
 Soultara law says people must have the same job as their parents by the time they become adults.`,
 
-connections:[
-'jax',
-'milsamolex',
-'laws'
-]
+connections:['jax','milsamolex','laws']
 },
-
 
 {
 id:'vala',
-workingOn:'Aneleigh / Josie',
+workingOn:'Aneleigh / Josie / Harper',
 title:'Vala Cafe',
 category:'places',
 type:'Business / Cafe',
 
 description:
-'A cafe Jax visits every day.',
+'A cafe Jax visits every day and a pickup location for Nova News.',
 
 popupImage:{
   label:'View Vala Cafe Menu ↗',
-
-  /* REPLACE THIS WITH YOUR RAW JPG URL */
   url:'https://raw.githubusercontent.com/Buhlerbuhler/worldbuilding/refs/heads/main/vala-cafe-1.jpg'
 },
 
@@ -1911,14 +1697,16 @@ His usual order is a rainbow lemonade made with:
 
 He also gets a volleyball cakepop.
 
-The cakepop is birthday-cake flavour.`,
+The cakepop is birthday-cake flavour.
 
-connections:[
-'jax',
-'milsamolex'
-]
+NOVA NEWS:
+
+Nova News identifies Harper Petkau as the owner of Vala Cafe.
+
+The newspaper reports that physical copies of Nova News can be picked up at the cafe.`,
+
+connections:['jax','milsamolex','newspaper']
 },
-
 
 {
 id:'map',
@@ -1937,16 +1725,13 @@ Arianna is mapping the world.
 
 The map can connect countries, cities, landmarks, habitats, roads, bodies of water and important locations.`,
 
-connections:[
-'nazareth',
-'soultara',
-'milsamolex',
-'tenebrae'
-]
+connections:['nazareth','soultara','milsamolex','tenebrae']
 },
 
 
-/* SPORTS */
+/* ======================================================
+   SPORTS
+====================================================== */
 
 {
 id:'lightning',
@@ -1960,9 +1745,7 @@ description:
 
 resource:{
 label:'View the Lightning jerseys ↗',
-
-url:
-'https://docs.google.com/presentation/d/1_IGfyOYMfDl_nt0EMo23VrayaEP3EZswhlJY62FrtRU/edit?usp=sharing'
+url:'https://docs.google.com/presentation/d/1_IGfyOYMfDl_nt0EMo23VrayaEP3EZswhlJY62FrtRU/edit?usp=sharing'
 },
 
 content:
@@ -1972,7 +1755,11 @@ The football team is called the Milsamolex Lightning.
 
 Paul is the football coach.
 
-In Soultara, people can only start playing football at age 12.
+Normally, players can only start football at age 12.
+
+Extremely talented players can be allowed to start earlier.
+
+The earliest anyone can join is age 10.
 
 Jax started playing football at age 12.
 
@@ -1981,11 +1768,12 @@ The team has jersey designs linked above.`,
 connections:[
 'jax',
 'paul',
+'jeremiah',
 'milsamolex',
-'laws'
+'laws',
+'newspaper'
 ]
 },
-
 
 {
 id:'flames',
@@ -2006,13 +1794,13 @@ IN DEVELOPMENT:
 
 Players, league information, history, rivals and other team details are still being developed.`,
 
-connections:[
-'milsamolex'
-]
+connections:['milsamolex']
 },
 
 
-/* SOCIETY */
+/* ======================================================
+   SOCIETY
+====================================================== */
 
 {
 id:'laws',
@@ -2022,14 +1810,18 @@ category:'society',
 type:'Law',
 
 description:
-'Rules governing adulthood, jobs, football, dragons, magic and forbidden places.',
+'Rules governing football, adulthood, jobs, dragons, magic, transportation, punishment and succession.',
 
 content:
 `CURRENT LAWS:
 
 01 / FOOTBALL
 
-You can only start football at age 12.
+You can normally only start football at age 12.
+
+Extremely talented players can be allowed to start earlier.
+
+The earliest anyone can join is age 10.
 
 02 / JOBS
 
@@ -2042,6 +1834,15 @@ You become an adult when you turn 20.
 04 / DRAGONS
 
 Everyone gets a pet dragon on their 20th birthday.
+
+The kind of dragon depends on the person.
+
+Examples include:
+
+• Water dragon
+• Ice dragon
+• Plant dragon
+• Storm dragon
 
 05 / TENEBRAE FOREST
 
@@ -2063,7 +1864,25 @@ A large amount of magic results in a larger punishment.
 
 You cannot raise the dead.
 
-If you raise the dead, you will die.`,
+If you raise the dead, you will die.
+
+08 / TRANSPORTATION
+
+There are no cars in Soultara.
+
+People get around by dragon.
+
+If you are under 20, you travel with someone who is over 20.
+
+09 / PUNISHMENT
+
+If someone breaks the rules, the king and queen decide the punishment based on what the person did.
+
+10 / ROYAL SUCCESSION
+
+Any of the king and queen's children can become king or queen.
+
+The next ruler does not have to be the oldest child.`,
 
 connections:[
 'soultara',
@@ -2071,10 +1890,10 @@ connections:[
 'lightning',
 'tenebrae',
 'dragons',
-'worldrules'
+'worldrules',
+'transport'
 ]
 },
-
 
 {
 id:'worldrules',
@@ -2103,42 +1922,59 @@ People become adults at age 20.
 
 Everyone receives a pet dragon on their 20th birthday.
 
-The Tenebrae Forest causes anyone who enters to become lost and never return.`,
+Different people can receive different kinds of dragons.
+
+The Tenebrae Forest causes anyone who enters to become lost and never return.
+
+Soultara has no cars.
+
+The king and queen decide punishments for broken laws.
+
+Royal succession does not automatically go to the oldest child.`,
 
 connections:[
 'nazareth',
 'soultara',
 'laws',
 'tenebrae',
-'dragons'
+'dragons',
+'transport'
 ]
 },
-
 
 {
 id:'transport',
 workingOn:'Sienna',
 title:'Transportation',
 category:'society',
-type:'World System / In Development',
+type:'World System',
 
 description:
-'How people move through Milsamolex, Soultara and Nazareth.',
+'Soultara has no cars. Dragons are the main established form of transportation.',
 
 content:
-`IN DEVELOPMENT:
+`ESTABLISHED:
 
-Sienna is designing transportation for the world.
+There are no cars in Soultara.
 
-Transportation may affect how cities work, how far people travel and what kinds of technology exist.`,
+People get around by dragon.
+
+Everyone receives their own pet dragon when they turn 20.
+
+People under the age of 20 travel with someone who is over 20.
+
+IN DEVELOPMENT:
+
+More details about routes, long-distance travel and transportation systems can still be developed.`,
 
 connections:[
 'milsamolex',
 'soultara',
-'nazareth'
+'nazareth',
+'dragons',
+'laws'
 ]
 },
-
 
 {
 id:'fashion',
@@ -2161,15 +1997,13 @@ Bella is developing fashion for the world.
 
 Fashion can connect to characters, climate, culture, jobs, sports and everyday life.`,
 
-connections:[
-'ashlee',
-'milsamolex',
-'soultara'
-]
+connections:['ashlee','milsamolex','soultara']
 },
 
 
-/* NATURE */
+/* ======================================================
+   NATURE
+====================================================== */
 
 {
 id:'animals',
@@ -2179,27 +2013,46 @@ category:'nature',
 type:'Wildlife',
 
 description:
-'The animals and creatures that live on Nazareth.',
+'The strange, dangerous, useful and sometimes extremely cute creatures of Nazareth.',
 
 content:
 `KNOWN CREATURES:
 
 • Shiger
 • Pogle
+• Celephant
+• Cantalop
+• Sharpie Bot
+• Deadly Long Arms
+• Thing1
+• Monkey
+• Bird
+• Dog
+• Mosquito
+• Gerd
 • Dragons
-• Familiar animals such as Siamese cats also exist.
+• Familiar animals such as Siamese cats
 
-More creatures are being developed.`,
+The animal kingdom of Nazareth includes wild animals, pets, endangered species and unusual creatures with special abilities.`,
 
 connections:[
 'nazareth',
 'shiger',
 'pogle',
+'celephant',
+'cantalop',
+'sharpiebot',
+'deadlylongarms',
+'thing1',
+'monkey',
+'bird',
+'dog',
+'mosquito',
+'gerd',
 'dragons',
 'noodles'
 ]
 },
-
 
 {
 id:'shiger',
@@ -2209,20 +2062,23 @@ category:'nature',
 type:'Creature',
 
 description:
-'A large creature that can travel underwater and walk on land.',
+'A rare amphibious creature hunted for its extremely valuable fur.',
 
 animalPhoto:true,
 
-image:'https://raw.githubusercontent.com/Buhlerbuhler/worldbuilding/refs/heads/main/Shiger.png',
+image:
+'https://raw.githubusercontent.com/Buhlerbuhler/worldbuilding/refs/heads/main/Shiger.png',
 
 content:
 `ESTABLISHED:
 
 Shigers can go underwater and walk on land.
 
-The Shiger shown in the class work is the only surviving Shiger species.
+Shigers are almost extinct, with only a couple hundred left.
 
-The other Shiger species went extinct because of humans.
+Most remaining Shigers live in zoos.
+
+They were hunted because their fur was extremely valuable and they were very rare.
 
 FEMALES:
 
@@ -2238,12 +2094,8 @@ Males can grow from about 3.4 to 4.0 metres.
 
 They can weigh between about 1,500 and 2,200 pounds.`,
 
-connections:[
-'animals',
-'nazareth'
-]
+connections:['animals','nazareth']
 },
-
 
 {
 id:'pogle',
@@ -2253,41 +2105,355 @@ category:'nature',
 type:'Creature',
 
 description:
-'The last surviving species of Pogle.',
+'A rare creature with only a few thousand remaining.',
 
 animalPhoto:true,
 
-image:'https://raw.githubusercontent.com/Buhlerbuhler/worldbuilding/refs/heads/main/Pogle.png',
+image:
+'https://raw.githubusercontent.com/Buhlerbuhler/worldbuilding/refs/heads/main/Pogle.png',
 
 content:
 `ESTABLISHED:
 
-This is the only surviving species of Pogle.
+Pogles are nearly extinct.
+
+Only a couple thousand Pogles remain.
 
 The other Pogle species died out because of climate change.
 
-INCOMPLETE RECORD:
+FEMALES:
 
-More information about the Pogle is still being developed.`,
+Females can grow from about 1 to 1.5 metres.
 
-connections:[
-'animals',
-'nazareth'
-]
+They weigh about 150 to 290 kilograms.
+
+MALES:
+
+Males can grow from about 1 to 1.5 metres.
+
+They weigh about 150 to 290 kilograms.
+
+The current notes describe males as heavier than females.`,
+
+connections:['animals','nazareth']
 },
 
+{
+id:'celephant',
+workingOn:'Crosby / Brent',
+title:'Celephant',
+category:'nature',
+type:'Creature / Pet',
+
+description:
+'A huge, peaceful animal that can be kept as a pet.',
+
+animalPhoto:true,
+image:'',
+
+content:
+`ESTABLISHED:
+
+Celephants are peaceful animals.
+
+They can be kept as pets.
+
+Celephants are very big and dirty, so be careful when wearing white clothes around them.
+
+FEMALES:
+
+Females can grow from about 2.4 to 2.9 metres.
+
+They can weigh from about 2,700 to 3,600 kilograms.
+
+MALES:
+
+Males can grow from about 3 to 4 metres.
+
+They can weigh about 5,000 kilograms.`,
+
+connections:['animals','cantalop','nazareth']
+},
+
+{
+id:'cantalop',
+workingOn:'Crosby / Brent',
+title:'Cantalop',
+category:'nature',
+type:'Creature / Pet',
+
+description:
+'A small, peaceful relative of the Celephant that can be kept as a pet.',
+
+animalPhoto:true,
+image:'',
+
+content:
+`ESTABLISHED:
+
+The Cantalop is another species of the Celephant, but it is very different.
+
+Like the Celephant, it is very peaceful.
+
+Cantalops can be kept as pets.
+
+Make sure you are nice to them.
+
+FEMALES:
+
+Females can grow from about 8 to 9 inches.
+
+They weigh from about 3.2 to 4.5 kilograms.
+
+MALES:
+
+Males can grow from about 10 to 11 inches.
+
+They weigh from about 4.5 to 6.4 kilograms.`,
+
+connections:['animals','celephant','nazareth']
+},
+
+{
+id:'sharpiebot',
+workingOn:'Crosby / Brent',
+title:'Sharpie Bot',
+category:'nature',
+type:'Creature',
+
+description:
+'A helpful wild creature that can talk and help people who are lost.',
+
+animalPhoto:true,
+image:'',
+
+content:
+`ESTABLISHED:
+
+Sharpie Bot is a helpful animal.
+
+It can be found in the wild.
+
+Sharpie Bot can help with everything.
+
+If you become lost in the wild, finding a Sharpie Bot can help you.
+
+Sharpie Bot can talk to people.
+
+SIZE:
+
+Females can grow up to 5.38 inches long and weigh 9 grams.
+
+Males are the same size and weight.`,
+
+connections:['animals','nazareth']
+},
+
+{
+id:'deadlylongarms',
+workingOn:'Crosby / Brent',
+title:'Deadly Long Arms',
+category:'nature',
+type:'Dangerous Creature',
+
+description:
+'A dangerous nocturnal animal.',
+
+animalPhoto:true,
+image:'',
+
+content:
+`ESTABLISHED:
+
+Deadly Long Arms is a dangerous animal.
+
+It only comes out at night.
+
+Be careful if you encounter one.
+
+IN DEVELOPMENT:
+
+More information about Deadly Long Arms has not yet been established.`,
+
+connections:['animals','nazareth']
+},
+
+{
+id:'thing1',
+workingOn:'Crosby / Brent',
+title:'Thing1',
+category:'nature',
+type:'Creature',
+
+description:
+'A small creature that can do almost anything for you.',
+
+animalPhoto:true,
+image:'',
+
+content:
+`ESTABLISHED:
+
+Thing1 is a small creature.
+
+It can do anything for you.
+
+Be careful that it does not get out of hand because it will literally do anything.
+
+IN DEVELOPMENT:
+
+More information about Thing1 has not yet been established.`,
+
+connections:['animals','nazareth']
+},
+
+{
+id:'monkey',
+workingOn:'Crosby / Brent',
+title:'Monkey',
+category:'nature',
+type:'Creature',
+
+description:
+'A peaceful and cute animal that can attack when provoked.',
+
+animalPhoto:true,
+image:'',
+
+content:
+`ESTABLISHED:
+
+The monkey is a peaceful animal.
+
+If provoked, it can attack.
+
+Be careful not to provoke it.
+
+It is also really cute.`,
+
+connections:['animals','nazareth','gerd']
+},
+
+{
+id:'bird',
+workingOn:'Crosby / Brent',
+title:'Bird',
+category:'nature',
+type:'Creature / Pet',
+
+description:
+'A small, peaceful and harmless bird that can also be kept as a pet.',
+
+animalPhoto:true,
+image:'',
+
+content:
+`ESTABLISHED:
+
+This bird is small, peaceful and harmless.
+
+It can be eaten.
+
+It can also make a good pet if you like birds.`,
+
+connections:['animals','nazareth']
+},
+
+{
+id:'dog',
+workingOn:'Crosby / Brent',
+title:'Dog',
+category:'nature',
+type:'Pet',
+
+description:
+'A loyal and highly trainable pet.',
+
+animalPhoto:true,
+image:'',
+
+content:
+`ESTABLISHED:
+
+Dogs are great, awesome and super loyal pets.
+
+They can do tons of things with training.
+
+The current animal notes declare them better than cats.
+
+They are really great animals.`,
+
+connections:['animals','nazareth','noodles']
+},
+
+{
+id:'mosquito',
+workingOn:'Crosby / Brent',
+title:'Mosquito',
+category:'nature',
+type:'Creature',
+
+description:
+'An annoying blood-sucking creature with a dangerous family response.',
+
+animalPhoto:true,
+image:'',
+
+content:
+`ESTABLISHED:
+
+Mosquitoes annoy everyone close to them.
+
+They suck blood.
+
+Their bites make skin itchy.
+
+When a mosquito is killed, it can call all of its family to get you.`,
+
+connections:['animals','nazareth']
+},
+
+{
+id:'gerd',
+workingOn:'Crosby / Brent',
+title:'Gerd',
+category:'nature',
+type:'Creature / Pet',
+
+description:
+'A gigantic but peaceful creature that mostly just eats.',
+
+animalPhoto:true,
+image:'',
+
+content:
+`ESTABLISHED:
+
+Gerd is 10 metres tall.
+
+Gerd weighs 500 pounds.
+
+It is a peaceful animal.
+
+Like the monkey, it does not do much and mostly just eats.
+
+Gerd can be kept as a pet.
+
+It can be really cute sometimes.`,
+
+connections:['animals','nazareth','monkey']
+},
 
 {
 id:'dragons',
 title:'Pet Dragons',
 category:'nature',
-type:'Creature / Society',
+type:'Creature / Transportation',
 
 description:
-'Every person receives a pet dragon when they turn 20.',
+'Every person receives their own type of dragon when they turn 20.',
 
 animalPhoto:true,
-
 image:'',
 
 content:
@@ -2297,20 +2463,38 @@ Dragons exist on Nazareth.
 
 Everyone gets a pet dragon on their 20th birthday.
 
+The kind of dragon depends on the person.
+
+Known examples include:
+
+• Water dragon
+• Ice dragon
+• Plant dragon
+• Storm dragon
+
 Age 20 is also when a person becomes an adult.
 
-Other details about the dragons are not yet established.`,
+TRANSPORTATION:
+
+There are no cars in Soultara.
+
+People travel by dragon.
+
+People under 20 travel with someone who is over 20.`,
 
 connections:[
 'animals',
 'laws',
 'worldrules',
-'nazareth'
+'nazareth',
+'transport'
 ]
 },
 
 
-/* STORIES / MEDIA */
+/* ======================================================
+   STORIES / MEDIA
+====================================================== */
 
 {
 id:'villains',
@@ -2333,12 +2517,8 @@ Why are they in conflict with Jax or this world?
 
 What happened before we met them?`,
 
-connections:[
-'jax',
-'worldrules'
-]
+connections:['jax','worldrules']
 },
-
 
 {
 id:'characters',
@@ -2361,10 +2541,10 @@ connections:[
 'leo',
 'mia',
 'lauren',
-'paul'
+'paul',
+'jeremiah'
 ]
 },
-
 
 {
 id:'newscast',
@@ -2383,13 +2563,8 @@ Hannah and Ivy are creating newscasts from within the world.
 
 Reports can connect to characters, sports, laws, major events and other class creations.`,
 
-connections:[
-'milsamolex',
-'jax',
-'laws'
-]
+connections:['milsamolex','jax','laws','newspaper']
 },
-
 
 {
 id:'graphicnovel',
@@ -2406,37 +2581,86 @@ content:
 
 Ivy is developing a graphic novel set in Jax’s World.`,
 
-connections:[
-'jax'
-]
+connections:['jax']
 },
-
 
 {
 id:'newspaper',
 workingOn:'Berkeley / Harper',
-title:'The Newspaper',
+title:'Nova News',
 category:'stories',
-type:'News / In Development',
+type:'Newspaper / News',
 
 description:
-'Articles and reporting from inside Jax’s World.',
+'The newspaper reporting on events throughout Jax’s World.',
 
-content:
-`IN DEVELOPMENT:
-
-Newspaper-style contributions are underway.
-
-This space can collect headlines, articles, images, interviews and reports about events elsewhere in the archive.`,
-
-connections:[
-'milsamolex',
-'lightning',
-'flames',
-'laws'
-]
+popupImage:{
+  label:'Read Nova News ↗',
+  url:'https://raw.githubusercontent.com/Buhlerbuhler/worldbuilding/refs/heads/main/newspaper.jpg'
 },
 
+content:
+`ESTABLISHED:
+
+The newspaper is called Nova News.
+
+FRIDAY NIGHT FOOTBALL:
+
+Nova News reports on the strange events during the Friday night football game.
+
+Earlier in the game, a green ray appeared from the sky over the field.
+
+A football was levitating in the middle of the ray.
+
+Fans initially thought it was some kind of halftime show.
+
+The teams later lined up at the 40-yard line.
+
+With four seconds left and five points down, Jax caught the snap.
+
+The football violently burst into crackling blue fire.
+
+The stadium lights went out.
+
+The chalk lines became burning golden runes.
+
+The grass transformed into jagged volcanic stone.
+
+The bleachers became dark obsidian cliffs.
+
+The opposing linebackers transformed into towering shadow-beasts.
+
+The blazing football levitated out of Jax's hands and unleashed a power that shook the earth beneath his cleats.
+
+INVESTIGATION:
+
+Scientists believe the strange football may have been connected to a UFO, supernatural powers, or another species from another planet or solar system.
+
+Police are investigating whether the event was some type of prank.
+
+Nova News plans to conduct its own investigation.
+
+VALA CAFE:
+
+Nova News reports that physical newspapers are no longer being dropped off.
+
+People can pick up their daily copy from Vala Cafe.
+
+The newspaper describes Vala Cafe as a place for studying, catching up with friends, or buying a drink.
+
+The cafe's opening was announced for 1:00.
+
+Harper Petkau is identified as the owner of Vala Cafe.`,
+
+connections:[
+'jax',
+'lightning',
+'vala',
+'milsamolex',
+'worldrules',
+'newscast'
+]
+},
 
 {
 id:'backstories',
@@ -2453,12 +2677,7 @@ content:
 
 Alexandra and Josie are developing backstories that can deepen characters and explain how parts of this world came to be.`,
 
-connections:[
-'jax',
-'villains',
-'leo',
-'ashlee'
-]
+connections:['jax','villains','leo','ashlee']
 }
 
 ];
@@ -2494,7 +2713,6 @@ function show(page){
   );
 
   window.scrollTo(0,0);
-
 }
 
 
@@ -2523,21 +2741,12 @@ const established = {
 "Jax started playing football at age 12.",
 "Jax is introverted and is not popular.",
 "Ashlee Eirvalon is Jax’s girlfriend. She is extroverted, calm, adventurous and very protective.",
-"Ashlee has dark brown hair and loves cargo pants.",
 "Leo Smith is Jax’s best friend. He is funny, sarcastic, has black curly hair and green eyes, and is a great chef.",
-"Mia is Jax’s 6-year-old little sister. She has curly blonde hair and blue eyes.",
-"Lauren is Jax’s mom. She has curly blonde hair and glasses.",
-"Paul is Jax’s dad and the football coach. He has balding black hair and brown eyes.",
-"Noodles is Jax’s calm female Siamese cat."
-],
-
-'JAX’S RELATIONSHIPS':[
-"Ashlee plans both of their next day hour for hour.",
-"Jax stays a bit away from Mia because she bombards him with hugs and he doesn't know what is going on in her head.",
-"Jax loves his parents but gives them alone time.",
-"Leo is Jax’s closest friend ever. They do not like being separated.",
-"Ashlee’s mom is a nurse.",
-"Ashlee’s dad is a science teacher."
+"Mia is Jax’s 6-year-old little sister.",
+"Lauren is Jax’s mom.",
+"Paul is Jax’s dad and the football coach.",
+"Noodles is Jax’s calm female Siamese cat.",
+"Jeremiah Smith is a 6'3\", 221-pound athlete who runs a 4.31 and has a five-year contract."
 ],
 
 'NAZARETH':[
@@ -2560,26 +2769,45 @@ const established = {
 "Football team: Milsamolex Lightning",
 "Basketball team: Milsamolex Flames",
 "Jax works at Luingunii’s Pizzeria.",
-"Jax visits Vala Cafe every day."
+"Jax visits Vala Cafe every day.",
+"Harper Petkau is identified as the owner of Vala Cafe.",
+"The newspaper is called Nova News."
 ],
 
-'LAWS':[
-"You can only start football at age 12.",
+'LAWS & SOCIETY':[
+"Football normally begins at age 12, but extremely talented players can start as early as age 10.",
 "You must have the same job as your parents by the time you become an adult.",
 "You become an adult at age 20.",
 "Everyone gets a pet dragon on their 20th birthday.",
-"You cannot enter the Tenebrae Forest. Anyone who enters gets lost and never comes out.",
+"The kind of dragon depends on the person.",
+"You cannot enter the Tenebrae Forest.",
 "You can only use magic with a permit.",
-"Using magic without a permit results in punishment based on the amount of magic used.",
-"You cannot raise the dead. If you do, you will die."
+"Punishment for unpermitted magic depends on how much magic was used.",
+"You cannot raise the dead. If you do, you will die.",
+"There are no cars in Soultara.",
+"People travel by dragon.",
+"People under 20 travel with someone over 20.",
+"The king and queen decide punishments for broken rules.",
+"Any of the king and queen’s children can become the next ruler."
 ],
 
 'CREATURES':[
 "Shigers can travel underwater and walk on land.",
-"Only one Shiger species remains. The others went extinct because of humans.",
-"Only one Pogle species remains. The others went extinct because of climate change.",
-"Dragons exist and everyone receives a pet dragon at age 20.",
-"Familiar Earth animals such as Siamese cats also exist."
+"Only a couple hundred Shigers remain, with most living in zoos.",
+"Shigers were hunted because their fur was extremely valuable.",
+"Only a couple thousand Pogles remain.",
+"Other Pogle species died out because of climate change.",
+"Celephants are huge peaceful animals that can be kept as pets.",
+"Cantalops are small peaceful relatives of Celephants.",
+"Sharpie Bots can talk and help people who are lost.",
+"Deadly Long Arms only comes out at night.",
+"Thing1 can do almost anything for someone.",
+"Monkeys are peaceful unless provoked.",
+"Birds can be pets and can also be eaten.",
+"Dogs are loyal and trainable.",
+"Killing a mosquito can cause it to call its family.",
+"Gerd is 10 metres tall, weighs 500 pounds and is peaceful.",
+"Dragons are pets and transportation."
 ]
 
 };
@@ -2596,23 +2824,15 @@ Object.entries(established)
 ESTABLISHED
 </span>
 
-<h3>
-${title}
-</h3>
+<h3>${title}</h3>
 
 <ul>
-
-${items.map(x =>
-`<li>${x}</li>`
-).join('')}
-
+${items.map(x=>`<li>${x}</li>`).join('')}
 </ul>
 
 </div>`
 
-)
-
-.join('');
+).join('');
 
 
 document
@@ -2675,7 +2895,6 @@ entries.filter(e =>
     e.workingOn || '',
     e.content || ''
   ]
-
   .join(' ')
   .toLowerCase()
   .includes(q)
@@ -2703,13 +2922,9 @@ data-id="${e.id}">
 RECORD / ${String(entries.indexOf(e)+1).padStart(3,'0')}
 </span>
 
-<h3>
-${e.title}
-</h3>
+<h3>${e.title}</h3>
 
-<p>
-${e.description}
-</p>
+<p>${e.description}</p>
 
 ${e.workingOn
 
@@ -2801,21 +3016,14 @@ class="profile-box ${sec.wide?'wide':''}">
 CHARACTER FILE
 </span>
 
-<h3>
-${sec.title}
-</h3>
+<h3>${sec.title}</h3>
 
 <div class="profile-list">
 
 ${sec.items.map(([k,v]) =>
 
-`<strong>
-${k}
-</strong>
-
-<span>
-${v}
-</span>`
+`<strong>${k}</strong>
+<span>${v}</span>`
 
 ).join('')}
 
@@ -2844,7 +3052,7 @@ ${sections}
 
 
 /* ======================================================
-   OPEN ARCHIVE ENTRY
+   OPEN ENTRY
 ====================================================== */
 
 function openEntry(id){
@@ -2907,7 +3115,7 @@ else{
 let media = '';
 
 
-/* LANDSCAPE ANIMAL PHOTO */
+/* ANIMAL IMAGE */
 
 if(e.animalPhoto){
 
@@ -2918,20 +3126,20 @@ media +=
 ${e.image
 
 ? `<img
-   src="${e.image}"
-   alt="${e.title}">`
+src="${e.image}"
+alt="${e.title}">`
 
 : `<div class="animal-photo-placeholder">
 
-     <span class="mono">
-     CREATURE IMAGE
-     </span>
+<span class="mono">
+CREATURE IMAGE
+</span>
 
-     <strong>
-     ${e.title}
-     </strong>
+<strong>
+${e.title}
+</strong>
 
-   </div>`
+</div>`
 
 }
 
@@ -2960,9 +3168,7 @@ if(e.resource){
 
 media +=
 
-`<br>
-
-<a
+`<a
 class="resource-link"
 href="${e.resource.url}"
 target="_blank"
@@ -2975,7 +3181,7 @@ ${e.resource.label}
 }
 
 
-/* POPUP IMAGE BUTTON */
+/* SCROLLABLE IMAGE RESOURCE */
 
 if(e.popupImage){
 
@@ -3005,8 +3211,6 @@ ${e.content || ''}
 
 
 
-/* CONNECT POPUP BUTTON */
-
 document
 .querySelectorAll('[data-popup-image]')
 .forEach(button => {
@@ -3028,7 +3232,7 @@ document
 }
 
 
-/* CONNECTED RECORDS */
+/* CONNECTIONS */
 
 const related =
 
@@ -3051,11 +3255,8 @@ related.length
 
 related.map(x =>
 
-`<button
-data-id="${x.id}">
-
+`<button data-id="${x.id}">
 ${x.title} ↗
-
 </button>`
 
 ).join('')
@@ -3083,7 +3284,7 @@ show('detail');
 
 
 /* ======================================================
-   SCROLLABLE IMAGE POPUP
+   IMAGE / DOCUMENT POPUP
 ====================================================== */
 
 const imagePopup =
@@ -3109,12 +3310,8 @@ function openImagePopup(src,title){
   imagePopupImg.alt =
   title || 'Image';
 
-
   imagePopupTitle.textContent =
-  title
-  ? title + ' / MENU'
-  : 'IMAGE';
-
+  title || 'IMAGE';
 
   imagePopup.classList.add('open');
 
@@ -3123,15 +3320,10 @@ function openImagePopup(src,title){
     'false'
   );
 
-
   document.body.style.overflow =
   'hidden';
 
-
-  /* ALWAYS BEGIN AT TOP OF MENU */
-
   imagePopupScroll.scrollTop = 0;
-
 }
 
 
@@ -3147,11 +3339,8 @@ function closeImagePopup(){
   imagePopupImg.src = '';
 
   document.body.style.overflow = '';
-
 }
 
-
-/* CLOSE BUTTON */
 
 imagePopupClose
 .addEventListener(
@@ -3160,24 +3349,18 @@ imagePopupClose
 );
 
 
-/* CLICK DARK BACKGROUND TO CLOSE */
-
 imagePopup
 .addEventListener(
   'click',
   e => {
 
     if(e.target === imagePopup){
-
       closeImagePopup();
-
     }
 
   }
 );
 
-
-/* ESCAPE KEY TO CLOSE */
 
 document
 .addEventListener(
@@ -3189,9 +3372,7 @@ document
       &&
       imagePopup.classList.contains('open')
     ){
-
       closeImagePopup();
-
     }
 
   }
@@ -3199,7 +3380,7 @@ document
 
 
 /* ======================================================
-   FILTERS / EVENTS
+   FILTERS
 ====================================================== */
 
 document
@@ -3221,7 +3402,6 @@ b.addEventListener(
   filter =
   b.dataset.filter;
 
-
   document
   .querySelectorAll('#filters button')
   .forEach(x =>
@@ -3232,7 +3412,6 @@ b.addEventListener(
     )
 
   );
-
 
   render();
 
@@ -3254,7 +3433,6 @@ document
 ====================================================== */
 
 render();
-
 renderSummary();
 
 </script>
