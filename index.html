@@ -287,6 +287,8 @@ main{
 .page{display:none}
 .page.active{display:block}
 
+/* PROJECT */
+
 .guide-grid{
   display:grid;
   grid-template-columns:repeat(2,1fr);
@@ -307,6 +309,8 @@ main{
 }
 
 .guide-box p{line-height:1.5}
+
+/* BUILDERS */
 
 .builder-grid{
   display:grid;
@@ -335,6 +339,8 @@ main{
 }
 
 .builder-card .mono{color:var(--muted)}
+
+/* DETAIL */
 
 .detail{
   max-width:1100px;
@@ -444,7 +450,9 @@ main{
   overflow:hidden;
 }
 
-.profile-box.wide{grid-column:1/-1}
+.profile-box.wide{
+  grid-column:1/-1;
+}
 
 .profile-box h3{
   font-size:22px;
@@ -463,7 +471,9 @@ main{
 
 .profile-list > *{min-width:0}
 
-.profile-list span{overflow-wrap:anywhere}
+.profile-list span{
+  overflow-wrap:anywhere;
+}
 
 .profile-list strong{
   font-family:'DM Mono',monospace;
@@ -471,7 +481,7 @@ main{
   text-transform:uppercase;
 }
 
-/* ANIMAL PHOTOS */
+/* ANIMAL PHOTO CONTAINERS */
 
 .animal-photo{
   width:100%;
@@ -521,7 +531,7 @@ main{
   padding:5px 8px;
 }
 
-/* IMAGE POPUP */
+/* SCROLLABLE IMAGE POPUP */
 
 .image-popup{
   position:fixed;
@@ -538,27 +548,61 @@ main{
   display:flex;
 }
 
-.image-popup img{
+.image-popup-window{
+  position:relative;
+  width:min(1100px,94vw);
+  height:min(88dvh,900px);
+  background:var(--paper);
+  border:2px solid var(--ink);
+  overflow:hidden;
+  display:flex;
+  flex-direction:column;
+  box-shadow:0 20px 80px rgba(0,0,0,.45);
+}
+
+.image-popup-header{
+  flex:0 0 auto;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  min-height:54px;
+  padding:8px 8px 8px 18px;
+  background:var(--accent);
+  border-bottom:2px solid var(--ink);
+}
+
+.image-popup-title{
+  font-family:'DM Mono',monospace;
+  font-size:11px;
+  letter-spacing:.05em;
+  text-transform:uppercase;
+  font-weight:500;
+}
+
+.image-popup-scroll{
+  flex:1;
+  min-height:0;
+  overflow-y:auto;
+  overflow-x:hidden;
+  background:#dedfd3;
+  overscroll-behavior:contain;
+}
+
+.image-popup-scroll img{
   display:block;
-  max-width:100%;
-  max-height:calc(100dvh - 40px);
-  width:auto;
+  width:100%;
   height:auto;
-  object-fit:contain;
-  box-shadow:0 0 0 1px rgba(255,255,255,.2);
 }
 
 .image-popup-close{
-  position:absolute;
-  top:14px;
-  right:18px;
-  z-index:2;
-  width:44px;
-  height:44px;
-  border:1px solid white;
+  position:static;
+  flex:0 0 auto;
+  width:38px;
+  height:38px;
+  border:1.5px solid var(--ink);
   background:var(--ink);
   color:white;
-  font-size:27px;
+  font-size:24px;
   line-height:1;
   display:flex;
   align-items:center;
@@ -566,9 +610,22 @@ main{
 }
 
 .image-popup-close:hover{
-  background:var(--accent);
+  background:var(--paper);
   color:var(--ink);
-  border-color:var(--accent);
+}
+
+.image-popup-scroll::-webkit-scrollbar{
+  width:12px;
+}
+
+.image-popup-scroll::-webkit-scrollbar-track{
+  background:#c9c7bd;
+  border-left:1px solid var(--ink);
+}
+
+.image-popup-scroll::-webkit-scrollbar-thumb{
+  background:var(--ink);
+  border:2px solid #c9c7bd;
 }
 
 /* CONNECTIONS */
@@ -588,7 +645,9 @@ main{
   text-transform:uppercase;
 }
 
-.connections button:hover{background:var(--accent)}
+.connections button:hover{
+  background:var(--accent);
+}
 
 /* SUMMARY */
 
@@ -649,12 +708,16 @@ footer{
   text-transform:uppercase;
 }
 
+/* PRINT */
+
 @media print{
+
   body{background:white}
 
   .top,
   footer,
-  .summary-actions .button{
+  .summary-actions .button,
+  .image-popup{
     display:none!important;
   }
 
@@ -665,9 +728,13 @@ footer{
 
   .page{display:none!important}
 
-  #summary.page{display:block!important}
+  #summary.page{
+    display:block!important;
+  }
 
-  .summary-grid{grid-template-columns:1fr 1fr}
+  .summary-grid{
+    grid-template-columns:1fr 1fr;
+  }
 
   .summary-box{
     break-inside:avoid;
@@ -675,9 +742,13 @@ footer{
   }
 }
 
+/* TABLET */
+
 @media(max-width:850px){
 
-  .character-profile{grid-template-columns:1fr}
+  .character-profile{
+    grid-template-columns:1fr;
+  }
 
   .profile-sections,
   .summary-grid{
@@ -699,6 +770,7 @@ footer{
   }
 
   .top small{display:none}
+
   .nav{width:100%}
 
   .hero,
@@ -706,19 +778,25 @@ footer{
     grid-template-columns:1fr;
   }
 
-  .hero{padding-top:45px}
+  .hero{
+    padding-top:45px;
+  }
 
   .cards{
     grid-template-columns:repeat(2,1fr);
   }
 
-  .guide-grid{grid-template-columns:1fr}
+  .guide-grid{
+    grid-template-columns:1fr;
+  }
 
   .search{
     width:100%;
     margin-left:0;
   }
 }
+
+/* PHONE */
 
 @media(max-width:550px){
 
@@ -727,110 +805,192 @@ footer{
     grid-template-columns:1fr;
   }
 
-  .entry{min-height:220px}
+  .entry{
+    min-height:220px;
+  }
 
-  .hero h1{font-size:46px}
+  .hero h1{
+    font-size:46px;
+  }
 
-  footer{flex-direction:column}
+  footer{
+    flex-direction:column;
+  }
 
   .image-popup{
-    padding:10px;
+    padding:8px;
   }
 
-  .image-popup img{
-    max-height:calc(100dvh - 20px);
+  .image-popup-window{
+    width:100%;
+    height:94dvh;
   }
 
-  .image-popup-close{
-    top:10px;
-    right:10px;
+  .image-popup-header{
+    min-height:50px;
+    padding-left:12px;
   }
 }
+
 </style>
 </head>
 
 <body>
 
 <header class="top">
-  <div class="brand">JAX'S WORLD<span>↗</span></div>
-  <small>AN OPEN ARCHIVE / GRADE 8 ELA</small>
+
+  <div class="brand">
+    JAX'S WORLD<span>↗</span>
+  </div>
+
+  <small>
+    AN OPEN ARCHIVE / GRADE 8 ELA
+  </small>
 
   <nav class="nav">
-    <button data-page="home" class="active">Explore</button>
-    <button data-page="summary">World Summary</button>
-    <button data-page="builders">Who’s Building What</button>
-    <button data-page="guide">The Project</button>
+
+    <button data-page="home" class="active">
+      Explore
+    </button>
+
+    <button data-page="summary">
+      World Summary
+    </button>
+
+    <button data-page="builders">
+      Who’s Building What
+    </button>
+
+    <button data-page="guide">
+      The Project
+    </button>
+
   </nav>
+
 </header>
 
+
 <main>
+
+<!-- ======================================================
+     HOME
+====================================================== -->
 
 <section id="home" class="page active">
 
 <div class="hero">
 
 <div>
+
 <div class="eyebrow">
 <span class="dot"></span>
 ARCHIVE STATUS: UNDER CONSTRUCTION
 </div>
 
-<h1>JAX'S<br><em>WORLD</em></h1>
+<h1>
+JAX'S<br>
+<em>WORLD</em>
+</h1>
 
 <p>
 A shared world built from one starting point and expanded by the class.
 Characters, places, creatures, laws, sports, history and stories all
 become part of the same growing world.
 </p>
+
 </div>
+
 
 <div class="hero-aside">
 
-<span class="mono">FIELD NOTE / 001</span>
+<span class="mono">
+FIELD NOTE / 001
+</span>
 
 <strong>
 THIS WORLD IS NOT FINISHED.
 THAT'S THE POINT.
 </strong>
 
-<button class="button"
+<button
+class="button"
 onclick="document.getElementById('archiveHead').scrollIntoView({behavior:'smooth'})">
 Explore the world ↗
 </button>
 
 </div>
+
 </div>
 
+
 <div class="section-head" id="archiveHead">
+
 <h2>THE ARCHIVE</h2>
+
 <span id="count"></span>
+
 </div>
+
 
 <div class="filters" id="filters">
 
-<button class="active" data-filter="all">All</button>
-<button data-filter="people">People</button>
-<button data-filter="places">Places</button>
-<button data-filter="sports">Sports</button>
-<button data-filter="society">Society</button>
-<button data-filter="nature">Nature</button>
-<button data-filter="stories">Stories & Media</button>
+<button class="active" data-filter="all">
+All
+</button>
 
-<input id="search" class="search" placeholder="Search the archive...">
+<button data-filter="people">
+People
+</button>
+
+<button data-filter="places">
+Places
+</button>
+
+<button data-filter="sports">
+Sports
+</button>
+
+<button data-filter="society">
+Society
+</button>
+
+<button data-filter="nature">
+Nature
+</button>
+
+<button data-filter="stories">
+Stories & Media
+</button>
+
+<input
+id="search"
+class="search"
+placeholder="Search the archive...">
 
 </div>
+
 
 <div id="cards" class="cards"></div>
 
 </section>
 
 
+<!-- ======================================================
+     WORLD SUMMARY
+====================================================== -->
+
 <section id="summary" class="page">
 
 <div class="section-head">
+
 <h2>WORLD SUMMARY</h2>
-<span>QUICK REFERENCE / CURRENT CANON</span>
+
+<span>
+QUICK REFERENCE / CURRENT CANON
+</span>
+
 </div>
+
 
 <div class="summary-actions">
 
@@ -839,29 +999,45 @@ Everything currently established about Jax’s World in one place.
 This page will keep changing as the class develops the world.
 </p>
 
-<button class="button" onclick="window.print()">
+<button
+class="button"
+onclick="window.print()">
 Print / Save PDF
 </button>
 
 </div>
+
 
 <div id="summaryContent"></div>
 
 </section>
 
 
+<!-- ======================================================
+     BUILDERS
+====================================================== -->
+
 <section id="builders" class="page">
 
 <div class="section-head">
-<h2>WHO’S BUILDING WHAT</h2>
-<span>FIND PEOPLE / MAKE CONNECTIONS</span>
+
+<h2>
+WHO’S BUILDING WHAT
+</h2>
+
+<span>
+FIND PEOPLE / MAKE CONNECTIONS
+</span>
+
 </div>
+
 
 <p class="summary-intro">
 If your idea connects to something another person is developing,
 talk to them. Ask questions, compare ideas, and get permission before
 changing or incorporating someone else’s creation.
 </p>
+
 
 <div class="builder-grid">
 
@@ -978,42 +1154,88 @@ changing or incorporating someone else’s creation.
 </section>
 
 
+<!-- ======================================================
+     PROJECT
+====================================================== -->
+
 <section id="guide" class="page">
 
 <div class="section-head">
+
 <h2>THE PROJECT</h2>
-<span>WORLD BUILDING / GRADE 8 ELA</span>
+
+<span>
+WORLD BUILDING / GRADE 8 ELA
+</span>
+
 </div>
+
 
 <p class="summary-intro">
 Create something that expands Jax’s World. Write, draw, design,
 explain, research, or combine approaches.
 </p>
 
+
 <div class="guide-grid">
 
 <div class="guide-box">
-<span class="mono">01 / ORIGINAL</span>
+
+<span class="mono">
+01 / ORIGINAL
+</span>
+
 <h3>ADD SOMETHING</h3>
-<p>Add something the world does not already fully explain.</p>
+
+<p>
+Add something the world does not already fully explain.
+</p>
+
 </div>
 
+
 <div class="guide-box">
-<span class="mono">02 / CONNECTED</span>
+
+<span class="mono">
+02 / CONNECTED
+</span>
+
 <h3>MAKE IT BELONG</h3>
-<p>Connect your contribution to the story or another part of the shared world.</p>
+
+<p>
+Connect your contribution to the story or another part of the shared world.
+</p>
+
 </div>
 
+
 <div class="guide-box">
-<span class="mono">03 / DEVELOPED</span>
+
+<span class="mono">
+03 / DEVELOPED
+</span>
+
 <h3>PUSH IT FURTHER</h3>
-<p>Add enough detail that other people can understand how your idea works.</p>
+
+<p>
+Add enough detail that other people can understand how your idea works.
+</p>
+
 </div>
 
+
 <div class="guide-box">
-<span class="mono">04 / PURPOSEFUL</span>
+
+<span class="mono">
+04 / PURPOSEFUL
+</span>
+
 <h3>MAKE CHOICES</h3>
-<p>Use your format intentionally and be able to explain your choices.</p>
+
+<p>
+Use your format intentionally and be able to explain your choices.
+</p>
+
 </div>
 
 </div>
@@ -1021,19 +1243,34 @@ explain, research, or combine approaches.
 </section>
 
 
+<!-- ======================================================
+     DETAIL
+====================================================== -->
+
 <section id="detail" class="page">
 
 <div class="detail">
 
-<button class="back" id="back">← Back to archive</button>
+<button
+class="back"
+id="back">
+← Back to archive
+</button>
 
-<div class="meta" id="detailMeta"></div>
+<div
+class="meta"
+id="detailMeta">
+</div>
 
 <h1 id="detailTitle"></h1>
 
-<p class="lead" id="detailLead"></p>
+<p
+class="lead"
+id="detailLead">
+</p>
 
 <div id="detailContent"></div>
+
 
 <div class="detail-body">
 
@@ -1041,9 +1278,15 @@ explain, research, or combine approaches.
 
 <div>
 
-<span class="mono">CONNECTED RECORDS</span>
+<span class="mono">
+CONNECTED RECORDS
+</span>
 
-<div class="connections" id="connections" style="margin-top:15px"></div>
+<div
+class="connections"
+id="connections"
+style="margin-top:15px">
+</div>
 
 </div>
 
@@ -1053,17 +1296,40 @@ explain, research, or combine approaches.
 
 </section>
 
+
 <footer>
-<span>JAX'S WORLD / CLASS ARCHIVE</span>
-<span>BUILD → CONNECT → EXPAND</span>
+
+<span>
+JAX'S WORLD / CLASS ARCHIVE
+</span>
+
+<span>
+BUILD → CONNECT → EXPAND
+</span>
+
 </footer>
 
 </main>
 
 
-<!-- IMAGE POPUP -->
+<!-- ======================================================
+     SCROLLABLE IMAGE VIEWER
+====================================================== -->
 
-<div id="imagePopup" class="image-popup" aria-hidden="true">
+<div
+id="imagePopup"
+class="image-popup"
+aria-hidden="true">
+
+<div class="image-popup-window">
+
+<div class="image-popup-header">
+
+<span
+id="imagePopupTitle"
+class="image-popup-title">
+IMAGE
+</span>
 
 <button
 id="imagePopupClose"
@@ -1072,14 +1338,33 @@ aria-label="Close image">
 ×
 </button>
 
-<img id="imagePopupImg" src="" alt="">
+</div>
+
+
+<div
+id="imagePopupScroll"
+class="image-popup-scroll">
+
+<img
+id="imagePopupImg"
+src=""
+alt="">
+
+</div>
+
+</div>
 
 </div>
 
 
 <script>
 
+/* ======================================================
+   ARCHIVE DATA
+====================================================== */
+
 const entries = [
+
 
 /* PEOPLE */
 
@@ -1093,10 +1378,12 @@ workingOn:'Hannah / Alexandra / Josie',
 
 profile:{
 photo:'',
+
 sections:[
 
 {
 title:'PROFILE',
+
 items:[
 ['Name','Jax King'],
 ['Age','15'],
@@ -1111,6 +1398,7 @@ items:[
 
 {
 title:'FAVOURITES',
+
 items:[
 ['Food','Cakepop'],
 ['Drink','Rainbow lemonade'],
@@ -1122,6 +1410,7 @@ items:[
 
 {
 title:'PERSONALITY',
+
 items:[
 ['Personality','Introverted'],
 ['Hobbies','Football, baking'],
@@ -1134,6 +1423,7 @@ items:[
 
 {
 title:'MOTIVATION',
+
 items:[
 ['Goal','Become a football player'],
 ['Would Die For','Football'],
@@ -1144,6 +1434,7 @@ items:[
 {
 title:'KNOWN HISTORY',
 wide:true,
+
 items:[
 ['Football','Jax started playing football at age 12.'],
 ['Football Camp','He missed football camp because he was sick with appendicitis.'],
@@ -1157,6 +1448,7 @@ items:[
 {
 title:'RELATIONSHIPS',
 wide:true,
+
 items:[
 ['Ashlee','His girlfriend. She plans both of their next day hour for hour.'],
 ['Mia',"His little sister. Jax stays a bit away because she bombards him with hugs and he doesn't know what is going on in her head."],
@@ -1170,17 +1462,30 @@ items:[
 },
 
 connections:[
-'ashlee','leo','mia','lauren','paul','noodles',
-'vala','pizzeria','lightning','milsamolex','laws'
+'ashlee',
+'leo',
+'mia',
+'lauren',
+'paul',
+'noodles',
+'vala',
+'pizzeria',
+'lightning',
+'milsamolex',
+'laws'
 ]
 },
+
 
 {
 id:'ashlee',
 title:'Ashlee Eirvalon',
 category:'people',
 type:'Character',
-description:'Jax’s girlfriend: extroverted, calm, adventurous and very protective.',
+
+description:
+'Jax’s girlfriend: extroverted, calm, adventurous and very protective.',
+
 content:
 `ESTABLISHED:
 
@@ -1199,15 +1504,23 @@ FAMILY:
 Ashlee’s mom is a nurse.
 
 Ashlee’s dad is a science teacher.`,
-connections:['jax','fashion']
+
+connections:[
+'jax',
+'fashion'
+]
 },
+
 
 {
 id:'leo',
 title:'Leo Smith',
 category:'people',
 type:'Character',
-description:'Jax’s best friend: funny, sarcastic, and a great chef.',
+
+description:
+'Jax’s best friend: funny, sarcastic, and a great chef.',
+
 content:
 `ESTABLISHED:
 
@@ -1222,15 +1535,20 @@ Leo is a great chef.
 Jax considers Leo his closest friend ever.
 
 They do not like being separated.`,
+
 connections:['jax']
 },
+
 
 {
 id:'mia',
 title:'Mia King',
 category:'people',
 type:'Character',
-description:'Jax’s six-year-old little sister.',
+
+description:
+'Jax’s six-year-old little sister.',
+
 content:
 `ESTABLISHED:
 
@@ -1243,15 +1561,24 @@ Jax describes her as annoying.
 Jax stays a bit away from Mia because she bombards him with hugs.
 
 He also says he doesn't know what is going on in her head.`,
-connections:['jax','lauren','paul']
+
+connections:[
+'jax',
+'lauren',
+'paul'
+]
 },
+
 
 {
 id:'lauren',
 title:'Lauren',
 category:'people',
 type:'Character',
-description:'Jax and Mia’s mom.',
+
+description:
+'Jax and Mia’s mom.',
+
 content:
 `ESTABLISHED:
 
@@ -1262,15 +1589,24 @@ She has curly blonde hair.
 She wears glasses.
 
 Jax loves his parents but gives them alone time.`,
-connections:['jax','mia','paul']
+
+connections:[
+'jax',
+'mia',
+'paul'
+]
 },
+
 
 {
 id:'paul',
 title:'Paul',
 category:'people',
 type:'Character / Coach',
-description:'Jax’s dad and the football coach.',
+
+description:
+'Jax’s dad and the football coach.',
+
 content:
 `ESTABLISHED:
 
@@ -1281,17 +1617,29 @@ Paul is the football coach.
 He has balding black hair and brown eyes.
 
 Jax loves his parents but gives them alone time.`,
-connections:['jax','lauren','mia','lightning']
+
+connections:[
+'jax',
+'lauren',
+'mia',
+'lightning'
+]
 },
+
 
 {
 id:'noodles',
 title:'Noodles',
 category:'nature',
 type:'Pet',
-description:'Jax’s calm female Siamese cat.',
+
+description:
+'Jax’s calm female Siamese cat.',
+
 animalPhoto:true,
+
 image:'',
+
 content:
 `ESTABLISHED:
 
@@ -1300,7 +1648,11 @@ Noodles is a female Siamese cat.
 She is calm.
 
 She belongs to Jax.`,
-connections:['jax','animals']
+
+connections:[
+'jax',
+'animals'
+]
 },
 
 
@@ -1312,7 +1664,10 @@ workingOn:'Norah / Jordyn',
 title:'Nazareth',
 category:'places',
 type:'Planet',
-description:'A yellow planet with unstable gravity, temporary volcanic regions and a moon named Harry.',
+
+description:
+'A yellow planet with unstable gravity, temporary volcanic regions and a moon named Harry.',
+
 content:
 `PLANET:
 
@@ -1365,15 +1720,26 @@ Nazareth has the same normal seasons as Earth.
 VISUAL DESIGN:
 
 Ask Norah for information about what the planet looks like.`,
-connections:['soultara','animals','map','worldrules','harry']
+
+connections:[
+'soultara',
+'animals',
+'map',
+'worldrules',
+'harry'
+]
 },
+
 
 {
 id:'harry',
 title:'Harry',
 category:'nature',
 type:'Moon',
-description:'The moon orbiting Nazareth.',
+
+description:
+'The moon orbiting Nazareth.',
+
 content:
 `ESTABLISHED:
 
@@ -1382,8 +1748,10 @@ Nazareth's moon is named Harry.
 Harry is based on Jordyn's eraser.
 
 For details about Harry's appearance, ask Jordyn or Norah.`,
+
 connections:['nazareth']
 },
+
 
 {
 id:'soultara',
@@ -1391,8 +1759,13 @@ workingOn:'Bristol / Norah / Jordyn',
 title:'Soultara',
 category:'places',
 type:'Country',
-description:'The country containing the city of Milsamolex.',
-image:'https://raw.githubusercontent.com/Buhlerbuhler/worldbuilding/refs/heads/main/Soultara-Flag-1.jpg',
+
+description:
+'The country containing the city of Milsamolex.',
+
+image:
+'https://raw.githubusercontent.com/Buhlerbuhler/worldbuilding/refs/heads/main/Soultara-Flag-1.jpg',
+
 content:
 `ESTABLISHED:
 
@@ -1403,8 +1776,16 @@ Milsamolex is a city in Soultara.
 The class has created a flag for Soultara.
 
 Soultara has laws governing football, adulthood, jobs, dragons, magic, the Tenebrae Forest and raising the dead.`,
-connections:['nazareth','milsamolex','laws','worldrules','tenebrae']
+
+connections:[
+'nazareth',
+'milsamolex',
+'laws',
+'worldrules',
+'tenebrae'
+]
 },
+
 
 {
 id:'milsamolex',
@@ -1412,7 +1793,10 @@ workingOn:'Finley / Cohen',
 title:'Milsamolex',
 category:'places',
 type:'City / City Planning',
-description:'The city where much of Jax’s known life takes place.',
+
+description:
+'The city where much of Jax’s known life takes place.',
+
 content:
 `ESTABLISHED:
 
@@ -1424,20 +1808,33 @@ The Milsamolex Flames basketball team is based here.
 
 Jax works at Luingunii’s Pizzeria.
 
-Jax visits  Cafe every day.
+Jax visits Vala Cafe every day.
 
 IN DEVELOPMENT:
 
 Finley and Cohen are developing the city itself, including its layout, neighbourhoods, streets, landmarks and important locations.`,
-connections:['soultara','lightning','flames','pizzeria','','transport','map']
+
+connections:[
+'soultara',
+'lightning',
+'flames',
+'pizzeria',
+'vala',
+'transport',
+'map'
+]
 },
+
 
 {
 id:'tenebrae',
 title:'Tenebrae Forest',
 category:'places',
 type:'Forbidden Place',
-description:'A forbidden forest where entering means becoming lost and never returning.',
+
+description:
+'A forbidden forest where entering means becoming lost and never returning.',
+
 content:
 `ESTABLISHED:
 
@@ -1448,8 +1845,14 @@ People are not allowed to enter it.
 Immediately after entering the forest, a person becomes lost.
 
 According to the current law, anyone who enters never comes out.`,
-connections:['soultara','laws','worldrules']
+
+connections:[
+'soultara',
+'laws',
+'worldrules'
+]
 },
+
 
 {
 id:'pizzeria',
@@ -1457,7 +1860,10 @@ workingOn:'Aneleigh / Josie',
 title:'Luingunii’s Pizzeria',
 category:'places',
 type:'Business',
-description:'The pizzeria where Jax works.',
+
+description:
+'The pizzeria where Jax works.',
+
 content:
 `ESTABLISHED:
 
@@ -1466,19 +1872,29 @@ Jax works at Luingunii’s Pizzeria.
 It is described as being "around the bend."
 
 Soultara law says people must have the same job as their parents by the time they become adults.`,
-connections:['jax','milsamolex','laws']
+
+connections:[
+'jax',
+'milsamolex',
+'laws'
+]
 },
 
+
 {
-id:'',
+id:'vala',
 workingOn:'Aneleigh / Josie',
 title:'Vala Cafe',
 category:'places',
 type:'Business / Cafe',
-description:'A cafe Jax visits every day.',
+
+description:
+'A cafe Jax visits every day.',
 
 popupImage:{
   label:'View Vala Cafe Menu ↗',
+
+  /* REPLACE THIS WITH YOUR RAW JPG URL */
   url:'https://raw.githubusercontent.com/Buhlerbuhler/worldbuilding/refs/heads/main/vala-cafe-1.jpg'
 },
 
@@ -1496,8 +1912,13 @@ His usual order is a rainbow lemonade made with:
 He also gets a volleyball cakepop.
 
 The cakepop is birthday-cake flavour.`,
-connections:['jax','milsamolex']
+
+connections:[
+'jax',
+'milsamolex'
+]
 },
+
 
 {
 id:'map',
@@ -1505,14 +1926,23 @@ workingOn:'Arianna',
 title:'Map of the World',
 category:'places',
 type:'Map / In Development',
-description:'The geography of Nazareth, Soultara and Milsamolex is being mapped.',
+
+description:
+'The geography of Nazareth, Soultara and Milsamolex is being mapped.',
+
 content:
 `IN DEVELOPMENT:
 
 Arianna is mapping the world.
 
 The map can connect countries, cities, landmarks, habitats, roads, bodies of water and important locations.`,
-connections:['nazareth','soultara','milsamolex','tenebrae']
+
+connections:[
+'nazareth',
+'soultara',
+'milsamolex',
+'tenebrae'
+]
 },
 
 
@@ -1524,11 +1954,17 @@ workingOn:'Marrex / Max',
 title:'Milsamolex Lightning',
 category:'sports',
 type:'Football Team',
-description:'The football team of Milsamolex.',
+
+description:
+'The football team of Milsamolex.',
+
 resource:{
 label:'View the Lightning jerseys ↗',
-url:'https://docs.google.com/presentation/d/1_IGfyOYMfDl_nt0EMo23VrayaEP3EZswhlJY62FrtRU/edit?usp=sharing'
+
+url:
+'https://docs.google.com/presentation/d/1_IGfyOYMfDl_nt0EMo23VrayaEP3EZswhlJY62FrtRU/edit?usp=sharing'
 },
+
 content:
 `ESTABLISHED:
 
@@ -1541,8 +1977,15 @@ In Soultara, people can only start playing football at age 12.
 Jax started playing football at age 12.
 
 The team has jersey designs linked above.`,
-connections:['jax','paul','milsamolex','laws']
+
+connections:[
+'jax',
+'paul',
+'milsamolex',
+'laws'
+]
 },
+
 
 {
 id:'flames',
@@ -1550,7 +1993,10 @@ workingOn:'Isaiah / Zander',
 title:'Milsamolex Flames',
 category:'sports',
 type:'Basketball Team',
-description:'The basketball team of Milsamolex.',
+
+description:
+'The basketball team of Milsamolex.',
+
 content:
 `ESTABLISHED:
 
@@ -1559,7 +2005,10 @@ The basketball team is called the Milsamolex Flames.
 IN DEVELOPMENT:
 
 Players, league information, history, rivals and other team details are still being developed.`,
-connections:['milsamolex']
+
+connections:[
+'milsamolex'
+]
 },
 
 
@@ -1571,7 +2020,10 @@ workingOn:'Ethne',
 title:'Laws & Rules',
 category:'society',
 type:'Law',
-description:'Rules governing adulthood, jobs, football, dragons, magic and forbidden places.',
+
+description:
+'Rules governing adulthood, jobs, football, dragons, magic and forbidden places.',
+
 content:
 `CURRENT LAWS:
 
@@ -1612,8 +2064,17 @@ A large amount of magic results in a larger punishment.
 You cannot raise the dead.
 
 If you raise the dead, you will die.`,
-connections:['soultara','jax','lightning','tenebrae','dragons','worldrules']
+
+connections:[
+'soultara',
+'jax',
+'lightning',
+'tenebrae',
+'dragons',
+'worldrules'
+]
 },
+
 
 {
 id:'worldrules',
@@ -1621,7 +2082,10 @@ workingOn:'Bristol',
 title:'World Rules',
 category:'society',
 type:'Worldbuilding',
-description:'Magic, planetary behaviour and the larger rules that shape life on Nazareth.',
+
+description:
+'Magic, planetary behaviour and the larger rules that shape life on Nazareth.',
+
 content:
 `KNOWN WORLD RULES:
 
@@ -1640,8 +2104,16 @@ People become adults at age 20.
 Everyone receives a pet dragon on their 20th birthday.
 
 The Tenebrae Forest causes anyone who enters to become lost and never return.`,
-connections:['nazareth','soultara','laws','tenebrae','dragons']
+
+connections:[
+'nazareth',
+'soultara',
+'laws',
+'tenebrae',
+'dragons'
+]
 },
+
 
 {
 id:'transport',
@@ -1649,15 +2121,24 @@ workingOn:'Sienna',
 title:'Transportation',
 category:'society',
 type:'World System / In Development',
-description:'How people move through Milsamolex, Soultara and Nazareth.',
+
+description:
+'How people move through Milsamolex, Soultara and Nazareth.',
+
 content:
 `IN DEVELOPMENT:
 
 Sienna is designing transportation for the world.
 
 Transportation may affect how cities work, how far people travel and what kinds of technology exist.`,
-connections:['milsamolex','soultara','nazareth']
+
+connections:[
+'milsamolex',
+'soultara',
+'nazareth'
+]
 },
+
 
 {
 id:'fashion',
@@ -1665,7 +2146,10 @@ workingOn:'Bella',
 title:'Fashion',
 category:'society',
 type:'Design / In Development',
-description:'Clothing and style in Jax’s World.',
+
+description:
+'Clothing and style in Jax’s World.',
+
 content:
 `ESTABLISHED:
 
@@ -1676,7 +2160,12 @@ IN DEVELOPMENT:
 Bella is developing fashion for the world.
 
 Fashion can connect to characters, climate, culture, jobs, sports and everyday life.`,
-connections:['ashlee','milsamolex','soultara']
+
+connections:[
+'ashlee',
+'milsamolex',
+'soultara'
+]
 },
 
 
@@ -1688,7 +2177,10 @@ workingOn:'Crosby / Brent',
 title:'Animal Kingdom',
 category:'nature',
 type:'Wildlife',
-description:'The animals and creatures that live on Nazareth.',
+
+description:
+'The animals and creatures that live on Nazareth.',
+
 content:
 `KNOWN CREATURES:
 
@@ -1698,8 +2190,16 @@ content:
 • Familiar animals such as Siamese cats also exist.
 
 More creatures are being developed.`,
-connections:['nazareth','shiger','pogle','dragons','noodles']
+
+connections:[
+'nazareth',
+'shiger',
+'pogle',
+'dragons',
+'noodles'
+]
 },
+
 
 {
 id:'shiger',
@@ -1707,9 +2207,14 @@ workingOn:'Crosby / Brent',
 title:'Shiger',
 category:'nature',
 type:'Creature',
-description:'A large creature that can travel underwater and walk on land.',
+
+description:
+'A large creature that can travel underwater and walk on land.',
+
 animalPhoto:true,
+
 image:'',
+
 content:
 `ESTABLISHED:
 
@@ -1732,8 +2237,13 @@ MALES:
 Males can grow from about 3.4 to 4.0 metres.
 
 They can weigh between about 1,500 and 2,200 pounds.`,
-connections:['animals','nazareth']
+
+connections:[
+'animals',
+'nazareth'
+]
 },
+
 
 {
 id:'pogle',
@@ -1741,9 +2251,14 @@ workingOn:'Crosby / Brent',
 title:'Pogle',
 category:'nature',
 type:'Creature',
-description:'The last surviving species of Pogle.',
+
+description:
+'The last surviving species of Pogle.',
+
 animalPhoto:true,
+
 image:'',
+
 content:
 `ESTABLISHED:
 
@@ -1754,17 +2269,27 @@ The other Pogle species died out because of climate change.
 INCOMPLETE RECORD:
 
 More information about the Pogle is still being developed.`,
-connections:['animals','nazareth']
+
+connections:[
+'animals',
+'nazareth'
+]
 },
+
 
 {
 id:'dragons',
 title:'Pet Dragons',
 category:'nature',
 type:'Creature / Society',
-description:'Every person receives a pet dragon when they turn 20.',
+
+description:
+'Every person receives a pet dragon when they turn 20.',
+
 animalPhoto:true,
+
 image:'',
+
 content:
 `ESTABLISHED:
 
@@ -1775,7 +2300,13 @@ Everyone gets a pet dragon on their 20th birthday.
 Age 20 is also when a person becomes an adult.
 
 Other details about the dragons are not yet established.`,
-connections:['animals','laws','worldrules','nazareth']
+
+connections:[
+'animals',
+'laws',
+'worldrules',
+'nazareth'
+]
 },
 
 
@@ -1787,7 +2318,10 @@ workingOn:'Elliot',
 title:'The Bad Guys',
 category:'people',
 type:'Backstory / In Development',
-description:'The backstory of the world’s villains is being developed.',
+
+description:
+'The backstory of the world’s villains is being developed.',
+
 content:
 `IN DEVELOPMENT:
 
@@ -1798,8 +2332,13 @@ What do they want?
 Why are they in conflict with Jax or this world?
 
 What happened before we met them?`,
-connections:['jax','worldrules']
+
+connections:[
+'jax',
+'worldrules'
+]
 },
+
 
 {
 id:'characters',
@@ -1807,13 +2346,25 @@ workingOn:'Hannah',
 title:'Character Profiles',
 category:'people',
 type:'Illustration / In Development',
-description:'Characters are being developed through profiles and drawings.',
+
+description:
+'Characters are being developed through profiles and drawings.',
+
 content:
 `IN DEVELOPMENT:
 
 Character drawings and profiles will be added here as they become part of the shared world.`,
-connections:['jax','ashlee','leo','mia','lauren','paul']
+
+connections:[
+'jax',
+'ashlee',
+'leo',
+'mia',
+'lauren',
+'paul'
+]
 },
+
 
 {
 id:'newscast',
@@ -1821,15 +2372,24 @@ workingOn:'Hannah / Ivy',
 title:'Milsamolex Newscast',
 category:'stories',
 type:'Broadcast / In Development',
-description:'News reported from inside Jax’s World.',
+
+description:
+'News reported from inside Jax’s World.',
+
 content:
 `IN DEVELOPMENT:
 
 Hannah and Ivy are creating newscasts from within the world.
 
 Reports can connect to characters, sports, laws, major events and other class creations.`,
-connections:['milsamolex','jax','laws']
+
+connections:[
+'milsamolex',
+'jax',
+'laws'
+]
 },
+
 
 {
 id:'graphicnovel',
@@ -1837,13 +2397,20 @@ workingOn:'Ivy',
 title:'Graphic Novel',
 category:'stories',
 type:'Visual Story / In Development',
-description:'A part of the world told through sequential art.',
+
+description:
+'A part of the world told through sequential art.',
+
 content:
 `IN DEVELOPMENT:
 
 Ivy is developing a graphic novel set in Jax’s World.`,
-connections:['jax']
+
+connections:[
+'jax'
+]
 },
+
 
 {
 id:'newspaper',
@@ -1851,15 +2418,25 @@ workingOn:'Berkeley / Harper',
 title:'The Newspaper',
 category:'stories',
 type:'News / In Development',
-description:'Articles and reporting from inside Jax’s World.',
+
+description:
+'Articles and reporting from inside Jax’s World.',
+
 content:
 `IN DEVELOPMENT:
 
 Newspaper-style contributions are underway.
 
 This space can collect headlines, articles, images, interviews and reports about events elsewhere in the archive.`,
-connections:['milsamolex','lightning','flames','laws']
+
+connections:[
+'milsamolex',
+'lightning',
+'flames',
+'laws'
+]
 },
+
 
 {
 id:'backstories',
@@ -1867,43 +2444,75 @@ workingOn:'Alexandra / Josie',
 title:'Backstories',
 category:'stories',
 type:'Story / In Development',
-description:'The past is being filled in through characters, events and histories.',
+
+description:
+'The past is being filled in through characters, events and histories.',
+
 content:
 `IN DEVELOPMENT:
 
 Alexandra and Josie are developing backstories that can deepen characters and explain how parts of this world came to be.`,
-connections:['jax','villains','leo','ashlee']
+
+connections:[
+'jax',
+'villains',
+'leo',
+'ashlee'
+]
 }
 
 ];
 
 
-/* NAVIGATION */
+/* ======================================================
+   NAVIGATION
+====================================================== */
 
-const pages = [...document.querySelectorAll('.page')];
-const nav = [...document.querySelectorAll('.nav button')];
+const pages =
+[...document.querySelectorAll('.page')];
+
+const nav =
+[...document.querySelectorAll('.nav button')];
 
 let filter = 'all';
+
 
 function show(page){
 
   pages.forEach(p =>
-    p.classList.toggle('active',p.id===page)
+    p.classList.toggle(
+      'active',
+      p.id===page
+    )
   );
 
   nav.forEach(b =>
-    b.classList.toggle('active',b.dataset.page===page)
+    b.classList.toggle(
+      'active',
+      b.dataset.page===page
+    )
   );
 
   window.scrollTo(0,0);
+
 }
 
-document.querySelectorAll('[data-page]').forEach(b =>
-  b.addEventListener('click',()=>show(b.dataset.page))
+
+document
+.querySelectorAll('[data-page]')
+.forEach(b =>
+
+  b.addEventListener(
+    'click',
+    ()=>show(b.dataset.page)
+  )
+
 );
 
 
-/* WORLD SUMMARY */
+/* ======================================================
+   WORLD SUMMARY
+====================================================== */
 
 function renderSummary(){
 
@@ -1975,24 +2584,40 @@ const established = {
 
 };
 
-const boxes = Object.entries(established)
+
+const boxes =
+Object.entries(established)
+
 .map(([title,items]) =>
 
 `<div class="summary-box">
 
-<span class="mono">ESTABLISHED</span>
+<span class="mono">
+ESTABLISHED
+</span>
 
-<h3>${title}</h3>
+<h3>
+${title}
+</h3>
 
 <ul>
-${items.map(x=>`<li>${x}</li>`).join('')}
+
+${items.map(x =>
+`<li>${x}</li>`
+).join('')}
+
 </ul>
 
 </div>`
 
-).join('');
+)
 
-document.getElementById('summaryContent').innerHTML =
+.join('');
+
+
+document
+.getElementById('summaryContent')
+.innerHTML =
 
 `<div class="summary-grid">
 
@@ -2000,9 +2625,13 @@ ${boxes}
 
 <div class="summary-box wide">
 
-<span class="mono">STILL GROWING</span>
+<span class="mono">
+STILL GROWING
+</span>
 
-<h3>The world isn't finished.</h3>
+<h3>
+The world isn't finished.
+</h3>
 
 <p>
 Anything not established in the archive may still be open for development.
@@ -2017,63 +2646,90 @@ overwriting someone else's work.
 }
 
 
-/* ARCHIVE */
+/* ======================================================
+   ARCHIVE
+====================================================== */
 
 function render(){
 
 const q =
-document.getElementById('search')
+document
+.getElementById('search')
 .value
 .trim()
 .toLowerCase();
 
-const found = entries.filter(e =>
 
-(filter==='all' || e.category===filter)
+const found =
+entries.filter(e =>
 
-&&
+  (filter==='all' || e.category===filter)
 
-[
-e.title,
-e.description,
-e.type,
-e.category,
-e.workingOn || '',
-e.content || ''
-]
-.join(' ')
-.toLowerCase()
-.includes(q)
+  &&
+
+  [
+    e.title,
+    e.description,
+    e.type,
+    e.category,
+    e.workingOn || '',
+    e.content || ''
+  ]
+
+  .join(' ')
+  .toLowerCase()
+  .includes(q)
 
 );
 
-document.getElementById('count').textContent =
+
+document
+.getElementById('count')
+.textContent =
 entries.length + ' entries / expanding';
 
-document.getElementById('cards').innerHTML =
+
+document
+.getElementById('cards')
+.innerHTML =
 
 found.map(e =>
 
-`<button class="entry" data-id="${e.id}">
+`<button
+class="entry"
+data-id="${e.id}">
 
 <span class="num">
 RECORD / ${String(entries.indexOf(e)+1).padStart(3,'0')}
 </span>
 
-<h3>${e.title}</h3>
+<h3>
+${e.title}
+</h3>
 
-<p>${e.description}</p>
+<p>
+${e.description}
+</p>
 
 ${e.workingOn
-? `<div class="creator">WORKING ON / ${e.workingOn}</div>`
+
+? `<div class="creator">
+WORKING ON / ${e.workingOn}
+</div>`
+
 : ''
+
 }
 
 <div class="bottom">
 
-<span class="tag">${e.type}</span>
+<span class="tag">
+${e.type}
+</span>
 
-<span class="arrow">↗</span>
+<span class="arrow">
+↗
+</span>
 
 </div>
 
@@ -2085,44 +2741,82 @@ ${e.workingOn
 
 '<p class="empty">No entries match your search.</p>';
 
-document.querySelectorAll('.entry').forEach(b =>
-b.addEventListener('click',()=>openEntry(b.dataset.id))
+
+document
+.querySelectorAll('.entry')
+.forEach(b =>
+
+  b.addEventListener(
+    'click',
+    ()=>openEntry(b.dataset.id)
+  )
+
 );
 
 }
 
 
-/* CHARACTER PROFILE */
+/* ======================================================
+   CHARACTER PROFILE
+====================================================== */
 
 function characterProfileHTML(e){
 
 if(!e.profile) return '';
 
-const photo = e.profile.photo
 
-? `<img src="${e.profile.photo}" alt="Portrait of ${e.title}">`
+const photo =
+e.profile.photo
+
+?
+
+`<img
+src="${e.profile.photo}"
+alt="Portrait of ${e.title}">`
 
 :
 
 `<div>
-<span class="mono">CHARACTER IMAGE</span>
+
+<span class="mono">
+CHARACTER IMAGE
+</span>
+
 <br><br>
-<strong>NOT YET ADDED</strong>
+
+<strong>
+NOT YET ADDED
+</strong>
+
 </div>`;
 
-const sections = e.profile.sections.map(sec =>
 
-`<div class="profile-box ${sec.wide?'wide':''}">
+const sections =
+e.profile.sections.map(sec =>
 
-<span class="mono">CHARACTER FILE</span>
+`<div
+class="profile-box ${sec.wide?'wide':''}">
 
-<h3>${sec.title}</h3>
+<span class="mono">
+CHARACTER FILE
+</span>
+
+<h3>
+${sec.title}
+</h3>
 
 <div class="profile-list">
 
 ${sec.items.map(([k,v]) =>
-`<strong>${k}</strong>
-<span>${v}</span>`
+
+`<strong>
+${k}
+</strong>
+
+<span>
+${v}
+</span>`
+
 ).join('')}
 
 </div>
@@ -2130,6 +2824,7 @@ ${sec.items.map(([k,v]) =>
 </div>`
 
 ).join('');
+
 
 return `
 
@@ -2148,37 +2843,61 @@ ${sections}
 }
 
 
-/* OPEN ENTRY */
+/* ======================================================
+   OPEN ARCHIVE ENTRY
+====================================================== */
 
 function openEntry(id){
 
-const e = entries.find(x=>x.id===id);
+const e =
+entries.find(x=>x.id===id);
 
 if(!e) return;
 
-document.getElementById('detailMeta').textContent =
+
+document
+.getElementById('detailMeta')
+.textContent =
 e.category + ' / ' + e.type;
 
-document.getElementById('detailTitle').textContent =
+
+document
+.getElementById('detailTitle')
+.textContent =
 e.title;
 
-document.getElementById('detailLead').textContent =
+
+document
+.getElementById('detailLead')
+.textContent =
 e.description;
 
-document.getElementById('detailInfo').innerHTML =
+
+document
+.getElementById('detailInfo')
+.innerHTML =
 
 (e.workingOn
-? '<strong>WORKING ON / '+e.workingOn+'</strong><br><br>'
+
+? '<strong>WORKING ON / ' +
+  e.workingOn +
+  '</strong><br><br>'
+
 : ''
+
 )
 
 +
 
 `This record is part of the shared Jax’s World archive.`;
 
+
+
 if(e.profile){
 
-document.getElementById('detailContent').innerHTML =
+document
+.getElementById('detailContent')
+.innerHTML =
 characterProfileHTML(e);
 
 }
@@ -2187,30 +2906,46 @@ else{
 
 let media = '';
 
+
 /* LANDSCAPE ANIMAL PHOTO */
 
 if(e.animalPhoto){
 
 media +=
+
 `<div class="animal-photo">
 
 ${e.image
-? `<img src="${e.image}" alt="${e.title}">`
+
+? `<img
+   src="${e.image}"
+   alt="${e.title}">`
+
 : `<div class="animal-photo-placeholder">
-     <span class="mono">CREATURE IMAGE</span>
-     <strong>${e.title}</strong>
+
+     <span class="mono">
+     CREATURE IMAGE
+     </span>
+
+     <strong>
+     ${e.title}
+     </strong>
+
    </div>`
+
 }
 
 </div>`;
 
 }
 
+
 /* STANDARD IMAGE */
 
 else if(e.image){
 
 media +=
+
 `<img
 src="${e.image}"
 alt="${e.title}"
@@ -2218,90 +2953,138 @@ class="world-image">`;
 
 }
 
+
 /* EXTERNAL RESOURCE */
 
 if(e.resource){
 
 media +=
-`<br><a
+
+`<br>
+
+<a
 class="resource-link"
 href="${e.resource.url}"
 target="_blank"
 rel="noopener">
+
 ${e.resource.label}
+
 </a>`;
 
 }
 
-/* POPUP IMAGE */
+
+/* POPUP IMAGE BUTTON */
 
 if(e.popupImage){
 
 media +=
+
 `<button
 class="popup-image-button"
 data-popup-image="${e.popupImage.url}"
 data-popup-title="${e.title}">
+
 ${e.popupImage.label}
+
 </button>`;
 
 }
 
-document.getElementById('detailContent').innerHTML =
+
+document
+.getElementById('detailContent')
+.innerHTML =
+
 media +
-`<div class="content-block">${e.content || ''}</div>`;
+
+`<div class="content-block">
+${e.content || ''}
+</div>`;
+
 
 
 /* CONNECT POPUP BUTTON */
 
-document.querySelectorAll('[data-popup-image]')
+document
+.querySelectorAll('[data-popup-image]')
 .forEach(button => {
 
-  button.addEventListener('click', () => {
+  button.addEventListener(
+    'click',
+    () => {
 
-    openImagePopup(
-      button.dataset.popupImage,
-      button.dataset.popupTitle
-    );
+      openImagePopup(
+        button.dataset.popupImage,
+        button.dataset.popupTitle
+      );
 
-  });
+    }
+  );
 
 });
 
 }
 
+
+/* CONNECTED RECORDS */
+
 const related =
+
 (e.connections || [])
-.map(id=>entries.find(x=>x.id===id))
+
+.map(id =>
+  entries.find(x=>x.id===id)
+)
+
 .filter(Boolean);
 
-document.getElementById('connections').innerHTML =
+
+document
+.getElementById('connections')
+.innerHTML =
 
 related.length
 
 ?
 
 related.map(x =>
-`<button data-id="${x.id}">
+
+`<button
+data-id="${x.id}">
+
 ${x.title} ↗
+
 </button>`
+
 ).join('')
 
 :
 
 '<p>No connections yet.</p>';
 
-document.querySelectorAll('#connections button')
+
+document
+.querySelectorAll('#connections button')
 .forEach(b =>
-b.addEventListener('click',()=>openEntry(b.dataset.id))
+
+  b.addEventListener(
+    'click',
+    ()=>openEntry(b.dataset.id)
+  )
+
 );
+
 
 show('detail');
 
 }
 
 
-/* IMAGE POPUP */
+/* ======================================================
+   SCROLLABLE IMAGE POPUP
+====================================================== */
 
 const imagePopup =
 document.getElementById('imagePopup');
@@ -2312,16 +3095,42 @@ document.getElementById('imagePopupImg');
 const imagePopupClose =
 document.getElementById('imagePopupClose');
 
+const imagePopupTitle =
+document.getElementById('imagePopupTitle');
+
+const imagePopupScroll =
+document.getElementById('imagePopupScroll');
+
 
 function openImagePopup(src,title){
 
   imagePopupImg.src = src;
-  imagePopupImg.alt = title || 'Image';
+
+  imagePopupImg.alt =
+  title || 'Image';
+
+
+  imagePopupTitle.textContent =
+  title
+  ? title + ' / MENU'
+  : 'IMAGE';
+
 
   imagePopup.classList.add('open');
-  imagePopup.setAttribute('aria-hidden','false');
 
-  document.body.style.overflow = 'hidden';
+  imagePopup.setAttribute(
+    'aria-hidden',
+    'false'
+  );
+
+
+  document.body.style.overflow =
+  'hidden';
+
+
+  /* ALWAYS BEGIN AT TOP OF MENU */
+
+  imagePopupScroll.scrollTop = 0;
 
 }
 
@@ -2329,7 +3138,11 @@ function openImagePopup(src,title){
 function closeImagePopup(){
 
   imagePopup.classList.remove('open');
-  imagePopup.setAttribute('aria-hidden','true');
+
+  imagePopup.setAttribute(
+    'aria-hidden',
+    'true'
+  );
 
   imagePopupImg.src = '';
 
@@ -2338,63 +3151,110 @@ function closeImagePopup(){
 }
 
 
-imagePopupClose.addEventListener(
+/* CLOSE BUTTON */
+
+imagePopupClose
+.addEventListener(
   'click',
   closeImagePopup
 );
 
 
-imagePopup.addEventListener('click', e => {
+/* CLICK DARK BACKGROUND TO CLOSE */
 
-  if(e.target === imagePopup){
-    closeImagePopup();
+imagePopup
+.addEventListener(
+  'click',
+  e => {
+
+    if(e.target === imagePopup){
+
+      closeImagePopup();
+
+    }
+
   }
-
-});
-
-
-document.addEventListener('keydown', e => {
-
-  if(
-    e.key === 'Escape' &&
-    imagePopup.classList.contains('open')
-  ){
-    closeImagePopup();
-  }
-
-});
-
-
-/* EVENTS */
-
-document.getElementById('back')
-.addEventListener('click',()=>show('home'));
-
-document.querySelectorAll('#filters button')
-.forEach(b =>
-
-b.addEventListener('click',()=>{
-
-filter=b.dataset.filter;
-
-document.querySelectorAll('#filters button')
-.forEach(x =>
-x.classList.toggle('active',x===b)
 );
 
-render();
+
+/* ESCAPE KEY TO CLOSE */
+
+document
+.addEventListener(
+  'keydown',
+  e => {
+
+    if(
+      e.key === 'Escape'
+      &&
+      imagePopup.classList.contains('open')
+    ){
+
+      closeImagePopup();
+
+    }
+
+  }
+);
+
+
+/* ======================================================
+   FILTERS / EVENTS
+====================================================== */
+
+document
+.getElementById('back')
+.addEventListener(
+  'click',
+  ()=>show('home')
+);
+
+
+document
+.querySelectorAll('#filters button')
+.forEach(b =>
+
+b.addEventListener(
+'click',
+()=>{
+
+  filter =
+  b.dataset.filter;
+
+
+  document
+  .querySelectorAll('#filters button')
+  .forEach(x =>
+
+    x.classList.toggle(
+      'active',
+      x===b
+    )
+
+  );
+
+
+  render();
 
 })
 
 );
 
-document.getElementById('search')
-.addEventListener('input',render);
+
+document
+.getElementById('search')
+.addEventListener(
+  'input',
+  render
+);
 
 
-/* START */
+/* ======================================================
+   START
+====================================================== */
 
 render();
+
 renderSummary();
 
 </script>
