@@ -453,6 +453,23 @@ main{
 @media(max-width:650px){.map-panel-links{grid-template-columns:1fr 1fr}}
 @media(max-width:420px){.map-panel-links{grid-template-columns:1fr}}
 
+/* RESPONSIVE VIDEO PLAYER */
+.video-frame{
+  width:100%;
+  max-width:900px;
+  aspect-ratio:16 / 9;
+  margin:22px 0 28px;
+  border:1.5px solid var(--ink);
+  background:var(--ink);
+  overflow:hidden;
+}
+.video-frame iframe{
+  display:block;
+  width:100%;
+  height:100%;
+  border:0;
+}
+
 /* CHARACTER PROFILE */
 
 .character-profile{
@@ -2634,17 +2651,18 @@ id:'newscast',
 workingOn:'Hannah / Ivy',
 title:'Milsamolex Newscast',
 category:'stories',
-type:'Broadcast / In Development',
+type:'Broadcast',
+videoId:'cjouAs6B-VE',
 
 description:
 'News reported from inside Jax’s World.',
 
 content:
-`IN DEVELOPMENT:
+`WATCH THE NEWS STORY:
 
-Hannah and Ivy are creating newscasts from within the world.
+The Milsamolex news story can be played directly above.
 
-Reports can connect to characters, sports, laws, major events and other class creations.`,
+Hannah and Ivy are developing newscasts from within Jax’s World.`,
 
 connections:['milsamolex','jax','laws','newspaper']
 },
@@ -3295,6 +3313,17 @@ class="world-image">`;
 
 }
 
+
+/* EMBEDDED VIDEO */
+if(e.videoId){
+media += `<div class="video-frame"><iframe
+src="https://www.youtube-nocookie.com/embed/${e.videoId}"
+title="${e.title} video"
+loading="lazy"
+referrerpolicy="strict-origin-when-cross-origin"
+allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+allowfullscreen></iframe></div>`;
+}
 
 /* EXTERNAL RESOURCE */
 
