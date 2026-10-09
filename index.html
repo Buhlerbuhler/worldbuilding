@@ -440,6 +440,19 @@ main{
   color:var(--accent);
 }
 
+
+/* WORLD MAP */
+.map-panel{margin:22px 0 30px;border:2px solid var(--ink);background:#e6e4da}
+.map-panel img{display:block;width:100%;height:auto;max-height:850px;object-fit:contain;background:#13bbd0}
+.map-panel-head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 18px;border-bottom:2px solid var(--ink)}
+.map-panel-links{padding:16px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;border-top:2px solid var(--ink)}
+.map-region{border:1.5px solid var(--ink);background:var(--paper);text-align:left;padding:14px;cursor:pointer;min-width:0}
+.map-region:hover{background:var(--accent)}
+.map-region strong{display:block;font-size:20px;letter-spacing:-.04em;margin-bottom:5px}
+.map-region small{font-size:12px;line-height:1.35;display:block}
+@media(max-width:650px){.map-panel-links{grid-template-columns:1fr 1fr}}
+@media(max-width:420px){.map-panel-links{grid-template-columns:1fr}}
+
 /* CHARACTER PROFILE */
 
 .character-profile{
@@ -1512,6 +1525,11 @@ Ask Norah for information about what the planet looks like.`,
 
 connections:[
 'soultara',
+'embrea',
+'galea',
+'petrary',
+'aquarea',
+'falder',
 'animals',
 'map',
 'worldrules',
@@ -1576,6 +1594,11 @@ The next ruler does not have to be the oldest child.`,
 
 connections:[
 'nazareth',
+'map',
+'embrea',
+'galea',
+'petrary',
+'aquarea',
 'milsamolex',
 'laws',
 'worldrules',
@@ -1710,24 +1733,84 @@ connections:['jax','milsamolex','newspaper']
 
 {
 id:'map',
-workingOn:'Arianna',
-title:'Map of the World',
+workingOn:'Arianna / Bristol',
+title:'Map of Nazareth',
 category:'places',
-type:'Map / In Development',
+type:'World Map',
+description:'Explore Soultara and the surrounding countries of Nazareth.',
+worldMap:true,
+image:'https://raw.githubusercontent.com/Buhlerbuhler/worldbuilding/refs/heads/main/map.jpg',
+content:`ESTABLISHED GEOGRAPHY:
 
-description:
-'The geography of Nazareth, Soultara and Milsamolex is being mapped.',
+Soultara is the central, warm region, containing Milsamolex, the castle and Tenebrae Forest.
 
-content:
-`IN DEVELOPMENT:
+Embrea is a desert region with multiple oases near the centre.
 
-Arianna is mapping the world.
+Galea is a snowy tundra with frequent snowstorms.
 
-The map can connect countries, cities, landmarks, habitats, roads, bodies of water and important locations.`,
+Petrary is a mountainous country.
 
-connections:['nazareth','soultara','milsamolex','tenebrae']
+Aquarea is a damp country with many lakes, rivers and streams.
+
+The Falder Sea is labelled between Soultara and the southern regions.`,
+connections:['nazareth','soultara','embrea','galea','petrary','aquarea','falder','milsamolex','tenebrae']
 },
+{
+id:'embrea',title:'Embrea',category:'places',type:'Country',workingOn:'Bristol / Arianna',
+description:'A desert region with multiple oases near the centre.',
+content:`ESTABLISHED:
 
+Embrea is a desert region.
+
+There are multiple oases near the centre.
+
+The map places Embrea northwest of Soultara.`,
+connections:['map','nazareth','soultara']
+},
+{
+id:'galea',title:'Galea',category:'places',type:'Country',workingOn:'Bristol / Arianna',
+description:'A snowy tundra with frequent snowstorms.',
+content:`ESTABLISHED:
+
+Galea is a snowy tundra.
+
+There are many snowstorms.
+
+The map places Galea northeast of Soultara.`,
+connections:['map','nazareth','soultara']
+},
+{
+id:'petrary',title:'Petrary',category:'places',type:'Country',workingOn:'Bristol / Arianna',
+description:'A mountainous country.',
+content:`ESTABLISHED:
+
+Petrary is a mountainous country.
+
+The map places Petrary southwest of Soultara.`,
+connections:['map','nazareth','soultara','falder']
+},
+{
+id:'aquarea',title:'Aquarea',category:'places',type:'Country',workingOn:'Bristol / Arianna',
+description:'A damp country with many lakes, rivers and streams.',
+content:`ESTABLISHED:
+
+Aquarea is a damp country.
+
+It has many lakes, rivers and streams.
+
+The map places Aquarea southeast of Soultara.`,
+connections:['map','nazareth','soultara','falder']
+},
+{
+id:'falder',title:'Falder Sea',category:'places',type:'Sea',workingOn:'Arianna',
+description:'A body of water labelled on the map of Nazareth.',
+content:`ESTABLISHED:
+
+The Falder Sea is labelled on the map between Soultara and the southern regions.
+
+Additional information about the sea has not yet been established.`,
+connections:['map','soultara','petrary','aquarea']
+},
 
 /* ======================================================
    SPORTS
@@ -2762,6 +2845,15 @@ const established = {
 "Lava rocks float in space, mostly around Nazareth."
 ],
 
+'GEOGRAPHY':[
+"Soultara is a warm region with rainforests, including Tenebrae Forest.",
+"Embrea is a desert region with multiple oases near the centre.",
+"Galea is a snowy tundra with many snowstorms.",
+"Petrary is a mountainous country.",
+"Aquarea is a damp country with lakes, rivers and streams.",
+"The Falder Sea is shown on the map."
+],
+
 'PLACES & SPORTS':[
 "Country: Soultara",
 "City: Milsamolex",
@@ -3148,6 +3240,16 @@ ${e.title}
 }
 
 
+/* WORLD MAP WITH COUNTRY NAVIGATION */
+if(e.worldMap){
+  const regionIds=['soultara','embrea','galea','petrary','aquarea','falder'];
+  const regionCards=regionIds.map(id=>{
+    const region=entries.find(x=>x.id===id);
+    return `<button type="button" class="map-region" data-map-id="${region.id}"><strong>${region.title} ↗</strong><small>${region.description}</small></button>`;
+  }).join('');
+  media+=`<div class="map-panel"><div class="map-panel-head"><strong>MAP OF NAZARETH</strong><span class="mono">EXPLORE THE REGIONS ↓</span></div><img src="${e.image}" alt="Student-created map of Nazareth showing Soultara, Embrea, Galea, Petrary, Aquarea and Falder Sea"><div class="map-panel-links">${regionCards}</div></div>`;
+}
+
 /* STANDARD IMAGE */
 
 else if(e.image){
@@ -3210,6 +3312,8 @@ ${e.content || ''}
 </div>`;
 
 
+
+document.querySelectorAll('[data-map-id]').forEach(b=>b.addEventListener('click',()=>openEntry(b.dataset.mapId)));
 
 document
 .querySelectorAll('[data-popup-image]')
