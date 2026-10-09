@@ -806,6 +806,43 @@ footer{
 .shadow-gallery-card:hover{outline:3px solid var(--accent);outline-offset:-3px}
 @media(min-width:900px){.shadow-gallery{grid-template-columns:repeat(4,minmax(0,1fr))}}
 
+
+.quick-links{display:flex;gap:8px;flex-wrap:wrap;margin:22px 0 32px}
+.quick-links button{border:1.5px solid var(--ink);background:transparent;color:var(--ink);padding:11px 15px;font:700 12px 'DM Mono',monospace;cursor:pointer}
+.quick-links button:hover,.quick-links button:focus-visible{background:var(--ink);color:var(--paper)}
+.search{min-width:210px}
+.entry:focus-visible,.map-region:focus-visible,.shadow-gallery-card:focus-visible{outline:3px solid #708500;outline-offset:3px}
+@media(max-width:700px){.quick-links{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}.quick-links button{text-align:left}.filters{gap:6px}.filters button{padding:10px}.search{width:100%;min-width:0}}
+
+.country-list{border-top:1.5px solid var(--ink)}
+.country-section{border-bottom:1px solid var(--line);background:var(--paper)}
+.country-section summary{cursor:pointer;display:grid;grid-template-columns:minmax(95px,1fr) minmax(0,2fr) 20px;align-items:center;gap:14px;padding:16px;list-style:none}
+.country-section summary::-webkit-details-marker{display:none}
+.country-section summary span{font-size:13px;line-height:1.45}
+.country-section[open] .country-chevron{transform:rotate(45deg)}
+.country-body{padding:0 18px 20px}.country-body .content-block{white-space:pre-line}.country-flag{max-width:340px;width:100%;height:auto;display:block;margin:14px 0}
+@media(max-width:600px){.country-section summary{grid-template-columns:1fr 20px}.country-section summary span:not(.country-chevron){grid-column:1;grid-row:2}.country-chevron{grid-column:2;grid-row:1}}
+
+.collection{margin:26px 0 34px}.collection-title{font:800 1.15rem 'Space Grotesk',sans-serif;letter-spacing:-.03em;margin:0 0 14px}
+.collection-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.collection-grid.creature{grid-template-columns:repeat(3,minmax(0,1fr))}
+.collection-item{border:2px solid var(--ink);background:var(--paper);min-width:0}
+.collection-item summary{cursor:pointer;list-style:none;padding:14px;display:grid;grid-template-columns:1fr auto;gap:7px;align-items:start}
+.collection-item summary::-webkit-details-marker{display:none}
+.collection-item summary img{grid-column:1/-1;width:100%;aspect-ratio:4/3;object-fit:cover;border:1px solid var(--line);background:#ddd}
+.collection-name{font:800 1.15rem 'Space Grotesk',sans-serif}.collection-expand{font-size:1.3rem}.collection-item[open] .collection-expand{transform:rotate(45deg)}
+.collection-description{grid-column:1/-1;font-size:.9rem;color:var(--muted);line-height:1.4}
+.collection-body{padding:0 14px 18px;border-top:1px solid var(--line)}.collection-body .content-block{white-space:pre-line;margin-top:14px}
+.summary-jump{margin-top:14px;padding:10px 14px;background:var(--ink);color:var(--paper);border:0;cursor:pointer;font-weight:800}
+@media(max-width:720px){.collection-grid.creature{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:430px){.collection-grid{grid-template-columns:1fr}.collection-grid.creature{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+.concert-gallery{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin:20px 0 26px}
+.concert-poster{display:flex;flex-direction:column;text-align:left;border:1.5px solid var(--ink);background:#e6e4da;color:var(--ink);padding:0;cursor:pointer;font:inherit}
+.concert-poster img{width:100%;aspect-ratio:16/10;object-fit:contain;background:#151515;display:block}
+.concert-poster span{padding:12px 14px;font-weight:700}
+.concert-poster:hover,.concert-poster:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+@media(max-width:580px){.concert-gallery{grid-template-columns:1fr}}
 </style>
 </head>
 
@@ -818,7 +855,7 @@ footer{
   <nav class="nav">
     <button data-page="home" class="active">Explore</button>
     <button data-page="summary">World Summary</button>
-    <button data-page="builders">Who’s Building What</button>
+    
     <button data-page="guide">The Project</button>
   </nav>
 </header>
@@ -840,9 +877,7 @@ footer{
   <h1>JAX'S<br><em>WORLD</em></h1>
 
   <p>
-    A shared world built from one starting point and expanded by the class.
-    Characters, places, creatures, laws, sports, history and stories all
-    become part of the same growing world.
+    Explore the people, places, creatures, and stories created by our class. Search for something or choose a category below.
   </p>
 </div>
 
@@ -863,6 +898,7 @@ footer{
 
 </div>
 
+<div class="quick-links"><button type="button" data-quick-id="jax">Meet Jax ↗</button><button type="button" data-quick-id="nazareth">Explore Nazareth ↗</button><button type="button" data-quick-id="villains">The Dark Shadows ↗</button><button type="button" data-page="builders">Who’s Building What ↗</button></div>
 <div class="section-head" id="archiveHead">
   <h2>THE ARCHIVE</h2>
   <span id="count"></span>
@@ -1516,6 +1552,8 @@ workingOn:'Norah / Jordyn',
 title:'Nazareth',
 category:'places',
 type:'Planet',
+worldMap:true,
+image:'https://raw.githubusercontent.com/Buhlerbuhler/worldbuilding/refs/heads/main/map.jpg',
 
 description:
 'A yellow planet with unstable gravity, temporary volcanic regions and a moon named Harry.',
@@ -1940,7 +1978,7 @@ connections:['milsamolex']
 {
 id:'laws',
 workingOn:'Ethne',
-title:'Laws & Rules',
+title:'Life in Soultara',
 category:'society',
 type:'Law',
 
@@ -2143,12 +2181,12 @@ connections:['ashlee','milsamolex','soultara','chilio']
 {
 id:'animals',
 workingOn:'Crosby / Brent',
-title:'Animal Kingdom',
+title:'Animals of Nazareth',
 category:'nature',
 type:'Wildlife',
 
 description:
-'The strange, dangerous, useful and sometimes extremely cute creatures of Nazareth.',
+'A field guide to the strange, dangerous, useful and sometimes extremely cute creatures of Nazareth.',
 
 content:
 `KNOWN CREATURES:
@@ -2635,7 +2673,7 @@ connections:[
 id:'villains',
 workingOn:'Elliot',
 title:'The Dark Shadows',
-category:'people',
+category:'stories',
 type:'Elemental beings / Football rivals',
 description:'Four elemental Shadow types disguise themselves as football players, capture opponents, and eventually face the Milsamolex Lightning.',
 shadowGallery:true,
@@ -2750,31 +2788,34 @@ connections:['jax']
 
 {
 id:'chilio',
-title:'CHILIO — Live at Jax’s World',
+title:'CHILIO',
 category:'stories',
 type:'Concert / Live Event',
-description:'A Saturday night live music show in Jax’s World. Doors at 7 PM, show ends at 10 PM, tickets $25.',
-popupImage:{
-  label:'View Concert Poster ↗',
-  url:'https://raw.githubusercontent.com/Buhlerbuhler/worldbuilding/refs/heads/main/chilio.jpg'
-},
-content:`ESTABLISHED FROM THE POSTER:
+description:'A live band playing a Saturday concert in downtown Milsamolex. Explore the concert poster and setlist.',
+concertImages:[
+ {label:'Concert poster',url:'https://raw.githubusercontent.com/Buhlerbuhler/worldbuilding/refs/heads/main/chilio.jpg'},
+ {label:'Live performance & setlist',url:'https://raw.githubusercontent.com/Buhlerbuhler/worldbuilding/refs/heads/main/chilio-setlist.jpg'}
+],
+content:`CHILIO — LIVE IN MILSAMOLEX
 
-Performer: CHILIO.
-
-Event: CHILIO at Jax’s World.
-
+Location: Downtown Milsamolex.
 Day: Saturday (exact date not yet established).
-
 Doors open: 7 PM.
-
 Show ends: 10 PM.
+Tickets: $25. All ages.
 
-Ticket price: $25.
+SETLIST (FROM THE SECOND POSTER)
 
-IN DEVELOPMENT:
+1. Song!
+2. Aromatherapy
+3. All I C
+4. Diamond Cutter
+5. Home
+6. Wallflower
+7. Buried Alive
+8. Only Way Out Is Through
 
-The exact venue and its location have not been established.`,
+The second poster also includes a QR code for tickets.`,
 connections:['milsamolex','newspaper','fashion']
 },
 
@@ -2858,6 +2899,17 @@ connections:[
 },
 
 {
+id:'newsroom',
+workingOn:'Hannah / Ivy / Berkeley / Harper',
+title:'News & Media',
+category:'stories',
+type:'Newsroom / Video & Newspaper',
+description:'Watch the Milsamolex newscast and read the Nova News newspaper in one place.',
+content:'Two student-created ways of reporting what is happening around Milsamolex.',
+connections:['jax','milsamolex','vala','lightning']
+},
+
+{
 id:'backstories',
 workingOn:'Alexandra / Josie',
 title:'Backstories',
@@ -2889,6 +2941,8 @@ const nav =
 [...document.querySelectorAll('.nav button')];
 
 let filter = 'all';
+const HIDDEN_ARCHIVE_IDS = new Set(["map", "soultara", "embrea", "galea", "petrary", "aquarea", "falder", "worldrules", "transport", "shiger", "pogle", "celephant", "cantalop", "sharpiebot", "deadlylongarms", "thing1", "monkey", "bird", "dog", "mosquito", "gerd", "dragons", "fireshadow", "watershadow", "airshadow", "earthshadow", "characters", "backstories", "newscast", "newspaper", "harry"]);
+const archiveEntries = entries.filter(e=>!HIDDEN_ARCHIVE_IDS.has(e.id));
 
 
 function show(page){
@@ -2928,157 +2982,17 @@ document
 ====================================================== */
 
 function renderSummary(){
-
-const established = {
-
-'PEOPLE':[
-"Jax King is 15 years old and has blond hair with a blue streak.",
-"Jax started playing football at age 12.",
-"Jax is introverted and is not popular.",
-"Ashlee Eirvalon is Jax’s girlfriend. She is extroverted, calm, adventurous and very protective.",
-"Leo Smith is Jax’s best friend. He is funny, sarcastic, has black curly hair and green eyes, and is a great chef.",
-"Mia is Jax’s 6-year-old little sister.",
-"Lauren is Jax’s mom.",
-"Paul is Jax’s dad and the football coach.",
-"Noodles is Jax’s calm female Siamese cat.",
-"Jeremiah Smith is a 6'3\", 221-pound athlete who runs a 4.31 and has a five-year contract."
-],
-
-'NAZARETH':[
-"Nazareth is the planet.",
-"Gravity normally works like Earth’s gravity.",
-"Occasionally people and loose objects hover or float before gravity returns to normal.",
-"Volcanic and obsidian areas can randomly appear and later return to normal.",
-"The atmosphere contains normal Earth-like air and oxygen.",
-"The planet’s main colour is yellow.",
-"Water is blue and all connects to the middle of the planet.",
-"Nazareth has Earth-like seasons.",
-"The moon is named Harry.",
-"Lava rocks float in space, mostly around Nazareth."
-],
-
-'GEOGRAPHY':[
-"Soultara is a warm region with rainforests, including Tenebrae Forest.",
-"Embrea is a desert region with multiple oases near the centre.",
-"Galea is a snowy tundra with many snowstorms.",
-"Petrary is a mountainous country.",
-"Aquarea is a damp country with lakes, rivers and streams.",
-"The Falder Sea is shown on the map."
-],
-
-'PLACES & SPORTS':[
-"Country: Soultara",
-"City: Milsamolex",
-"Forbidden place: Tenebrae Forest",
-"Football team: Milsamolex Lightning",
-"Basketball team: Milsamolex Flames",
-"Jax works at Luingunii’s Pizzeria.",
-"Jax visits Vala Cafe every day.",
-"Harper Petkau is identified as the owner of Vala Cafe.",
-"The newspaper is called Nova News.",
-"CHILIO is advertised to perform at Jax’s World on a Saturday, with doors at 7 PM, a 10 PM end time, and $25 tickets."
-],
-
-'LAWS & SOCIETY':[
-"Football normally begins at age 12, but extremely talented players can start as early as age 10.",
-"You must have the same job as your parents by the time you become an adult.",
-"You become an adult at age 20.",
-"Everyone gets a pet dragon on their 20th birthday.",
-"The kind of dragon depends on the person.",
-"You cannot enter the Tenebrae Forest.",
-"You can only use magic with a permit.",
-"Punishment for unpermitted magic depends on how much magic was used.",
-"You cannot raise the dead. If you do, you will die.",
-"There are no cars in Soultara.",
-"People travel by dragon.",
-"People under 20 travel with someone over 20.",
-"The king and queen decide punishments for broken rules.",
-"Any of the king and queen’s children can become the next ruler."
-],
-
-'THE DARK SHADOWS':[
-"The Dark Shadows are elemental beings: Fire, Water, Earth and Air.",
-"The Air Shadow is their queen and the only one of her kind.",
-"The queen can summon more Shadows, which disguise themselves as humans.",
-"Fire and Water Shadows play football; Earth Shadows guard the queen.",
-"After each game, they capture opposing players and imprison them in a forest near Milsamolex.",
-"The Shadows eventually face the Milsamolex Lightning in a semifinal; the game's outcome is not yet established."
-],
-
-'CREATURES':[
-"Shigers can travel underwater and walk on land.",
-"Only a couple hundred Shigers remain, with most living in zoos.",
-"Shigers were hunted because their fur was extremely valuable.",
-"Only a couple thousand Pogles remain.",
-"Other Pogle species died out because of climate change.",
-"Celephants are huge peaceful animals that can be kept as pets.",
-"Cantalops are small peaceful relatives of Celephants.",
-"Sharpie Bots can talk and help people who are lost.",
-"Deadly Long Arms only comes out at night.",
-"Thing1 can do almost anything for someone.",
-"Monkeys are peaceful unless provoked.",
-"Birds can be pets and can also be eaten.",
-"Dogs are loyal and trainable.",
-"Killing a mosquito can cause it to call its family.",
-"Gerd is 10 metres tall, weighs 500 pounds and is peaceful.",
-"Dragons are pets and transportation."
-]
-
-};
-
-
-const boxes =
-Object.entries(established)
-
-.map(([title,items]) =>
-
-`<div class="summary-box">
-
-<span class="mono">
-ESTABLISHED
-</span>
-
-<h3>${title}</h3>
-
-<ul>
-${items.map(x=>`<li>${x}</li>`).join('')}
-</ul>
-
-</div>`
-
-).join('');
-
-
-document
-.getElementById('summaryContent')
-.innerHTML =
-
-`<div class="summary-grid">
-
-${boxes}
-
-<div class="summary-box wide">
-
-<span class="mono">
-STILL GROWING
-</span>
-
-<h3>
-The world isn't finished.
-</h3>
-
-<p>
-Anything not established in the archive may still be open for development.
-New ideas should connect to what the class already knows without automatically
-overwriting someone else's work.
-</p>
-
-</div>
-
-</div>`;
-
+const highlights=[
+ ['THE WORLD','Nazareth is a yellow planet with occasional gravity shifts, volcanic events, five mapped countries, and a moon called Harry.','nazareth'],
+ ['THE STORY','Jax King is a 15-year-old football player. During a game, his football bursts into blue fire and the stadium transforms.','jax'],
+ ['PLACES','Milsamolex is a city in Soultara, home to Vala Cafe and the Milsamolex Lightning.','milsamolex'],
+ ['SOCIETY','Magic requires a permit. People become adults at 20 and receive a dragon. Soultara has no cars.','laws'],
+ ['WILDLIFE','Nazareth is home to Shigers, Pogles, Celephants, Cantalops, dragons and many more creatures.','animals'],
+ ['NEW STORIES','The Dark Shadows have entered Milsamolex and face the Lightning in a semifinal. The outcome is still being written.','villains']
+];
+document.getElementById('summaryContent').innerHTML=`<div class="summary-grid">${highlights.map(([title,description,id])=>`<div class="summary-box"><span class="mono">AT A GLANCE</span><h3>${title}</h3><p>${description}</p><button class="summary-jump" data-id="${id}">EXPLORE ↗</button></div>`).join('')}<div class="summary-box wide"><h3>Still growing</h3><p>These are established highlights, not the entire world. Open the archive to explore the student-created details and work in progress.</p></div></div>`;
+document.querySelectorAll('.summary-jump').forEach(b=>b.addEventListener('click',()=>openEntry(b.dataset.id)));
 }
-
 
 /* ======================================================
    ARCHIVE
@@ -3097,6 +3011,7 @@ document
 const found =
 entries.filter(e =>
 
+  !HIDDEN_ARCHIVE_IDS.has(e.id) &&
   (filter==='all' || e.category===filter)
 
   &&
@@ -3119,7 +3034,7 @@ entries.filter(e =>
 document
 .getElementById('count')
 .textContent =
-entries.length + ' entries / expanding';
+found.length + ' shown / ' + archiveEntries.length + ' main entries';
 
 
 document
@@ -3184,6 +3099,10 @@ document
 
 }
 
+
+document.querySelectorAll('[data-quick-id]').forEach(button=>{
+ button.addEventListener('click',()=>openEntry(button.dataset.quickId));
+});
 
 /* ======================================================
    CHARACTER PROFILE
@@ -3268,6 +3187,21 @@ ${sections}
 /* ======================================================
    OPEN ENTRY
 ====================================================== */
+
+function collectionHTML(heading,ids,kind){
+ const items=ids.map(id=>entries.find(e=>e.id===id)).filter(Boolean);
+ return `<section class="collection"><h2 class="collection-title">${heading}</h2><div class="collection-grid ${kind}">
+ ${items.map(item=>`<details class="collection-item"><summary>
+ ${item.image?`<img src="${item.image}" alt="${item.title}" loading="lazy" onerror="this.style.display='none'">`:''}
+ <span class="collection-name">${item.title}</span><span class="collection-expand">＋</span>
+ <span class="collection-description">${item.description||''}</span></summary>
+ <div class="collection-body">
+ ${item.videoId?`<div class="video-frame"><iframe src="https://www.youtube-nocookie.com/embed/${item.videoId}" title="${item.title}" loading="lazy" allowfullscreen></iframe></div>`:''}
+ ${item.popupImage?`<button type="button" class="popup-image-button" data-popup-image="${item.popupImage.url}" data-popup-title="${item.title}">${item.popupImage.label}</button>`:''}
+ <div class="content-block">${item.content||''}</div>
+ ${item.workingOn?`<p class="mono">CREATED BY / ${item.workingOn}</p>`:''}
+ </div></details>`).join('')}</div></section>`;
+}
 
 function openEntry(id){
 
@@ -3362,14 +3296,14 @@ ${e.title}
 }
 
 
-/* WORLD MAP WITH COUNTRY NAVIGATION */
+/* NAZARETH MAP AND COUNTRIES IN ONE PLACE */
 if(e.worldMap){
   const regionIds=['soultara','embrea','galea','petrary','aquarea','falder'];
   const regionCards=regionIds.map(id=>{
     const region=entries.find(x=>x.id===id);
-    return `<button type="button" class="map-region" data-map-id="${region.id}"><strong>${region.title} ↗</strong><small>${region.description}</small></button>`;
+    return `<details class="country-section" id="region-${id}"><summary><strong>${region.title}</strong><span>${region.description}</span><span class="country-chevron">＋</span></summary><div class="country-body">${region.image ? `<img class="country-flag" src="${region.image}" alt="${region.title} flag">` : ''}<div class="content-block">${region.content || ''}</div><small class="mono">WORKING ON / ${region.workingOn || 'CLASS'}</small></div></details>`;
   }).join('');
-  media+=`<div class="map-panel"><div class="map-panel-head"><strong>MAP OF NAZARETH</strong><span class="mono">EXPLORE THE REGIONS ↓</span></div><img src="${e.image}" alt="Student-created map of Nazareth showing Soultara, Embrea, Galea, Petrary, Aquarea and Falder Sea"><div class="map-panel-links">${regionCards}</div></div>`;
+  media+=`<div class="map-panel"><div class="map-panel-head"><strong>MAP OF NAZARETH</strong><span class="mono">COUNTRIES & REGIONS ↓</span></div><img src="${e.image}" alt="Student-created map of Nazareth"><div class="country-list">${regionCards}</div></div>`;
 }
 
 /* STANDARD IMAGE */
@@ -3386,15 +3320,28 @@ class="world-image">`;
 }
 
 
-/* DARK SHADOWS IMAGE GALLERY */
-if(e.shadowGallery){
-const shadowIds=['fireshadow','watershadow','airshadow','earthshadow'];
-media += `<div class="shadow-gallery">${shadowIds.map(id=>{
-const sh=entries.find(item=>item.id===id);
-return `<button class="shadow-gallery-card" type="button" data-shadow-id="${id}"><img src="${sh.image}" alt="${sh.title}" loading="lazy"><span>${sh.title} ↗</span></button>`;
-}).join('')}</div>`;
+/* RELATED CONTENT GROUPED ON ITS MAIN PAGE */
+if(e.id==='animals'){
+  const ids=['shiger','pogle','celephant','cantalop','sharpiebot','deadlylongarms','thing1','monkey','bird','dog','mosquito','gerd','dragons'];
+  media+=collectionHTML('CREATURE FIELD GUIDE',ids,'creature');
 }
-
+if(e.id==='villains'){
+  media+=collectionHTML('THE FOUR ELEMENTS',['fireshadow','watershadow','airshadow','earthshadow'],'shadow');
+}
+if(e.id==='laws'){
+  media+=collectionHTML('MORE ABOUT DAILY LIFE',['worldrules','transport'],'society');
+}
+if(e.id==='newsroom'){
+  media+=collectionHTML('REPORTS',['newspaper','newscast'],'media');
+}
+/* CONCERT POSTERS — one archive entry, two full-size images */
+if(e.concertImages){
+  media+=`<div class="concert-gallery">${e.concertImages.map(photo=>`
+    <button type="button" class="concert-poster" data-popup-image="${photo.url}" data-popup-title="CHILIO — ${photo.label}">
+      <img src="${photo.url}" alt="CHILIO ${photo.label}" loading="lazy">
+      <span>${photo.label} ↗</span>
+    </button>`).join('')}</div>`;
+}
 /* EMBEDDED VIDEO */
 if(e.videoId){
 media += `<div class="video-frame"><iframe
@@ -3449,15 +3396,15 @@ document
 
 media +
 
-`<div class="content-block">
+(e.id==='animals' || e.id==='newsroom' ? '' : `<div class="content-block">
 ${e.content || ''}
-</div>`;
+</div>`);
 
 
 
 document.querySelectorAll('[data-shadow-id]').forEach(b=>b.addEventListener('click',()=>openEntry(b.dataset.shadowId)));
 
-document.querySelectorAll('[data-map-id]').forEach(b=>b.addEventListener('click',()=>openEntry(b.dataset.mapId)));
+
 
 document
 .querySelectorAll('[data-popup-image]')
@@ -3486,6 +3433,8 @@ const related =
 
 (e.connections || [])
 
+.map(id=>{const parent={map:'nazareth',soultara:'nazareth',embrea:'nazareth',galea:'nazareth',petrary:'nazareth',aquarea:'nazareth',falder:'nazareth',worldrules:'laws',transport:'laws',shiger:'animals',pogle:'animals',celephant:'animals',cantalop:'animals',sharpiebot:'animals',deadlylongarms:'animals',thing1:'animals',monkey:'animals',bird:'animals',dog:'animals',mosquito:'animals',gerd:'animals',dragons:'animals',fireshadow:'villains',watershadow:'villains',airshadow:'villains',earthshadow:'villains',newscast:'newsroom',newspaper:'newsroom',characters:'jax',backstories:'jax',harry:'nazareth'};return parent[id]||id;})
+.filter((id,index,array)=>array.indexOf(id)===index && id!==e.id)
 .map(id =>
   entries.find(x=>x.id===id)
 )
