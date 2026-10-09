@@ -1359,23 +1359,34 @@ id:'mia',
 title:'Mia King',
 category:'people',
 type:'Character',
-
-description:
-'Jax’s six-year-old little sister.',
-
-content:
-`ESTABLISHED:
-
-Mia is 6 years old.
-
-She has curly blonde hair and blue eyes.
-
-She is described as a little crazy.
-
-Jax stays a bit away from Mia because otherwise he gets bombarded with hugs.
-
-He also says he doesn't know what is going on in her head.`,
-
+description:'Jax’s six-year-old sister. Sweet, cheeky, and passionate about cheerleading.',
+profile:{
+photo:'',
+sections:[
+{title:'PROFILE',items:[
+['Name','Mia'],['Age','6'],['Name Meaning','Beloved'],
+['Birthday','June 12'],['Height',"3’"],['Weight','44.7 lb'],
+['Physical Traits','Blonde hair, blue eyes (previously described as curly blonde hair)']
+]},
+{title:'FAVOURITES',items:[
+['Food','Homemade cinnamon buns'],['Drink','Hot chocolate'],
+['Colour','Green'],['Weather','Fall'],['Item','Bunny stuffy']
+]},
+{title:'PERSONALITY',items:[
+['Personality','Sweet and cheeky'],['Hobbies','Cheerleading'],
+['Special Skills','Cheerleading'],['Pet Peeve',"When others don’t listen"],
+['Bad At','Listening'],['Biggest Fear','Being alone']
+]},
+{title:'MOTIVATION',items:[
+['Goal','Become a cheerleader'],['Would Die For','Cheerleading'],
+['Would Kill For','Cheerleading']
+]},
+{title:'RELATIONSHIPS',wide:true,items:[
+['Jax','Older brother; she often bombards him with hugs.'],
+['Parents','Lauren and Paul']
+]}
+]
+},
 connections:['jax','lauren','paul']
 },
 
@@ -1406,20 +1417,35 @@ id:'paul',
 title:'Paul',
 category:'people',
 type:'Character / Coach',
-
-description:'Jax’s dad and the football coach.',
-
-content:
-`ESTABLISHED:
-
-Jax's dad is supposedly called Paul.
-
-Paul is the football coach.
-
-He has balding black hair and brown eyes.
-
-Jax loves his parents but gives them alone time.`,
-
+description:'Jax and Mia’s father, an intense football coach who hates losing.',
+profile:{
+photo:'',
+sections:[
+{title:'PROFILE',items:[
+['Name','Paul'],['Age','40'],['Name Meaning','Humble'],
+['Birthday','February 29'],['Height',"5’11”"],['Weight','160 lb'],
+['Physical Traits','Bald, blue eyes (updated from earlier balding black hair and brown eyes)']
+]},
+{title:'FAVOURITES',items:[
+['Food','Chicken'],['Drink','Coke'],['Colour','Red'],
+['Weather','Sunny'],['Item','Hairbrush']
+]},
+{title:'PERSONALITY',items:[
+['Personality','Intense'],['Hobbies','Coaching, family time, football'],
+['Special Skills','Coaching'],['Pet Peeve','Losing games'],
+['Bad At','Winning'],['Biggest Fear','Cheese']
+]},
+{title:'MOTIVATION',items:[
+['Goal','Win every game'],
+['Would Die For','Meeting his favourite football player'],
+['Would Kill For','Playing on the same team as his favourite player']
+]},
+{title:'RELATIONSHIPS',wide:true,items:[
+['Jax','Son; Paul coaches football.'],
+['Mia','Daughter'],['Lauren','Family']
+]}
+]
+},
 connections:['jax','lauren','mia','lightning']
 },
 
