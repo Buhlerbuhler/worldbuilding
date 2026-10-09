@@ -797,6 +797,15 @@ footer{
     padding-left:12px;
   }
 }
+
+/* DARK SHADOWS GALLERY */
+.shadow-gallery{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin:24px 0}
+.shadow-gallery-card{border:1.5px solid var(--ink);background:#e6e4da;padding:0;text-align:left;cursor:pointer;color:var(--ink);font:inherit;overflow:hidden}
+.shadow-gallery-card img{width:100%;aspect-ratio:3/4;object-fit:cover;display:block;background:#222}
+.shadow-gallery-card span{display:block;padding:12px 14px;font-weight:700}
+.shadow-gallery-card:hover{outline:3px solid var(--accent);outline-offset:-3px}
+@media(min-width:900px){.shadow-gallery{grid-template-columns:repeat(4,minmax(0,1fr))}}
+
 </style>
 </head>
 
@@ -2599,25 +2608,53 @@ connections:[
 {
 id:'villains',
 workingOn:'Elliot',
-title:'The Bad Guys',
+title:'The Dark Shadows',
 category:'people',
-type:'Backstory / In Development',
+type:'Elemental beings / Football rivals',
+description:'Four elemental Shadow types disguise themselves as football players, capture opponents, and eventually face the Milsamolex Lightning.',
+shadowGallery:true,
+content:`ORIGIN STORY / ELLIOT
 
-description:
-'The backstory of the world’s villains is being developed.',
+In a forest near Milsamolex, the ground bursts open and lava and rock reform into the Fire Shadow. The Fire Shadow spots the city and decides it would be an easy target.
 
-content:
-`IN DEVELOPMENT:
+On its journey, it encounters a strangely moving puddle that rises into the Water Shadow. Together they discover a swirling breeze of dust and rocks that transforms into the Air Shadow, their queen. On the way back toward the city, an oddly shaped tree reveals itself as the Earth Shadow.
 
-Who are the bad guys?
+The Air Shadow summons more Fire, Water, and Earth Shadows. She is the only Air Shadow. The Shadows take human form and enter Milsamolex.
 
-What do they want?
+They sign up as a football team called the Shadows. Fire and Water Shadows play the games; Earth Shadows stay behind in the forest to protect their queen. After each game, regardless of the result, the Shadows capture players from the opposing team and hold them in the forest where the Fire Shadow first appeared.
 
-Why are they in conflict with Jax or this world?
+After several games, the Shadows reach a semifinal against Jax's Milsamolex Lightning.
 
-What happened before we met them?`,
-
-connections:['jax','worldrules']
+STORY IN PROGRESS: The submitted account ends during the description of the first three quarters. The result of the game has not yet been established.`,
+connections:['fireshadow','watershadow','airshadow','earthshadow','lightning','jax','milsamolex','tenebrae']
+},
+{
+id:'fireshadow',workingOn:'Elliot',title:'Fire Shadow',category:'people',type:'Elemental Shadow',
+image:'https://raw.githubusercontent.com/Buhlerbuhler/worldbuilding/refs/heads/main/fireshadow.jpg',
+description:'A being formed from lava and rock; the first Shadow to discover Milsamolex.',
+content:`The Fire Shadow emerges from a fiery opening in the ground in a forest near Milsamolex. It identifies the city as an easy target, finds the Water Shadow, and helps assemble the elemental group. Fire Shadows play on the Shadows football team.`,
+connections:['villains','watershadow','airshadow','earthshadow','milsamolex']
+},
+{
+id:'watershadow',workingOn:'Elliot',title:'Water Shadow',category:'people',type:'Elemental Shadow',
+image:'https://raw.githubusercontent.com/Buhlerbuhler/worldbuilding/refs/heads/main/watershadow.jpg',
+description:'An elemental being that rises from an unusually moving puddle.',
+content:`The Water Shadow first appears as a strangely moving puddle before rising to meet the Fire Shadow. Water Shadows play on the Shadows football team and help capture opposing players.`,
+connections:['villains','fireshadow','airshadow','earthshadow']
+},
+{
+id:'airshadow',workingOn:'Elliot',title:'Air Shadow — The Queen',category:'people',type:'Elemental Shadow / Queen',
+image:'https://raw.githubusercontent.com/Buhlerbuhler/worldbuilding/refs/heads/main/airshadow.jpg',
+description:'The only Air Shadow, queen of the elemental Shadows.',
+content:`The Air Shadow appears from a small swirling breeze of dust and rocks. She is the only one of her kind and can summon additional Fire, Water, and Earth Shadows. Earth Shadows protect her in the forest while the others play football.`,
+connections:['villains','fireshadow','watershadow','earthshadow']
+},
+{
+id:'earthshadow',workingOn:'Elliot',title:'Earth Shadow',category:'people',type:'Elemental Shadow',
+image:'https://raw.githubusercontent.com/Buhlerbuhler/worldbuilding/refs/heads/main/earthshadow.jpg',
+description:'A powerful Shadow first encountered in the form of an unusual tree.',
+content:`The Earth Shadow is discovered disguised as an oddly shaped tree. Although Earth Shadows are strong, they remain in the forest to protect the Air Shadow queen while Fire and Water Shadows play football.`,
+connections:['villains','fireshadow','watershadow','airshadow']
 },
 
 {
@@ -2931,6 +2968,15 @@ const established = {
 "People under 20 travel with someone over 20.",
 "The king and queen decide punishments for broken rules.",
 "Any of the king and queen’s children can become the next ruler."
+],
+
+'THE DARK SHADOWS':[
+"The Dark Shadows are elemental beings: Fire, Water, Earth and Air.",
+"The Air Shadow is their queen and the only one of her kind.",
+"The queen can summon more Shadows, which disguise themselves as humans.",
+"Fire and Water Shadows play football; Earth Shadows guard the queen.",
+"After each game, they capture opposing players and imprison them in a forest near Milsamolex.",
+"The Shadows eventually face the Milsamolex Lightning in a semifinal; the game's outcome is not yet established."
 ],
 
 'CREATURES':[
@@ -3314,6 +3360,15 @@ class="world-image">`;
 }
 
 
+/* DARK SHADOWS IMAGE GALLERY */
+if(e.shadowGallery){
+const shadowIds=['fireshadow','watershadow','airshadow','earthshadow'];
+media += `<div class="shadow-gallery">${shadowIds.map(id=>{
+const sh=entries.find(item=>item.id===id);
+return `<button class="shadow-gallery-card" type="button" data-shadow-id="${id}"><img src="${sh.image}" alt="${sh.title}" loading="lazy"><span>${sh.title} ↗</span></button>`;
+}).join('')}</div>`;
+}
+
 /* EMBEDDED VIDEO */
 if(e.videoId){
 media += `<div class="video-frame"><iframe
@@ -3373,6 +3428,8 @@ ${e.content || ''}
 </div>`;
 
 
+
+document.querySelectorAll('[data-shadow-id]').forEach(b=>b.addEventListener('click',()=>openEntry(b.dataset.shadowId)));
 
 document.querySelectorAll('[data-map-id]').forEach(b=>b.addEventListener('click',()=>openEntry(b.dataset.mapId)));
 
