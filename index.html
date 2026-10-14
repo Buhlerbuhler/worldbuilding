@@ -843,6 +843,12 @@ footer{
 .concert-poster span{padding:12px 14px;font-weight:700}
 .concert-poster:hover,.concert-poster:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
 @media(max-width:580px){.concert-gallery{grid-template-columns:1fr}}
+
+.ssm-gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(175px,1fr));gap:14px;margin:24px 0}
+.ssm-gallery-item{background:var(--paper);border:1px solid var(--ink);padding:0;cursor:pointer;text-align:left;color:var(--ink);font:700 12px 'DM Mono',monospace}
+.ssm-gallery-item img{display:block;width:100%;aspect-ratio:4/3;object-fit:cover}
+.ssm-gallery-item span{display:block;padding:11px}
+.ssm-gallery-item:hover{outline:3px solid var(--accent)}
 </style>
 </head>
 
@@ -1419,11 +1425,12 @@ sections:[
 ]},
 {title:'RELATIONSHIPS',wide:true,items:[
 ['Jax','Older brother; she often bombards him with hugs.'],
-['Parents','Lauren and Paul']
+['Parents','Lauren and Paul'],
+['Cheerleading','Junior member of the Milsamolex Monarchs']
 ]}
 ]
 },
-connections:['jax','lauren','paul']
+connections:['jax','lauren','paul','monarchs']
 },
 
 {
@@ -1432,7 +1439,7 @@ title:'Lauren',
 category:'people',
 type:'Character',
 
-description:'Jax and Mia’s mom.',
+description:'Jax and Mia’s mom, and captain of the Milsamolex Monarchs cheer team.',
 
 content:
 `ESTABLISHED:
@@ -1443,9 +1450,13 @@ She has curly blonde hair.
 
 She wears glasses.
 
+She is generally calm, but becomes serious about cheerleading.
+
+Lauren is captain of the Milsamolex Monarchs cheer team. Mia is on the junior team.
+
 Jax loves his parents but gives them alone time.`,
 
-connections:['jax','mia','paul']
+connections:['jax','mia','paul','monarchs']
 },
 
 {
@@ -1971,6 +1982,26 @@ connections:['milsamolex']
 },
 
 
+{
+id:'monarchs',
+title:'Milsamolex Monarchs',
+category:'sports',
+type:'Cheer Team',
+description:'Milsamolex cheerleading team, captained by Lauren; Mia is on the junior team.',
+content:`ESTABLISHED:
+
+The Milsamolex Monarchs are a cheerleading team.
+
+Lauren is the captain.
+
+Mia belongs to the junior team.
+
+IN DEVELOPMENT:
+
+Uniforms, competitions and other members have not yet been described.`,
+connections:['lauren','mia','milsamolex']
+},
+
 /* ======================================================
    SOCIETY
 ====================================================== */
@@ -1983,7 +2014,7 @@ category:'society',
 type:'Law',
 
 description:
-'Rules governing football, adulthood, jobs, dragons, magic, transportation, punishment and succession.',
+'Laws, education, transportation, government and security in Soultara.',
 
 content:
 `CURRENT LAWS:
@@ -2041,9 +2072,9 @@ If you raise the dead, you will die.
 
 08 / TRANSPORTATION
 
-There are no cars in Soultara.
+Cars are rare in Soultara, and only very wealthy people have them.
 
-People get around by dragon.
+Most people get around by dragon.
 
 If you are under 20, you travel with someone who is over 20.
 
@@ -2055,8 +2086,33 @@ If someone breaks the rules, the king and queen decide the punishment based on w
 
 Any of the king and queen's children can become king or queen.
 
-The next ruler does not have to be the oldest child.`,
+The next ruler does not have to be the oldest child.
 
+11 / EDUCATION
+
+Children start school at age 1 and finish at age 15.
+
+The school day runs from 9:00 AM to 2:00 PM (five hours).
+
+12 / SECURITY
+
+Soultara has police and an army.
+
+The Soultarian Space Marines (SSM) are a secretive military organization. Members cannot reveal their identities, and little is publicly known about them.
+
+The SSM are described as the only people on Nazareth allowed to use vehicles. This conflicts with the law allowing wealthy residents to own cars; the class has not yet resolved how these rules fit together.
+
+SSM EQUIPMENT
+
+The students have designed a soldier, a tank, a large ship, a smaller aircraft and a jeep. See the gallery below.`,
+
+gallery:[
+{label:'SSM soldier',url:'https://raw.githubusercontent.com/Buhlerbuhler/worldbuilding/refs/heads/main/ssm-soldier.jpg'},
+{label:'SSM tank',url:'https://raw.githubusercontent.com/Buhlerbuhler/worldbuilding/refs/heads/main/ssm-tank.jpg'},
+{label:'SSM ship',url:'https://raw.githubusercontent.com/Buhlerbuhler/worldbuilding/refs/heads/main/ssm-ship.jpg'},
+{label:'SSM aircraft',url:'https://raw.githubusercontent.com/Buhlerbuhler/worldbuilding/refs/heads/main/ssm-aircraft.jpg'},
+{label:'SSM jeep',url:'https://raw.githubusercontent.com/Buhlerbuhler/worldbuilding/refs/heads/main/ssm-jeep.jpg'}
+],
 connections:[
 'soultara',
 'jax',
@@ -2099,7 +2155,7 @@ Different people can receive different kinds of dragons.
 
 The Tenebrae Forest causes anyone who enters to become lost and never return.
 
-Soultara has no cars.
+Cars are rare in Soultara; most people travel by dragon. The SSM are a secretive military group.
 
 The king and queen decide punishments for broken laws.
 
@@ -2123,7 +2179,7 @@ category:'society',
 type:'World System',
 
 description:
-'Soultara has no cars. Dragons are the main established form of transportation.',
+'Cars are rare in Soultara; most people travel by dragon. The SSM are a secretive military group. Dragons are the main established form of transportation.',
 
 content:
 `ESTABLISHED:
@@ -2594,7 +2650,7 @@ category:'nature',
 type:'Creature / Pet',
 
 description:
-'A gigantic but peaceful creature that mostly just eats.',
+'A gigantic, dangerous creature that may attack if approached.',
 
 animalPhoto:true,
 image:'',
@@ -2606,13 +2662,7 @@ Gerd is 10 metres tall.
 
 Gerd weighs 500 pounds.
 
-It is a peaceful animal.
-
-Like the monkey, it does not do much and mostly just eats.
-
-Gerd can be kept as a pet.
-
-It can be really cute sometimes.`,
+Gerd can be dangerous and may attack if you get too close. Keep your distance.`,
 
 connections:['animals','nazareth','monkey']
 },
@@ -2986,7 +3036,7 @@ const highlights=[
  ['THE WORLD','Nazareth is a yellow planet with occasional gravity shifts, volcanic events, five mapped countries, and a moon called Harry.','nazareth'],
  ['THE STORY','Jax King is a 15-year-old football player. During a game, his football bursts into blue fire and the stadium transforms.','jax'],
  ['PLACES','Milsamolex is a city in Soultara, home to Vala Cafe and the Milsamolex Lightning.','milsamolex'],
- ['SOCIETY','Magic requires a permit. People become adults at 20 and receive a dragon. Soultara has no cars.','laws'],
+ ['SOCIETY','Magic requires a permit. People become adults at 20 and receive a dragon. Cars are rare in Soultara; most people travel by dragon. The SSM are a secretive military group.','laws'],
  ['WILDLIFE','Nazareth is home to Shigers, Pogles, Celephants, Cantalops, dragons and many more creatures.','animals'],
  ['NEW STORIES','The Dark Shadows have entered Milsamolex and face the Lightning in a semifinal. The outcome is still being written.','villains']
 ];
@@ -3373,6 +3423,10 @@ ${e.resource.label}
 
 
 /* SCROLLABLE IMAGE RESOURCE */
+
+if(e.gallery && e.gallery.length){
+ media+=`<div class="ssm-gallery">${e.gallery.map(photo=>`<button type="button" class="ssm-gallery-item" data-popup-image="${photo.url}" data-popup-title="${photo.label}"><img src="${photo.url}" alt="${photo.label}" loading="lazy"><span>${photo.label} ↗</span></button>`).join('')}</div>`;
+}
 
 if(e.popupImage){
 
