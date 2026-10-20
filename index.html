@@ -801,7 +801,7 @@ footer{
 /* DARK SHADOWS GALLERY */
 .shadow-gallery{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin:24px 0}
 .shadow-gallery-card{border:1.5px solid var(--ink);background:#e6e4da;padding:0;text-align:left;cursor:pointer;color:var(--ink);font:inherit;overflow:hidden}
-.shadow-gallery-card img{width:100%;aspect-ratio:3/4;object-fit:cover;display:block;background:#222}
+.shadow-gallery-card img{width:100%;aspect-ratio:2/3;object-fit:contain;display:block;background:#222}
 .shadow-gallery-card span{display:block;padding:12px 14px;font-weight:700}
 .shadow-gallery-card:hover{outline:3px solid var(--accent);outline-offset:-3px}
 @media(min-width:900px){.shadow-gallery{grid-template-columns:repeat(4,minmax(0,1fr))}}
@@ -829,7 +829,7 @@ footer{
 .collection-item{border:2px solid var(--ink);background:var(--paper);min-width:0}
 .collection-item summary{cursor:pointer;list-style:none;padding:14px;display:grid;grid-template-columns:1fr auto;gap:7px;align-items:start}
 .collection-item summary::-webkit-details-marker{display:none}
-.collection-item summary img{grid-column:1/-1;width:100%;aspect-ratio:4/3;object-fit:cover;border:1px solid var(--line);background:#ddd}
+.collection-item summary img{grid-column:1/-1;width:100%;aspect-ratio:16/10;object-fit:contain;border:1px solid var(--line);background:#ddd}
 .collection-name{font:800 1.15rem 'Space Grotesk',sans-serif}.collection-expand{font-size:1.3rem}.collection-item[open] .collection-expand{transform:rotate(45deg)}
 .collection-description{grid-column:1/-1;font-size:.9rem;color:var(--muted);line-height:1.4}
 .collection-body{padding:0 14px 18px;border-top:1px solid var(--line)}.collection-body .content-block{white-space:pre-line;margin-top:14px}
@@ -849,6 +849,16 @@ footer{
 .ssm-gallery-item img{display:block;width:100%;aspect-ratio:4/3;object-fit:cover}
 .ssm-gallery-item span{display:block;padding:11px}
 .ssm-gallery-item:hover{outline:3px solid var(--accent)}
+
+/* Planet infographic stays with the Nazareth geography record. */
+.planet-infographic{border:2px solid var(--ink);margin:24px 0;background:var(--paper)}
+.planet-infographic-button{width:100%;display:block;border:0;padding:12px;background:transparent;cursor:zoom-in}
+.planet-infographic-button img{display:block;width:100%;max-height:650px;object-fit:contain}
+.planet-image-help{padding:0 15px 14px;font-size:.82rem;color:var(--muted)}
+.planet-image-fallback{display:none;padding:24px 15px;color:var(--muted)}
+.planet-infographic.image-unavailable .planet-infographic-button,.planet-infographic.image-unavailable .planet-image-help{display:none}
+.planet-infographic.image-unavailable .planet-image-fallback{display:block}
+
 </style>
 </head>
 
@@ -1340,33 +1350,44 @@ connections:[
 
 {
 id:'ashlee',
-title:'Ashlee Eirvalon',
+title:'Ashly Eirvalon',
 category:'people',
 type:'Character',
-
-description:
-'Jax’s girlfriend: extroverted, calm, adventurous and very protective.',
-
-content:
-`ESTABLISHED:
-
-Ashlee Eirvalon is Jax’s girlfriend.
-
-She is extroverted, calm, adventurous and very protective.
-
-She has dark brown hair.
-
-She loves cargo pants.
-
-Ashlee is close with Jax and plans both of their next day hour for hour.
-
-FAMILY:
-
-Ashlee’s mom is a nurse.
-
-Ashlee’s dad is a science teacher.`,
-
-connections:['jax','fashion']
+description:'Jax’s girlfriend. Kind, funny, protective and calm; she works at the library.',
+profile:{
+photo:'',
+sections:[
+{title:'PROFILE',items:[
+['Name','Ashly Eirvalon'],['Age','15'],['Name Meaning','Meadow of ash trees'],
+['Birthday','May 5'],['Zodiac','None'],['Height','5 ft 3.8 in (161.8 cm)'],
+['Weight','117–125 lb (about 53–57 kg)'],
+['Physical Traits','Brown eyes, short shaggy blackish-brown hair, light skin']
+]},
+{title:'FAVOURITES',items:[
+['Food','Spicy sushi'],['Drink','Raspberry lemonade'],['Colours','Red and black'],
+['Weather','Summer'],['Item','Her grandma’s clock']
+]},
+{title:'PERSONALITY & SKILLS',items:[
+['Personality','Kind, funny, protective, calm, interfered (student wording)'],
+['Hobbies','Cooking/baking, reading, drawing'],['Special Skills','Whistling, voices'],
+['Pet Peeve','Dirty hair'],['Bad At','Making friends'],
+['Biggest Fear','Her loved ones dying']
+]},
+{title:'GOALS & LIFE',items:[
+['Goal','Make a change in the world'],['Would Die For','Jax'],
+['Would Kill For','Her parents'],['Job','Works at the library'],
+['Social Life','Not popular']
+]},
+{title:'DAILY ROUTINE',wide:true,items:[
+['Routine','Wake up, brush teeth, get dressed, do hair, meet Jax at the cafe for lemonade, go to work, have three hours of free time, go home, get ready for bed, and repeat.']
+]},
+{title:'RELATIONSHIPS',wide:true,items:[
+['Jax','Boyfriend; she loves being with him and feels calm around him.'],
+['Mother','Nurse'],['Father','Science teacher']
+]}
+]
+},
+connections:['jax','fashion','vala']
 },
 
 {
@@ -2295,8 +2316,7 @@ description:
 
 animalPhoto:true,
 
-image:
-'https://raw.githubusercontent.com/Buhlerbuhler/worldbuilding/refs/heads/main/Shiger.png',
+image:'https://raw.githubusercontent.com/Buhlerbuhler/worldbuilding/refs/heads/main/shiger.jpg',
 
 content:
 `ESTABLISHED:
@@ -2338,8 +2358,7 @@ description:
 
 animalPhoto:true,
 
-image:
-'https://raw.githubusercontent.com/Buhlerbuhler/worldbuilding/refs/heads/main/Pogle.png',
+image:'https://raw.githubusercontent.com/Buhlerbuhler/worldbuilding/refs/heads/main/pogle.jpg',
 
 content:
 `ESTABLISHED:
@@ -2378,7 +2397,7 @@ description:
 'A huge, peaceful animal that can be kept as a pet.',
 
 animalPhoto:true,
-image:'',
+image:'https://raw.githubusercontent.com/Buhlerbuhler/worldbuilding/refs/heads/main/celephant.jpg',
 
 content:
 `ESTABLISHED:
@@ -2415,7 +2434,7 @@ description:
 'A small, peaceful relative of the Celephant that can be kept as a pet.',
 
 animalPhoto:true,
-image:'',
+image:'https://raw.githubusercontent.com/Buhlerbuhler/worldbuilding/refs/heads/main/cantalop.jpg',
 
 content:
 `ESTABLISHED:
@@ -2454,7 +2473,7 @@ description:
 'A helpful wild creature that can talk and help people who are lost.',
 
 animalPhoto:true,
-image:'',
+image:'https://raw.githubusercontent.com/Buhlerbuhler/worldbuilding/refs/heads/main/sharpiebot.jpg',
 
 content:
 `ESTABLISHED:
@@ -2489,7 +2508,7 @@ description:
 'A dangerous nocturnal animal.',
 
 animalPhoto:true,
-image:'',
+image:'https://raw.githubusercontent.com/Buhlerbuhler/worldbuilding/refs/heads/main/deadlylongarms.jpg',
 
 content:
 `ESTABLISHED:
@@ -2518,7 +2537,7 @@ description:
 'A small creature that can do almost anything for you.',
 
 animalPhoto:true,
-image:'',
+image:'https://raw.githubusercontent.com/Buhlerbuhler/worldbuilding/refs/heads/main/thing1.jpg',
 
 content:
 `ESTABLISHED:
@@ -2547,7 +2566,7 @@ description:
 'A peaceful and cute animal that can attack when provoked.',
 
 animalPhoto:true,
-image:'',
+image:'https://raw.githubusercontent.com/Buhlerbuhler/worldbuilding/refs/heads/main/monkey.jpg',
 
 content:
 `ESTABLISHED:
@@ -2574,7 +2593,7 @@ description:
 'A small, peaceful and harmless bird that can also be kept as a pet.',
 
 animalPhoto:true,
-image:'',
+image:'https://raw.githubusercontent.com/Buhlerbuhler/worldbuilding/refs/heads/main/bird.jpg',
 
 content:
 `ESTABLISHED:
@@ -2599,7 +2618,7 @@ description:
 'A loyal and highly trainable pet.',
 
 animalPhoto:true,
-image:'',
+image:'https://raw.githubusercontent.com/Buhlerbuhler/worldbuilding/refs/heads/main/dog.jpg',
 
 content:
 `ESTABLISHED:
@@ -2626,7 +2645,7 @@ description:
 'An annoying blood-sucking creature with a dangerous family response.',
 
 animalPhoto:true,
-image:'',
+image:'https://raw.githubusercontent.com/Buhlerbuhler/worldbuilding/refs/heads/main/mosquito.jpg',
 
 content:
 `ESTABLISHED:
@@ -2653,7 +2672,7 @@ description:
 'A gigantic, dangerous creature that may attack if approached.',
 
 animalPhoto:true,
-image:'',
+image:'https://raw.githubusercontent.com/Buhlerbuhler/worldbuilding/refs/heads/main/gerd.jpg',
 
 content:
 `ESTABLISHED:
@@ -2725,22 +2744,10 @@ workingOn:'Elliot',
 title:'The Dark Shadows',
 category:'stories',
 type:'Elemental beings / Football rivals',
-description:'Four elemental Shadow types disguise themselves as football players, capture opponents, and eventually face the Milsamolex Lightning.',
+description:'The Shadows challenge the Lightning in a semifinal that ends 27–20. The Soultarian Space Marines intervene after the game.',
 shadowGallery:true,
-content:`ORIGIN STORY / ELLIOT
-
-In a forest near Milsamolex, the ground bursts open and lava and rock reform into the Fire Shadow. The Fire Shadow spots the city and decides it would be an easy target.
-
-On its journey, it encounters a strangely moving puddle that rises into the Water Shadow. Together they discover a swirling breeze of dust and rocks that transforms into the Air Shadow, their queen. On the way back toward the city, an oddly shaped tree reveals itself as the Earth Shadow.
-
-The Air Shadow summons more Fire, Water, and Earth Shadows. She is the only Air Shadow. The Shadows take human form and enter Milsamolex.
-
-They sign up as a football team called the Shadows. Fire and Water Shadows play the games; Earth Shadows stay behind in the forest to protect their queen. After each game, regardless of the result, the Shadows capture players from the opposing team and hold them in the forest where the Fire Shadow first appeared.
-
-After several games, the Shadows reach a semifinal against Jax's Milsamolex Lightning.
-
-STORY IN PROGRESS: The submitted account ends during the description of the first three quarters. The result of the game has not yet been established.`,
-connections:['fireshadow','watershadow','airshadow','earthshadow','lightning','jax','milsamolex','tenebrae']
+content:"ORIGIN STORY / ELLIOT\n\nThe Dark Shadows\n\nSomewhere out in a forest nearby Milsa Molex the ground burst open in a fiery explosion and oozed a pile of lava and rock that reformed into something that resembled the form of a human. This creature was called the fire shadow, one of four elemental beings: fire, earth, water, and air, their queen. As the fire shadows stumbled out of its molten hole in search of its brothers and sisters, it noticed a town and thought to itself this is an easy attack so it went to notify the rest of its species. As it walked it found a puddle that was moving very strangely and it lurched up at him he realized it was the water shadow and they went in search to find more. They found a small breeze swirling around in a spiral of dust and rocks and it transformed into their queen and as the three of them walked back to the city that the fire shadow found earlier (milsa molex) they found an oddly shaped tree that turned out to be the earth shadow. The air shadow summoned more of each species except hers because she was the only one of her kind and they morphed into humans and one by one moved into the city. As they walked they ran into a college football stadium. They decided to sign up as a new football team called the shadows and after they played a game (win or lose) they would capture the opposing teams players and hold them in the forest that the fire shadow came up into. However, it was only the fire and water shadows playing because they were big and strong although the earth shadows were also strong they needed to protect the queen in the forest while the games went on. They repeated this cycle for quite a few games until they reached the semi final game and the other team was the Lightning (Jax's team.) The first three quarters flew by and somehow the dark shadows with super human abilities were losing. The game was tied 20 to 20 and if the lightning could score one more touchdown plus the  conversion before the clock ran out they could secure the win and move on to the finals and maybe even win the season but right now Jax had to focus on this game. Jax’s team mate Jeremiah Smith threw the ball with immense force towards Jax but suddenly the ball burst into blue hot flames! Jax then looked in front of him and saw that the opposing team had morphed into dark shadowy creatures! The field around them turned into rough volcanic rock and the bleachers into cold purple shards of obsidian! Jax caught the ball and the blue flames immediately went out! Jax jumped with superb strength over one of the creatures and slid through the next one's legs! He burst into a sprint and threw the ball against the cold hard rock scoring a touchdown but before the monsters could catch them he ran back a few yards and and punted the ball threw the uprights scoring the 27th point and winning the game and moving his team onto the finals! At that moment the monsters rushed towards Jax but then the SCC ( Soultarian Space Marines) of their continent slid down from the ceiling on wires and vacuumed up the souls of the shadows with vacuum powered extraction guns! Jax and the rest of his team rushed into the changing room and back to their houses. That night Jax had a lot going through his mind but all he could think of was that he had made it to the finals and he would be playing a week from now which is all that he dreamed about.",
+connections:['fireshadow','watershadow','airshadow','earthshadow','lightning','jax','milsamolex','tenebrae','jeremiah','laws']
 },
 {
 id:'fireshadow',workingOn:'Elliot',title:'Fire Shadow',category:'people',type:'Elemental Shadow',
@@ -3038,7 +3045,7 @@ const highlights=[
  ['PLACES','Milsamolex is a city in Soultara, home to Vala Cafe and the Milsamolex Lightning.','milsamolex'],
  ['SOCIETY','Magic requires a permit. People become adults at 20 and receive a dragon. Cars are rare in Soultara; most people travel by dragon. The SSM are a secretive military group.','laws'],
  ['WILDLIFE','Nazareth is home to Shigers, Pogles, Celephants, Cantalops, dragons and many more creatures.','animals'],
- ['NEW STORIES','The Dark Shadows have entered Milsamolex and face the Lightning in a semifinal. The outcome is still being written.','villains']
+ ['THE DARK SHADOWS','The Lightning defeat the Shadows 27–20 in the semifinal. Soultarian Space Marines intervene, and Jax advances to the finals.','villains']
 ];
 document.getElementById('summaryContent').innerHTML=`<div class="summary-grid">${highlights.map(([title,description,id])=>`<div class="summary-box"><span class="mono">AT A GLANCE</span><h3>${title}</h3><p>${description}</p><button class="summary-jump" data-id="${id}">EXPLORE ↗</button></div>`).join('')}<div class="summary-box wide"><h3>Still growing</h3><p>These are established highlights, not the entire world. Open the archive to explore the student-created details and work in progress.</p></div></div>`;
 document.querySelectorAll('.summary-jump').forEach(b=>b.addEventListener('click',()=>openEntry(b.dataset.id)));
@@ -3353,6 +3360,7 @@ if(e.worldMap){
     const region=entries.find(x=>x.id===id);
     return `<details class="country-section" id="region-${id}"><summary><strong>${region.title}</strong><span>${region.description}</span><span class="country-chevron">＋</span></summary><div class="country-body">${region.image ? `<img class="country-flag" src="${region.image}" alt="${region.title} flag">` : ''}<div class="content-block">${region.content || ''}</div><small class="mono">WORKING ON / ${region.workingOn || 'CLASS'}</small></div></details>`;
   }).join('');
+  media+=`<div class="planet-infographic"><div class="map-panel-head"><strong>NAZARETH / PLANET INFOGRAPHIC</strong><span class="mono">CLICK TO EXPAND ↗</span></div><button type="button" class="planet-infographic-button" data-popup-image="https://raw.githubusercontent.com/Buhlerbuhler/worldbuilding/refs/heads/main/nazareth.jpg" data-popup-title="Nazareth — Planet Infographic"><img src="https://raw.githubusercontent.com/Buhlerbuhler/worldbuilding/refs/heads/main/nazareth.jpg" alt="Infographic of the planet Nazareth" loading="lazy" onerror="this.closest('.planet-infographic').classList.add('image-unavailable')"></button><p class="planet-image-help">Planet infographic · Created by the class · Tap to view full size.</p><p class="planet-image-fallback">Upload <strong>nazareth.jpg</strong> to GitHub to display the planet infographic.</p></div>`;
   media+=`<div class="map-panel"><div class="map-panel-head"><strong>MAP OF NAZARETH</strong><span class="mono">COUNTRIES & REGIONS ↓</span></div><img src="${e.image}" alt="Student-created map of Nazareth"><div class="country-list">${regionCards}</div></div>`;
 }
 
